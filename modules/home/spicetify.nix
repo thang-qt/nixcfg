@@ -12,8 +12,8 @@ in
 
   programs.spicetify = {
     enable = true;
-    theme = spicePkgs.themes.catppuccin;
-    colorScheme = "mocha";
+    theme = spicePkgs.themes.starryNight;
+    # colorScheme = "mocha";
 
     enabledExtensions = with spicePkgs.extensions; [
       fullScreen
@@ -24,10 +24,6 @@ in
       ({
         src = ohitstom + "/immersiveView";
         name = "immersiveView.js";
-      })
-      ({
-        src = ohitstom + "/toggleDJ";
-        name = "toggleDJ.js";
       })
     ];
 

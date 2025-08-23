@@ -18,7 +18,6 @@
     uv
     prismlauncher
     lazygit
-    vscode
     anki
     goldendict-ng
     qbittorrent
@@ -33,7 +32,8 @@
     imv
     xfce.thunar
     calibre
-    super-productivity
+    tor-browser
+    zed-editor
   ];
 
   services.kdeconnect.enable = true;
@@ -63,4 +63,9 @@
     ../../modules/home/swaync/base.nix
     ../../modules/home/zathura/base.nix
   ];
+
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode.fhs;
+  };
 }

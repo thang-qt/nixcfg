@@ -70,7 +70,10 @@
 
   users.users.thang = {
     shell = pkgs.fish;
-    extraGroups = [ "adbusers" ];
+    extraGroups = [
+      "adbusers"
+      "docker"
+    ];
   };
 
   # Install firefox.
@@ -101,6 +104,13 @@
 
   hardware.graphics.enable32Bit = true;
 
+  programs.steam = {
+    enable = true;
+    remotePlay.openFirewall = true; # Open ports in the firewall for Steam Remote Play
+    dedicatedServer.openFirewall = true; # Open ports in the firewall for Source Dedicated Server
+    localNetworkGameTransfers.openFirewall = true; # Open ports in the firewall for Steam Local Network Game Transfers
+  };
+
   programs.fish.enable = true;
 
   programs.direnv = {
@@ -115,6 +125,8 @@
 
   programs.niri.enable = true;
 
+  programs.nh.enable = true;
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   services.tailscale.enable = true;
@@ -128,9 +140,35 @@
     '';
   };
 
-  services.syncthing.enable = true;
+  services.postgresql = {
+    enable = true;
+    package = pkgs.postgresql_15;
+    enableTCPIP = true;
+    port = 5432;
+    authentication = pkgs.lib.mkOverride 10 ''
+      local all all trust
+      host all all 127.0.0.1/32 trust
+      host all all ::1/128 trust
+    '';
+    initialScript = pkgs.writeText "backend-initScript" ''
+      CREATE ROLE postgres WITH LOGIN PASSWORD 'postgres' CREATEDB SUPERUSER;
+      CREATE DATABASE flashmind OWNER postgres;
+    '';
+  };
 
   programs.adb.enable = true;
+
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
+
+  virtualisation.docker.rootless.daemon.settings = {
+    dns = [
+      "1.1.1.1"
+      "8.8.8.8"
+    ];
+  };
 
   system.stateVersion = "24.11";
 }

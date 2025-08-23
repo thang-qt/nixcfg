@@ -56,6 +56,6 @@
   };
 
   imports = [
-    ./dns.nix
+    # ./dns.nix
   ];
 }
