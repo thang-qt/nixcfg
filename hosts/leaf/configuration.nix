@@ -62,8 +62,9 @@
   environment.plasma6.excludePackages = with pkgs; [
     xterm
     kdePackages.elisa
-    kdePackages.plasma-browser-integration
     kdePackages.discover
+    kdePackages.kdepim-runtime
+    kdePackages.plasma-browser-integration
   ];
 
   security.polkit.enable = true;
@@ -93,13 +94,18 @@
     mpv
     zathura
     fzf
+    bat
     fd
     ffmpeg
     yt-dlp
     stremio
-    wineWowPackages.stable
-    lutris
     onlyoffice-bin
+
+    kdePackages.kcolorchooser
+    kdePackages.ksystemlog
+    kdePackages.sddm-kcm
+
+    unrar
   ];
 
   hardware.graphics.enable32Bit = true;
@@ -116,11 +122,6 @@
   programs.direnv = {
     enable = true;
     silent = true;
-  };
-
-  programs.hyprland = {
-    enable = true;
-    xwayland.enable = true;
   };
 
   programs.niri.enable = true;
@@ -140,35 +141,20 @@
     '';
   };
 
-  services.postgresql = {
-    enable = true;
-    package = pkgs.postgresql_15;
-    enableTCPIP = true;
-    port = 5432;
-    authentication = pkgs.lib.mkOverride 10 ''
-      local all all trust
-      host all all 127.0.0.1/32 trust
-      host all all ::1/128 trust
-    '';
-    initialScript = pkgs.writeText "backend-initScript" ''
-      CREATE ROLE postgres WITH LOGIN PASSWORD 'postgres' CREATEDB SUPERUSER;
-      CREATE DATABASE flashmind OWNER postgres;
-    '';
-  };
-
   programs.adb.enable = true;
 
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
+  virtualisation.docker.enable = true;
 
-  virtualisation.docker.rootless.daemon.settings = {
+  virtualisation.docker.daemon.settings = {
     dns = [
       "1.1.1.1"
       "8.8.8.8"
     ];
   };
+
+  nixpkgs.config.permittedInsecurePackages = [
+    "qtwebengine-5.15.19"
+  ];
 
   system.stateVersion = "24.11";
 }

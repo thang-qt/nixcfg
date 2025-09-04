@@ -13,8 +13,6 @@
   home.packages = with pkgs; [
     kde-rounded-corners
     obs-studio
-    kdePackages.karousel
-    python312Packages.kde-material-you-colors
     uv
     prismlauncher
     lazygit
@@ -32,7 +30,6 @@
     imv
     xfce.thunar
     calibre
-    tor-browser
     zed-editor
   ];
 
