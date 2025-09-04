@@ -10,6 +10,12 @@
           file = ./openwebui_env.age;
           owner = "thang";
         };
+        readn_auth = {
+          file = ./readn_auth.age;
+          owner = "readn";
+          group = "readn";
+          mode = "0440";
+        };
       }
     else if hostName == "leaf" then
       {

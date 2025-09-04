@@ -2,6 +2,7 @@
   config,
   pkgs,
   lib,
+  inputs,
   ...
 }:
 {
@@ -10,6 +11,7 @@
     ../../modules/services/glance.nix
     ../../modules/services/openwebui.nix
     (import ../../modules/agenix.nix { hostName = "satellite"; })
+    inputs.readn.nixosModules.readn
   ];
 
   boot.loader.grub.device = "/dev/sda";
@@ -64,7 +66,19 @@
           tls internal
           reverse_proxy http://127.0.0.1:9943
         '';
+        "read.thangqt.com".extraConfig = ''
+          tls internal
+          reverse_proxy http://127.0.0.1:7070
+        '';
       };
+    };
+
+    # ReadN service
+    readn = {
+      enable = true;
+      # Listen only on loopback; exposed via Caddy
+      address = "127.0.0.1:7070";
+      authFile = config.age.secrets.readn_auth.path;
     };
   };
 
@@ -82,6 +96,12 @@
         ];
         extraGroups = [ "podman" ];
       };
+      # Dedicated service user for ReadN
+      "readn" = {
+        isSystemUser = true;
+        group = "readn";
+        home = "/var/lib/readn";
+      };
       "www-data" = {
         isSystemUser = true;
         createHome = true;
@@ -90,6 +110,7 @@
       };
     };
     groups."www-data" = { };
+    groups."readn" = { };
   };
 
   environment = {
@@ -99,4 +120,10 @@
   };
 
   programs.fish.enable = true;
+
+  systemd.services.readn.serviceConfig = {
+    User = "readn";
+    Group = "readn";
+    DynamicUser = lib.mkForce false;
+  };
 }

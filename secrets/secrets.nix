@@ -6,4 +6,5 @@ in
   "warp_priv_key.age".publicKeys = [ satellite ];
   "vaultwarden_env.age".publicKeys = [ satellite ];
   "openwebui_env.age".publicKeys = [ satellite ];
+  "readn_auth.age".publicKeys = [ satellite ];
 }
