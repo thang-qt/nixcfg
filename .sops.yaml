@@ -1,0 +1,11 @@
+# ~/nixcfg/.sops.yaml
+keys:
+  - &thang age14q6pgca09nmsy6rj2t56766nkj20675g33aenn3zqhyzun66wy0qrh9u7w # Replace with YOUR actual age key
+  - &nebula age1gv6vmrm2pdujce08wj62vlxlfnf0jes72ma0whegn967rjn9m3yqhr0f6a # This is correct from your output
+
+creation_rules:
+  - path_regex: secrets/[^/]+\.yaml$
+    key_groups:
+      - age:
+          - *thang    # You can edit secrets
+          - *nebula   # Machine can decrypt at boot
