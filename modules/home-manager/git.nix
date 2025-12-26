@@ -3,9 +3,11 @@
   programs.git = {
     enable = true;
     package = pkgs.gitFull;
-    userName = "Quang Thang";
-    userEmail = "thang@thangqt.com";
-    extraConfig = {
+    settings = {
+      user = {
+        name = "Quang Thang";
+        email = "thang@thangqt.com";
+      };
       credential.helper = "libsecret";
     };
   };
