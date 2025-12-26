@@ -5,8 +5,8 @@ final: prev: {
     src = prev.fetchFromGitHub {
       owner = "thang-qt";
       repo = "Readn";
-      rev = "980d73161966a23db9bbf9558ebed5f05a2018f0";
-      hash = "sha256-SiEsU8CFOs+gb7z0X/Bptth23kZQ5YX6LQVxE8e5b6Q=";
+      rev = "8f2980b704c7f60b590feabfce4c83d3f14a91f7";
+      hash = "sha256-+SEdOarNKZ5/8tb8Ih+WsXHRv/OSp33Lg4/TYwirq2o=";
     };
 
     vendorHash = null;
