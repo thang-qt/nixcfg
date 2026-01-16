@@ -51,19 +51,30 @@
             sops-nix.nixosModules.sops
           ];
         };
+        pathway = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./nixos/pathway/configuration.nix
+            sops-nix.nixosModules.sops
+          ];
+        };
       };
 
       # Standalone home-manager configuration entrypoint
       # Available through 'home-manager --flake .#your-username@your-hostname'
       homeConfigurations = {
-        # FIXME replace with your username@hostname
         "thang@nebula" = home-manager.lib.homeManagerConfiguration {
-          # Home-manager requires 'pkgs' instance
-          pkgs = nixpkgs.legacyPackages.aarch64-linux; # FIXME replace x86_64-linux with your architecure
+          pkgs = nixpkgs.legacyPackages.aarch64-linux;
           extraSpecialArgs = { inherit inputs; };
           modules = [
-            # > Our main home-manager configuration file <
-            ./home/thang/home.nix
+            ./home/thang/nebula/home.nix
+          ];
+        };
+        "thang@pathway" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.x86_64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./home/thang/pathway/home.nix
           ];
         };
       };

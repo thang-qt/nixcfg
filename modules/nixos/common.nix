@@ -62,7 +62,14 @@
     curl
     git
     helix
+    lazygit
+    rclone
+    fzf
+    ripgrep
+    home-manager
   ];
+
+  programs.fish.enable = true;
 
   users.users.thang = {
     isNormalUser = true;
