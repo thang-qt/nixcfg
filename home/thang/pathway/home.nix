@@ -20,11 +20,29 @@
     mpv
     wezterm
     thunderbird
+    _1password
+    _1password-gui
     unstable.opencode
   ];
 
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium.fhs;
+  };
+
+  programs.ssh = {
+    enable = true;
+    extraConfig = ''
+      Host *
+        IdentityAgent ~/.1password/agent.sock
+    '';
+  };
+
+  programs.git.settings = {
+    gpg.format = "ssh";
+    "gpg \"ssh\"" = {
+      program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
+    };
+    commit.gpgsign = true;
   };
 }

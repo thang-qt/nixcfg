@@ -38,6 +38,11 @@
   };
 
   programs.firefox.enable = true;
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "thang" ];
+  };
 
   users.users.thang = {
     packages = with pkgs; [
