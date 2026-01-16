@@ -21,7 +21,7 @@
     mpv
     wezterm
     thunderbird
-    _1password
+    _1password-cli
     _1password-gui
     unstable.opencode
   ];
