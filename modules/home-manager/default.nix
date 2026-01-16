@@ -4,4 +4,7 @@
   # List your module files here
   git = import ./git.nix;
   helix = import ./helix.nix;
+  firefox = import ./firefox.nix;
+  wezterm = import ./wezterm.nix;
+  zellij = import ./zellij;
 }

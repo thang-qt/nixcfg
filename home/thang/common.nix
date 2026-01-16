@@ -53,14 +53,6 @@
     homeDirectory = "/home/thang";
   };
 
-  home.packages = with pkgs; [
-    zed-editor
-    mpv
-    wezterm
-    spotify
-    thunderbird
-  ];
-
   # Enable home-manager and git
   programs.home-manager.enable = true;
   programs.git.enable = true;
