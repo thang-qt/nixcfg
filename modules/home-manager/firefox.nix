@@ -21,6 +21,7 @@
         "browser.compactmode.show" = true;
         "browser.formfill.enable" = false;
         "browser.toolbars.bookmarks.visibility" = "never";
+        "browser.newtabpage.activity-stream.trendingSearch.defaultSearchEngine" = "DuckDuckGo";
         "sidebar.revamp" = true;
         "sidebar.verticalTabs" = true;
         "sidebar.revamp.round-content-area" = true;
