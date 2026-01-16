@@ -67,6 +67,8 @@
     fzf
     ripgrep
     home-manager
+    zoxide
+    nix-your-shell
   ];
 
   programs.fish.enable = true;

@@ -7,4 +7,6 @@
   firefox = import ./firefox.nix;
   wezterm = import ./wezterm.nix;
   zellij = import ./zellij;
+  fish = import ./fish.nix;
+  spicetify = import ./spicetify.nix;
 }

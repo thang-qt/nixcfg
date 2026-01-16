@@ -14,6 +14,7 @@
     # inputs.self.homeManagerModules.example
     inputs.self.homeManagerModules.git
     inputs.self.homeManagerModules.helix
+    inputs.self.homeManagerModules.fish
 
     # Or modules exported from other flakes (such as nix-colors):
     # inputs.nix-colors.homeManagerModules.default
