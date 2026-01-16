@@ -9,4 +9,5 @@
   zellij = import ./zellij;
   fish = import ./fish.nix;
   spicetify = import ./spicetify.nix;
+  mpv = import ./mpv.nix;
 }

@@ -13,6 +13,7 @@
     inputs.self.homeManagerModules.wezterm
     inputs.self.homeManagerModules.zellij
     inputs.self.homeManagerModules.spicetify
+    inputs.self.homeManagerModules.mpv
   ];
 
   home.packages = with pkgs; [
