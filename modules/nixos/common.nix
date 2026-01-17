@@ -63,7 +63,6 @@
     git
     helix
     lazygit
-    rclone
     fzf
     ripgrep
     home-manager

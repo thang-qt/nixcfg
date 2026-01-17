@@ -13,7 +13,8 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-f63d4774-dcc7-4f57-b085-7ad9cd683c57".device = "/dev/disk/by-uuid/f63d4774-dcc7-4f57-b085-7ad9cd683c57";
+  boot.initrd.luks.devices."luks-f63d4774-dcc7-4f57-b085-7ad9cd683c57".device =
+    "/dev/disk/by-uuid/f63d4774-dcc7-4f57-b085-7ad9cd683c57";
 
   networking.hostName = "pathway";
   networking.networkmanager.enable = true;
@@ -50,6 +51,11 @@
     ];
     extraGroups = lib.mkAfter [ "networkmanager" ];
   };
+
+  environment.systemPackages = with pkgs; [
+    rclone
+    qalculate-qt
+  ];
 
   system.stateVersion = "25.11";
 }
