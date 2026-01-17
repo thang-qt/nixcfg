@@ -19,7 +19,7 @@
   home.packages = with pkgs; [
     zed-editor
     wezterm
-    geary
+    thunderbird
     _1password-cli
     _1password-gui
     unstable.opencode
