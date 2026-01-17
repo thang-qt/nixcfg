@@ -72,6 +72,10 @@
 
   programs.fish.enable = true;
 
+  services.tailscale = {
+    enable = true;
+  };
+
   users.users.thang = {
     isNormalUser = true;
     description = "Quang Thang";
