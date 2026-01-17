@@ -9,16 +9,19 @@ in
 {
   programs.spicetify = {
     enable = true;
-    spotifyPackage = pkgs.spotify;
+    spotifyPackage = pkgs.unstable.spotify;
+    spicetifyPackage = pkgs.unstable.spicetify-cli;
     theme = spicePkgs.themes.starryNight;
     enabledExtensions = with spicePkgs.extensions; [
       shuffle
-      popupLyrics
-      keyboardShortcut
-      betterGenres
+      catJamSynced
     ];
     enabledCustomApps = with spicePkgs.apps; [
       lyricsPlus
+    ];
+    enabledSnippets = with spicePkgs.snippets; [
+      duck
+      nyanCatProgressBar
     ];
   };
 }
