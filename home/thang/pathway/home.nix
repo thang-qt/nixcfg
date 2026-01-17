@@ -22,7 +22,10 @@
     thunderbird
     _1password-cli
     _1password-gui
+    vacuum-tube
     unstable.opencode
+    unstable.codex
+    unstable.gemini-cli-bin
   ];
 
   programs.vscode = {
