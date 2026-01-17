@@ -10,6 +10,7 @@
     ./hardware-configuration.nix
     inputs.self.nixosModules.common
     inputs.self.nixosModules.bluetooth
+    inputs.self.nixosModules.auto-cpufreq
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -30,6 +31,8 @@
 
   services.printing.enable = true;
 
+  services.power-profiles-daemon.enable = false;
+
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
@@ -38,6 +41,7 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
 
   programs.firefox.enable = true;
   programs._1password.enable = true;

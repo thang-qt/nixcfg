@@ -8,4 +8,5 @@
   open-webui = import ./open-webui.nix;
   readn = import ./readn.nix;
   bluetooth = import ./bluetooth.nix;
+  auto-cpufreq = import ./auto-cpufreq.nix;
 }

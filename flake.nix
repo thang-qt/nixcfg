@@ -19,6 +19,10 @@
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    auto-cpufreq = {
+      url = "github:AdnanHodzic/auto-cpufreq";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +32,7 @@
       home-manager,
       sops-nix,
       spicetify-nix,
+      auto-cpufreq,
       ...
     }@inputs:
     let
@@ -60,6 +65,7 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./nixos/pathway/configuration.nix
+            auto-cpufreq.nixosModules.default
             sops-nix.nixosModules.sops
           ];
         };
