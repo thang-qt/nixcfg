@@ -18,9 +18,8 @@
 
   home.packages = with pkgs; [
     zed-editor
-    mpv
     wezterm
-    thunderbird
+    geary
     _1password-cli
     _1password-gui
     unstable.opencode
@@ -37,13 +36,5 @@
     matchBlocks."*".extraOptions = {
       IdentityAgent = "~/.1password/agent.sock";
     };
-  };
-
-  programs.git.settings = {
-    gpg.format = "ssh";
-    "gpg \"ssh\"" = {
-      program = "${lib.getExe' pkgs._1password-gui "op-ssh-sign"}";
-    };
-    commit.gpgsign = true;
   };
 }
