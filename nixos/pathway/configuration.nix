@@ -63,6 +63,7 @@
     enable = true;
     polkitPolicyOwners = [ "thang" ];
   };
+  programs.kdeconnect.enable = true;
 
   users.users.thang = {
     packages = with pkgs; [
