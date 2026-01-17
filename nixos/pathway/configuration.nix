@@ -11,6 +11,7 @@
     inputs.self.nixosModules.common
     inputs.self.nixosModules.bluetooth
     inputs.self.nixosModules.auto-cpufreq
+    inputs.self.nixosModules.koito
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -34,6 +35,7 @@
   services.power-profiles-daemon.enable = false;
 
   services.pulseaudio.enable = false;
+
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;

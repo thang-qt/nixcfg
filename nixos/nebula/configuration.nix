@@ -12,6 +12,7 @@
     inputs.self.nixosModules.nginx
     inputs.self.nixosModules.open-webui
     inputs.self.nixosModules.readn
+    inputs.self.nixosModules.koito
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -40,6 +41,11 @@
       PermitRootLogin = "no";
       PasswordAuthentication = false;
     };
+  };
+
+  custom_modules.koito = {
+    enable = true;
+    allowedHosts = "koito.thangqt.com";
   };
 
   system.stateVersion = "25.05";

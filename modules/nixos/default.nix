@@ -9,4 +9,5 @@
   readn = import ./readn.nix;
   bluetooth = import ./bluetooth.nix;
   auto-cpufreq = import ./auto-cpufreq.nix;
+  koito = import ./koito.nix;
 }

@@ -3,4 +3,5 @@
 pkgs: {
   # example = pkgs.callPackage ./example { };
   pano-scrobbler = pkgs.callPackage ./pano-scrobbler-bin.nix { };
+  koito = pkgs.callPackage ./koito.nix { };
 }
