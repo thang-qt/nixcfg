@@ -26,6 +26,9 @@
     unstable.opencode
     unstable.codex
     unstable.gemini-cli-bin
+    pano-scrobbler
+
+    kdePackages.koi
   ];
 
   programs.vscode = {
