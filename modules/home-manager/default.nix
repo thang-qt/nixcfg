@@ -10,4 +10,5 @@
   fish = import ./fish.nix;
   spicetify = import ./spicetify.nix;
   mpv = import ./mpv.nix;
+  opencode = import ./opencode.nix;
 }

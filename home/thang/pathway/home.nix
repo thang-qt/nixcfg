@@ -9,6 +9,7 @@
   imports = [
     inputs.spicetify-nix.homeManagerModules.default
     ../common.nix
+    inputs.self.homeManagerModules.opencode
     inputs.self.homeManagerModules.firefox
     inputs.self.homeManagerModules.wezterm
     inputs.self.homeManagerModules.zellij
@@ -23,11 +24,11 @@
     _1password-cli
     _1password-gui
     vacuum-tube
-    unstable.opencode
     unstable.codex
     unstable.gemini-cli-bin
     pano-scrobbler
   ];
+
 
   programs.vscode = {
     enable = true;
