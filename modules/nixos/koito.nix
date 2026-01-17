@@ -98,6 +98,8 @@ in
           KOITO_BIND_ADDR = "127.0.0.1";
           KOITO_LOG_LEVEL = "info";
           KOITO_DEFAULT_USERNAME = cfg.defaultUsername;
+          KOITO_DEFAULT_THEME = "urim";
+          KOITO_LOGIN_GATE = "true";
         }
         // lib.optionalAttrs (cfg.subsonicUrl != null) {
           KOITO_SUBSONIC_URL = cfg.subsonicUrl;
