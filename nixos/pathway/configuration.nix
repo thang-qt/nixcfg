@@ -44,6 +44,7 @@
     pulse.enable = true;
   };
 
+  services.cloudflare-warp.enable = true;
 
   programs.firefox.enable = true;
   programs._1password.enable = true;
