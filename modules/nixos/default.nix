@@ -7,4 +7,5 @@
   nginx = import ./nginx.nix;
   open-webui = import ./open-webui.nix;
   readn = import ./readn.nix;
+  bluetooth = import ./bluetooth.nix;
 }

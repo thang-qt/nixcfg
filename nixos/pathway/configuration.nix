@@ -9,6 +9,7 @@
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosModules.common
+    inputs.self.nixosModules.bluetooth
   ];
 
   boot.loader.systemd-boot.enable = true;
