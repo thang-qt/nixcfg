@@ -58,5 +58,17 @@
     qalculate-qt
   ];
 
+  fonts = {
+    enableDefaultPackages = true;
+    packages = with pkgs; [
+      corefonts
+      liberation_ttf
+      noto-fonts
+      noto-fonts-cjk-sans
+      noto-fonts-color-emoji
+      nerd-fonts.meslo-lg
+    ];
+  };
+
   system.stateVersion = "25.11";
 }
