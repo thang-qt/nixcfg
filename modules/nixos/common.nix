@@ -72,7 +72,10 @@
 
   programs.fish.enable = true;
 
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    silent = true;
+  };
 
   services.tailscale = {
     enable = true;
