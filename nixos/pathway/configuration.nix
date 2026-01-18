@@ -75,6 +75,8 @@
   environment.systemPackages = with pkgs; [
     rclone
     qalculate-qt
+    sops
+    age
   ];
 
   fonts = {

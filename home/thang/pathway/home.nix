@@ -8,6 +8,7 @@
 {
   imports = [
     inputs.spicetify-nix.homeManagerModules.default
+    inputs.sops-nix.homeManagerModules.sops
     ../common.nix
     inputs.self.homeManagerModules.opencode
     inputs.self.homeManagerModules.firefox
@@ -15,6 +16,7 @@
     inputs.self.homeManagerModules.zellij
     inputs.self.homeManagerModules.spicetify
     inputs.self.homeManagerModules.mpv
+    inputs.self.homeManagerModules.rescrobbled
   ];
 
   home.packages = with pkgs; [
@@ -26,9 +28,7 @@
     vacuum-tube
     unstable.codex
     unstable.gemini-cli-bin
-    pano-scrobbler
   ];
-
 
   programs.vscode = {
     enable = true;

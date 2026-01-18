@@ -11,4 +11,5 @@
   spicetify = import ./spicetify.nix;
   mpv = import ./mpv.nix;
   opencode = import ./opencode.nix;
+  rescrobbled = import ./rescrobbled.nix;
 }
