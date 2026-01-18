@@ -14,13 +14,11 @@
   services.nginx = {
     enable = true;
 
-    # Sensible defaults from the NixOS module
     recommendedProxySettings = true;
     recommendedTlsSettings = true;
     recommendedGzipSettings = true;
 
     virtualHosts."llm.thangqt.com" = {
-      # Automatic Let's Encrypt
       enableACME = true;
       forceSSL = true;
 
@@ -38,7 +36,6 @@
       };
     };
     virtualHosts."readn.thangqt.com" = {
-      # Automatic Let's Encrypt
       enableACME = true;
       forceSSL = true;
 
@@ -72,6 +69,5 @@
     defaults.email = "thang@thangqt.com";
   };
 
-  # Optional but nice if you're reusing ACME certs elsewhere
   users.users.nginx.extraGroups = [ "acme" ];
 }

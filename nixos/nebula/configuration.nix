@@ -21,7 +21,6 @@
 
   networking.hostName = "nebula";
 
-  # Users
   users.users = {
     thang = {
       openssh.authorizedKeys.keys = [
@@ -31,7 +30,6 @@
     };
   };
 
-  # Shells & programs
   environment.shells = [ pkgs.fish ];
   programs.fish.enable = true;
 
