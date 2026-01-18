@@ -1,6 +1,6 @@
 # ~/nixcfg/.sops.yaml
 keys:
-  - &thang age14q6pgca09nmsy6rj2t56766nkj20675g33aenn3zqhyzun66wy0qrh9u7w # Replace with YOUR actual age key
+  - &thang age12gt0669qhhsptwsjeqgnx5dctfyhr0mzqcgrl8u3c83gfv00ucksw5yy39 # Replace with YOUR actual age key
   - &nebula age1gv6vmrm2pdujce08wj62vlxlfnf0jes72ma0whegn967rjn9m3yqhr0f6a # This is correct from your output
 
 creation_rules:
