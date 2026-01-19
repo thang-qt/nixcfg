@@ -43,7 +43,7 @@
 
   custom_modules.koito = {
     enable = true;
-    allowedHosts = "koito.thangqt.com";
+    allowedHosts = "*";
   };
 
   system.stateVersion = "25.05";
