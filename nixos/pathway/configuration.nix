@@ -65,11 +65,31 @@
   };
   programs.kdeconnect.enable = true;
 
+  virtualisation.docker = {
+    enable = true;
+    daemon.settings = {
+      dns = [
+        "1.1.1.1"
+        "8.8.8.8"
+      ];
+    };
+    rootless = {
+      enable = true;
+      setSocketVariable = true;
+      daemon.settings = {
+        dns = [
+          "1.1.1.1"
+          "8.8.8.8"
+        ];
+      };
+    };
+  };
+
   users.users.thang = {
-    packages = with pkgs; [
-      kdePackages.kate
+    extraGroups = lib.mkAfter [
+      "networkmanager"
+      "docker"
     ];
-    extraGroups = lib.mkAfter [ "networkmanager" ];
   };
 
   environment.systemPackages = with pkgs; [
