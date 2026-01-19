@@ -15,7 +15,7 @@
       use-track-start-timestamp = false
 
       [[listenbrainz]]
-      url = "https://koito.thangqt.com/apis/listenbrainz/"
+      url = "https://koito.thangqt.com/apis/listenbrainz/1/"
       token = "${config.sops.placeholder.rescrobbled-listenbrainz-token}"
     '';
     path = "${config.xdg.configHome}/rescrobbled/config.toml";
