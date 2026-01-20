@@ -33,6 +33,7 @@
         "dom.forms.autocomplete.formautofill" = false;
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
+        "widget.use-xdg-desktop-portal.file-picker" = 1;
       };
     };
   };
