@@ -97,6 +97,8 @@
     qalculate-qt
     sops
     age
+    libreoffice-qt
+    hunspell
   ];
 
   fonts = {
