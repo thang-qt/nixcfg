@@ -29,6 +29,7 @@
     gh
     unstable.codex
     unstable.gemini-cli-bin
+    ungoogled-chromium
   ];
 
   programs.vscode = {
