@@ -26,6 +26,7 @@
     _1password-cli
     _1password-gui
     vacuum-tube
+    gh
     unstable.codex
     unstable.gemini-cli-bin
   ];
