@@ -12,6 +12,7 @@
     inputs.self.nixosModules.bluetooth
     inputs.self.nixosModules.auto-cpufreq
     inputs.self.nixosModules.koito
+    inputs.self.nixosModules.restic
   ];
 
   boot.loader.systemd-boot.enable = true;

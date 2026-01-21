@@ -8,4 +8,5 @@
   bluetooth = import ./bluetooth.nix;
   auto-cpufreq = import ./auto-cpufreq.nix;
   koito = import ./koito.nix;
+  restic = import ./restic.nix;
 }
