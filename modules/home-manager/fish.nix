@@ -9,7 +9,7 @@
     interactiveShellInit = ''
       set fish_greeting
       nix-your-shell fish | source
-      zoxide init fish | source
+      zoxide init fish --cmd cd | source
       set fzf_directory_opts --bind "alt-o:execute($EDITOR {} &> /dev/tty)"
     '';
     functions.mkcd = {
