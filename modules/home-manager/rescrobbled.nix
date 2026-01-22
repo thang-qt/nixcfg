@@ -22,4 +22,11 @@
   };
 
   services.rescrobbled.enable = true;
+
+  systemd.user.services.rescrobbled = {
+    Unit = {
+      After = [ "sops-nix.service" ];
+      Requires = [ "sops-nix.service" ];
+    };
+  };
 }
