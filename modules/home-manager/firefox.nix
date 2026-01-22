@@ -34,6 +34,8 @@
         "extensions.formautofill.addresses.enabled" = false;
         "extensions.formautofill.creditCards.enabled" = false;
         "widget.use-xdg-desktop-portal.file-picker" = 1;
+        "network.trr.mode" = 2;
+        "network.trr.uri" = "https://mozilla.cloudflare-dns.com/dns-query";
       };
     };
   };
