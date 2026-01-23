@@ -25,7 +25,8 @@
 
   systemd.user.services.rescrobbled = {
     Unit = {
-      After = [ "sops-nix.service" ];
+      After = [ "network-online.target" "sops-nix.service" ];
+      Wants = [ "network-online.target" ];
       Requires = [ "sops-nix.service" ];
     };
   };
