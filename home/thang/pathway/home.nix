@@ -32,6 +32,7 @@
     ungoogled-chromium
     heroic
     lutris
+    jetbrains.idea
   ];
 
   programs.vscode = {
