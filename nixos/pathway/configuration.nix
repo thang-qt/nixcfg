@@ -13,6 +13,7 @@
     inputs.self.nixosModules.auto-cpufreq
     inputs.self.nixosModules.koito
     inputs.self.nixosModules.restic
+    inputs.self.nixosModules.gaming
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -104,6 +105,7 @@
     libreoffice-qt
     hunspell
     kdePackages.sddm-kcm
+    aria2
   ];
 
   fonts = {

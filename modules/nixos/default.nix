@@ -9,4 +9,5 @@
   auto-cpufreq = import ./auto-cpufreq.nix;
   koito = import ./koito.nix;
   restic = import ./restic.nix;
+  gaming = import ./gaming.nix;
 }
