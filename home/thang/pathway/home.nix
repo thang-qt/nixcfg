@@ -33,6 +33,8 @@
     heroic
     lutris
     jetbrains.idea
+    hubstaff
+    qbittorrent
   ];
 
   programs.vscode = {
