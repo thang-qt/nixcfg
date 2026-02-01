@@ -64,6 +64,7 @@
     fzf
     fd
     bat
+    jq
     ripgrep
     home-manager
     zoxide
