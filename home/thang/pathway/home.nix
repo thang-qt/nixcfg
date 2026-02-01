@@ -39,6 +39,7 @@
     jetbrains.idea
     hubstaff
     qbittorrent
+    cider
   ];
 
   programs.vscode = {
