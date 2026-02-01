@@ -391,6 +391,7 @@ binds {
     Super+Alt+L { spawn-sh "noctalia-shell ipc call lockScreen lock"; }
     Super+V { spawn-sh "noctalia-shell ipc call launcher clipboard"; }
     Super+P { spawn-sh "noctalia-shell ipc call sessionMenu toggle"; }
+    Super+Ctrl+P { spawn-sh "niri msg --json outputs | jq -e '.\"eDP-1\".current_mode == null' >/dev/null && niri msg output eDP-1 on || niri msg output eDP-1 off"; }
     Super+B { spawn-sh "firefox"; }
 
 
