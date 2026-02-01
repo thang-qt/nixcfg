@@ -63,6 +63,7 @@
     lazygit
     fzf
     fd
+    bat
     ripgrep
     home-manager
     zoxide

@@ -106,8 +106,8 @@
     age
     libreoffice-qt
     hunspell
-    kdePackages.sddm-kcm
     aria2
+    xwayland-satellite
   ];
 
   fonts = {
