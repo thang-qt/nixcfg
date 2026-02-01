@@ -111,6 +111,10 @@ output "HDMI-A-1" {
     scale 1.25
 }
 
+workspace "main"
+workspace "entertainment"
+workspace "communication"
+
 // Settings that influence how windows are positioned and sized.
 // Find more information on the wiki:
 // https://yalter.github.io/niri/Configuration:-Layout
@@ -274,6 +278,7 @@ layout {
 
 // This line starts waybar, a commonly used bar for Wayland compositors.
 spawn-at-startup "noctalia-shell"
+spawn-at-startup "thunderbird"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
@@ -288,7 +293,7 @@ hotkey-overlay {
 // Additionally, clients will be informed that they are tiled, removing some client-side rounded corners.
 // This option will also fix border/focus ring drawing behind some semitransparent windows.
 // After enabling or disabling this, you need to restart the apps for this to take effect.
-// prefer-no-csd
+prefer-no-csd
 
 // You can change the path where screenshots are saved.
 // A ~ at the front will be expanded to the home directory.
@@ -321,6 +326,22 @@ window-rule {
     // You can get away with just app-id="wezterm" if you want.
     match app-id=r#"^org\.wezfurlong\.wezterm$"#
     default-column-width {}
+}
+
+window-rule {
+    match app-id=r#"^(thunderbird|org\.mozilla\.Thunderbird)$"#
+    open-on-workspace "communication"
+    open-floating true
+    default-column-width { proportion 0.92; }
+    default-window-height { proportion 0.85; }
+}
+
+window-rule {
+    match app-id=r#"^(spotify|com\.spotify\.Client)$"#
+    open-on-workspace "entertainment"
+    open-floating true
+    default-column-width { proportion 0.92; }
+    default-window-height { proportion 0.85; }
 }
 
 // Open the Firefox picture-in-picture player as floating by default.
@@ -592,7 +613,7 @@ binds {
     Mod+Shift+Equal { set-window-height "+10%"; }
 
     // Move the focused window between the floating and the tiling layout.
-    Mod+V       { toggle-window-floating; }
+    Mod+Space       { toggle-window-floating; }
     Mod+Shift+V { switch-focus-between-floating-and-tiling; }
 
     // Toggle tabbed column display mode.
