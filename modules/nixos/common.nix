@@ -62,6 +62,7 @@
     helix
     lazygit
     fzf
+    fd
     ripgrep
     home-manager
     zoxide
