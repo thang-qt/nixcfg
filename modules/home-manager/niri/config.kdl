@@ -334,6 +334,14 @@ window-rule {
     default-window-height { proportion 0.9; }
 }
 
+window-rule {
+    match app-id="Cider"
+    open-on-workspace "entertainment"
+    open-floating true
+    default-column-width { proportion 0.8; }
+    default-window-height { proportion 0.9; }
+}
+
 // Open the Firefox picture-in-picture player as floating by default.
 window-rule {
     // This app-id regular expression will work for both:
