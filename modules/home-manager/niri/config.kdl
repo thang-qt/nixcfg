@@ -322,7 +322,7 @@ window-rule {
     match app-id=r#"^(thunderbird|org\.mozilla\.Thunderbird)$"#
     open-on-workspace "communication"
     open-floating true
-    default-column-width { proportion 0.8; }
+    default-column-width { proportion 0.85; }
     default-window-height { proportion 0.9; }
 }
 
@@ -330,7 +330,7 @@ window-rule {
     match app-id=r#"^(spotify|com\.spotify\.Client)$"#
     open-on-workspace "entertainment"
     open-floating true
-    default-column-width { proportion 0.8; }
+    default-column-width { proportion 0.85; }
     default-window-height { proportion 0.9; }
 }
 
@@ -338,7 +338,7 @@ window-rule {
     match app-id="Cider"
     open-on-workspace "entertainment"
     open-floating true
-    default-column-width { proportion 0.8; }
+    default-column-width { proportion 0.85; }
     default-window-height { proportion 0.9; }
 }
 
