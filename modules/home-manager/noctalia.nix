@@ -164,7 +164,7 @@
         enableClipboardHistory = true;
         clipboardWatchTextCommand = "wl-paste --type text --watch cliphist store";
         clipboardWatchImageCommand = "wl-paste --type image --watch cliphist store";
-        terminalCommand = "wezterm -e";
+        terminalCommand = "alacritty -e";
         iconMode = "native";
         enableSettingsSearch = true;
         enableWindowsSearch = true;

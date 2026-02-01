@@ -4,7 +4,7 @@
   git = import ./git.nix;
   helix = import ./helix.nix;
   firefox = import ./firefox.nix;
-  wezterm = import ./wezterm.nix;
+  alacritty = import ./alacritty.nix;
   zellij = import ./zellij;
   fish = import ./fish.nix;
   spicetify = import ./spicetify.nix;

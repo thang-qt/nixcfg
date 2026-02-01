@@ -13,7 +13,7 @@
     ../common.nix
     inputs.self.homeManagerModules.opencode
     inputs.self.homeManagerModules.firefox
-    inputs.self.homeManagerModules.wezterm
+    inputs.self.homeManagerModules.alacritty
     inputs.self.homeManagerModules.zellij
     inputs.self.homeManagerModules.spicetify
     inputs.self.homeManagerModules.mpv
@@ -24,7 +24,7 @@
 
   home.packages = with pkgs; [
     zed-editor
-    wezterm
+    alacritty
     quickshell
     thunderbird
     _1password-cli
