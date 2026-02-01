@@ -11,4 +11,6 @@
   mpv = import ./mpv.nix;
   opencode = import ./opencode.nix;
   rescrobbled = import ./rescrobbled.nix;
+  niri = import ./niri;
+  noctalia = import ./noctalia.nix;
 }

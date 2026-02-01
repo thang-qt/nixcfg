@@ -10,7 +10,6 @@
     ./hardware-configuration.nix
     inputs.self.nixosModules.common
     inputs.self.nixosModules.bluetooth
-    inputs.self.nixosModules.auto-cpufreq
     inputs.self.nixosModules.koito
     inputs.self.nixosModules.restic
     inputs.self.nixosModules.gaming
@@ -48,7 +47,8 @@
 
   services.printing.enable = true;
 
-  services.power-profiles-daemon.enable = false;
+  services.power-profiles-daemon.enable = true;
+  services.upower.enable = true;
 
   services.pulseaudio.enable = false;
 
@@ -59,6 +59,8 @@
     alsa.support32Bit = true;
     pulse.enable = true;
   };
+
+  programs.niri.enable = true;
 
   # services.cloudflare-warp.enable = true;
 

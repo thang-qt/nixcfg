@@ -9,6 +9,7 @@
   imports = [
     inputs.spicetify-nix.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
+    inputs.noctalia.homeModules.default
     ../common.nix
     inputs.self.homeManagerModules.opencode
     inputs.self.homeManagerModules.firefox
@@ -17,11 +18,14 @@
     inputs.self.homeManagerModules.spicetify
     inputs.self.homeManagerModules.mpv
     inputs.self.homeManagerModules.rescrobbled
+    inputs.self.homeManagerModules.niri
+    inputs.self.homeManagerModules.noctalia
   ];
 
   home.packages = with pkgs; [
     zed-editor
     wezterm
+    quickshell
     thunderbird
     _1password-cli
     _1password-gui
@@ -41,6 +45,7 @@
     enable = true;
     package = pkgs.vscodium.fhs;
   };
+
 
   programs.ssh = {
     enable = true;
