@@ -25,7 +25,6 @@
       slang = "vie,vi,eng,en";
       cache = "yes";
       demuxer-max-bytes = "4G";
-      cache-backbuffer = "yes";
       demuxer-max-back-bytes = "1G";
       keep-open = "yes";
       keep-open-pause = "yes";
