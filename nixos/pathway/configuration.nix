@@ -72,6 +72,10 @@
   };
   programs.kdeconnect.enable = true;
 
+  programs.nix-ld = {
+    enable = true;
+  };
+
   virtualisation.docker = {
     enable = true;
     daemon.settings = {
@@ -108,6 +112,7 @@
     hunspell
     aria2
     xwayland-satellite
+    steam-run
   ];
 
   fonts = {
