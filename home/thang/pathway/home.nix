@@ -40,13 +40,13 @@
     hubstaff
     qbittorrent
     cider
+    kodi
   ];
 
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium.fhs;
   };
-
 
   programs.ssh = {
     enable = true;
