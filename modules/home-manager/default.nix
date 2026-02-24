@@ -13,4 +13,5 @@
   rescrobbled = import ./rescrobbled.nix;
   niri = import ./niri;
   noctalia = import ./noctalia.nix;
+  zathura = import ./zathura.nix;
 }

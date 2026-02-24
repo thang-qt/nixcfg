@@ -20,6 +20,7 @@
     inputs.self.homeManagerModules.rescrobbled
     inputs.self.homeManagerModules.niri
     inputs.self.homeManagerModules.noctalia
+    inputs.self.homeManagerModules.zathura
   ];
 
   home.packages = with pkgs; [
