@@ -41,6 +41,7 @@
     qbittorrent
     cider
     kodi
+    obsidian
   ];
 
   programs.vscode = {
