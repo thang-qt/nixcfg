@@ -62,6 +62,21 @@
         '';
       };
     };
+
+    virtualHosts."chat.thangqt.com" = {
+      enableACME = true;
+      forceSSL = true;
+
+      locations."/" = {
+        proxyPass = "http://127.0.0.1:3456";
+        proxyWebsockets = true;
+
+        extraConfig = ''
+          proxy_ssl_server_name on;
+          proxy_pass_header Authorization;
+        '';
+      };
+    };
   };
 
   security.acme = {

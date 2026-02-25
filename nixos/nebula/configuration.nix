@@ -13,6 +13,7 @@
     inputs.self.nixosModules.open-webui
     inputs.self.nixosModules.readn
     inputs.self.nixosModules.koito
+    inputs.self.nixosModules.docker
   ];
 
   boot.loader.systemd-boot.enable = true;

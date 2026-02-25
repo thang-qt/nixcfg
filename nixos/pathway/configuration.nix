@@ -13,6 +13,7 @@
     inputs.self.nixosModules.koito
     inputs.self.nixosModules.restic
     inputs.self.nixosModules.gaming
+    inputs.self.nixosModules.docker
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -76,30 +77,9 @@
     enable = true;
   };
 
-  virtualisation.docker = {
-    enable = true;
-    daemon.settings = {
-      dns = [
-        "1.1.1.1"
-        "8.8.8.8"
-      ];
-    };
-    rootless = {
-      enable = true;
-      setSocketVariable = true;
-      daemon.settings = {
-        dns = [
-          "1.1.1.1"
-          "8.8.8.8"
-        ];
-      };
-    };
-  };
-
   users.users.thang = {
     extraGroups = lib.mkAfter [
       "networkmanager"
-      "docker"
     ];
   };
 

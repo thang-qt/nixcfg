@@ -10,4 +10,5 @@
   koito = import ./koito.nix;
   restic = import ./restic.nix;
   gaming = import ./gaming.nix;
+  docker = import ./docker.nix;
 }
