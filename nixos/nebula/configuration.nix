@@ -10,7 +10,7 @@
     ./hardware-configuration.nix
     inputs.self.nixosModules.common
     inputs.self.nixosModules.nginx
-    inputs.self.nixosModules.open-webui
+    # inputs.self.nixosModules.open-webui
     inputs.self.nixosModules.readn
     inputs.self.nixosModules.koito
     inputs.self.nixosModules.docker

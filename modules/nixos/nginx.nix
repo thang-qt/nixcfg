@@ -18,23 +18,23 @@
     recommendedTlsSettings = true;
     recommendedGzipSettings = true;
 
-    virtualHosts."llm.thangqt.com" = {
-      enableACME = true;
-      forceSSL = true;
+    # virtualHosts."llm.thangqt.com" = {
+    #   enableACME = true;
+    #   forceSSL = true;
 
-      locations."/" = {
-        proxyPass = "http://127.0.0.1:3434";
-        proxyWebsockets = true; # if your app uses websockets
+    #   locations."/" = {
+    #     proxyPass = "http://127.0.0.1:3434";
+    #     proxyWebsockets = true; # if your app uses websockets
 
-        extraConfig = ''
-          # In case the upstream ever speaks TLS / uses name-based vhosts
-          proxy_ssl_server_name on;
+    #     extraConfig = ''
+    #       # In case the upstream ever speaks TLS / uses name-based vhosts
+    #       proxy_ssl_server_name on;
 
-          # Forward auth headers if your upstream needs them
-          proxy_pass_header Authorization;
-        '';
-      };
-    };
+    #       # Forward auth headers if your upstream needs them
+    #       proxy_pass_header Authorization;
+    #     '';
+    #   };
+    # };
     virtualHosts."readn.thangqt.com" = {
       enableACME = true;
       forceSSL = true;
