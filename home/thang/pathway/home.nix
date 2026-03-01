@@ -28,12 +28,9 @@
     alacritty
     quickshell
     thunderbird
-    _1password-cli
-    _1password-gui
     vacuum-tube
     gh
     unstable.codex
-    unstable.gemini-cli-bin
     ungoogled-chromium
     heroic
     lutris
@@ -41,7 +38,6 @@
     hubstaff
     qbittorrent
     cider
-    kodi
     obsidian
   ];
 
