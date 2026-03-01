@@ -27,6 +27,7 @@
         "sidebar.revamp.round-content-area" = true;
         "sidebar.visibility" = "expand-on-hover";
         "sidebar.animation.enabled" = false;
+        "browser.tabs.splitView.enabled" = true;
         "services.sync.engine.addresses" = false;
         "services.sync.engine.history" = false;
         "services.sync.engine.passwords" = false;
