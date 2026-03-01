@@ -26,6 +26,7 @@
         "sidebar.verticalTabs" = true;
         "sidebar.revamp.round-content-area" = true;
         "sidebar.visibility" = "expand-on-hover";
+        "sidebar.animation.enabled" = false;
         "services.sync.engine.addresses" = false;
         "services.sync.engine.history" = false;
         "services.sync.engine.passwords" = false;
