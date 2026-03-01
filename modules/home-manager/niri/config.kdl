@@ -77,7 +77,7 @@ input {
 // Remember to uncomment the node by removing "/-"!
 output "eDP-1" {
     // Uncomment this line to disable this output.
-    off
+    // off
 
     // Resolution and, optionally, refresh rate of the output.
     // The format is "<width>x<height>" or "<width>x<height>@<refresh rate>".
@@ -282,6 +282,7 @@ spawn-at-startup "thunderbird"
 
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
+spawn-sh-at-startup "niri msg --json outputs | jq -e 'to_entries | any(.key != \"eDP-1\" and .value.current_mode != null)' >/dev/null && niri msg output eDP-1 off || niri msg output eDP-1 on"
 
 hotkey-overlay {
     // Uncomment this line to disable the "Important Hotkeys" pop-up at startup.
