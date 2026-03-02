@@ -38,6 +38,7 @@
         "widget.use-xdg-desktop-portal.file-picker" = 1;
         "network.trr.mode" = 2;
         "network.trr.uri" = "https://mozilla.cloudflare-dns.com/dns-query";
+        "reader.color_scheme" = "sepia";
       };
     };
   };
