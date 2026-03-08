@@ -31,6 +31,7 @@
     vacuum-tube
     gh
     unstable.codex
+    unstable.antigravity-fhs
     ungoogled-chromium
     heroic
     lutris
