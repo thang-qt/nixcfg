@@ -12,7 +12,6 @@
     inputs.self.homeManagerModules.git
     inputs.self.homeManagerModules.helix
     inputs.self.homeManagerModules.fish
-    ./kde-lookandfeel.nix
   ];
 
   nixpkgs = {
