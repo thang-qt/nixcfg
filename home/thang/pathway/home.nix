@@ -36,6 +36,7 @@
     heroic
     lutris
     jetbrains.idea
+    jetbrains.rider
     hubstaff
     qbittorrent
     cider
