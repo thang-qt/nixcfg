@@ -93,6 +93,7 @@
     aria2
     xwayland-satellite
     steam-run
+    uv
   ];
 
   fonts = {
