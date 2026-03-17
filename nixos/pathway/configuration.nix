@@ -88,8 +88,7 @@
     qalculate-qt
     sops
     age
-    libreoffice-qt
-    hunspell
+    onlyoffice-desktopeditors
     aria2
     xwayland-satellite
     steam-run
