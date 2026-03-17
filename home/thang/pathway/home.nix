@@ -40,6 +40,8 @@
     qbittorrent
     cider
     obsidian
+    blender
+    unityhub
   ];
 
   programs.vscode = {
