@@ -28,6 +28,9 @@
   home = {
     username = "thang";
     homeDirectory = "/home/thang";
+    sessionPath = [
+      "$HOME/.local/bin"
+    ];
   };
 
   programs.home-manager.enable = true;
