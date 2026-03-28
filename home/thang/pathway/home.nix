@@ -24,7 +24,6 @@
   ];
 
   home.packages = with pkgs; [
-    zed-editor
     alacritty
     quickshell
     thunderbird
@@ -35,19 +34,20 @@
     ungoogled-chromium
     heroic
     lutris
-    jetbrains.idea
-    jetbrains.rider
     hubstaff
     qbittorrent
     cider
     obsidian
-    blender
-    unityhub
   ];
 
   programs.vscode = {
     enable = true;
     package = pkgs.vscodium.fhs;
+  };
+
+  programs.git = {
+    lfs.enable = true;
+    settings.push.autoSetupRemote = true;
   };
 
   programs.ssh = {

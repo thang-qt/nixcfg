@@ -34,8 +34,13 @@
   };
 
   programs.home-manager.enable = true;
-  programs.git.enable = true;
-
+  programs.git = {
+    enable = true;
+    settings.user = {
+      name = "Quang Thang";
+      email = "thang@thangqt.com";
+    };
+  };
   systemd.user.startServices = "sd-switch";
 
   sops.age.keyFile = "/etc/sops/age/keys.txt";
