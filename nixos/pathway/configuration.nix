@@ -18,8 +18,9 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-f63d4774-dcc7-4f57-b085-7ad9cd683c57".device =
-    "/dev/disk/by-uuid/f63d4774-dcc7-4f57-b085-7ad9cd683c57";
+  boot.initrd.luks.devices."luks-f37aceda-6d5d-4c90-9baa-eb64220a6042".device =
+    "/dev/disk/by-uuid/f37aceda-6d5d-4c90-9baa-eb64220a6042";
+  boot.resumeDevice = "/dev/mapper/luks-f37aceda-6d5d-4c90-9baa-eb64220a6042";
 
   networking.hostName = "pathway";
   networking.networkmanager.enable = true;
@@ -89,7 +90,6 @@
     sops
     age
     onlyoffice-desktopeditors
-    aria2
     xwayland-satellite
     steam-run
     uv
