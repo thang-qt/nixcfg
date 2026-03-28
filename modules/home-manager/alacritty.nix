@@ -9,6 +9,10 @@
           x = 12;
           y = 8;
         };
+        dimensions = {
+          columns = 110;
+          lines = 28;
+        };
       };
       font = {
         normal = {
