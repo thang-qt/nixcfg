@@ -8,6 +8,8 @@
     enable = true;
     profiles.thang = {
       settings = {
+        "browser.newtabpage.enabled" = false;
+        "browser.startup.homepage" = "chrome://browser/content/blanktab.html";
         "apz.overscroll.enabled" = true;
         "browser.aboutConfig.showWarning" = false;
         "general.autoScroll" = true;
