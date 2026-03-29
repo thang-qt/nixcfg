@@ -18,6 +18,10 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    kairos = {
+      url = "github:thang-qt/Kairos";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     noctalia = {
       url = "github:noctalia-dev/noctalia-shell";
       inputs.nixpkgs.follows = "nixpkgs-unstable";
@@ -32,6 +36,7 @@
       sops-nix,
       spicetify-nix,
       auto-cpufreq,
+      kairos,
       noctalia,
       ...
     }@inputs:
