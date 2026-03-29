@@ -28,7 +28,10 @@
   services.xserver.enable = true;
   services.displayManager.sddm = {
     enable = true;
-    wayland.enable = true;
+    wayland = {
+      enable = true;
+      compositor = "kwin";
+    };
   };
   services.desktopManager.plasma6.enable = true;
   services.xserver.xkb = {
@@ -85,6 +88,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    kdePackages.sddm-kcm
     rclone
     qalculate-qt
     sops
