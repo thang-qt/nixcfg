@@ -8,6 +8,7 @@
 {
   imports = [
     ./hardware-configuration.nix
+    ./data-binds.nix
     inputs.self.nixosModules.common
     inputs.self.nixosModules.bluetooth
     inputs.self.nixosModules.koito
@@ -21,6 +22,25 @@
   boot.initrd.luks.devices."luks-f37aceda-6d5d-4c90-9baa-eb64220a6042".device =
     "/dev/disk/by-uuid/f37aceda-6d5d-4c90-9baa-eb64220a6042";
   boot.resumeDevice = "/dev/mapper/luks-f37aceda-6d5d-4c90-9baa-eb64220a6042";
+
+  boot.initrd.secrets = {
+    "/crypto_keyfile_data" = "/etc/luks-keys/data.key";
+  };
+
+  boot.initrd.luks.devices."data" = {
+    device = "/dev/disk/by-uuid/e781ccf6-f534-48a5-be50-593106ca3eeb";
+    keyFile = "/crypto_keyfile_data";
+  };
+
+  fileSystems."/data" = {
+    device = "/dev/disk/by-uuid/40e0c532-375f-4842-a9ad-ad54dc5fb8b5";
+    fsType = "btrfs";
+    options = [
+      "subvol=@data"
+      "compress=zstd"
+      "noatime"
+    ];
+  };
 
   networking.hostName = "pathway";
   networking.networkmanager.enable = true;

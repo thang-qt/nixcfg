@@ -60,6 +60,7 @@
         "/home/thang/.config/google-chrome/*/Cache"
         "/home/thang/.config/chromium/*/Cache"
         "/home/thang/Downloads"
+        "/home/thang/Games"
         "/home/thang/.local/share/Steam"
         "node_modules"
         ".next"
