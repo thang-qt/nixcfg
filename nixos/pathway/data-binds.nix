@@ -4,6 +4,7 @@ let
   bindDirs = [
     "Documents"
     "Dev"
+    "Games"
     "Music"
     "Pictures"
     "Videos"
