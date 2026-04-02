@@ -32,8 +32,6 @@
     unstable.codex
     unstable.antigravity-fhs
     ungoogled-chromium
-    heroic
-    lutris
     hubstaff
     qbittorrent
     cider
