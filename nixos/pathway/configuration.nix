@@ -108,6 +108,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    unrar
     kdePackages.sddm-kcm
     rclone
     qalculate-qt
