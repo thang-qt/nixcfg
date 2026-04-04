@@ -85,6 +85,8 @@
     pulse.enable = true;
   };
 
+  programs.nh.enable = true;
+
   programs.niri.enable = true;
 
   # services.cloudflare-warp.enable = true;
