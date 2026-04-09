@@ -6,6 +6,10 @@
   ...
 }:
 {
+  nixpkgs.overlays = [
+    inputs.self.overlays.llm-agents
+  ];
+
   imports = [
     inputs.spicetify-nix.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
@@ -29,7 +33,9 @@
     thunderbird
     vacuum-tube
     gh
-    unstable.codex
+    llm-agents.codex
+    llm-agents.crush
+    llm-agents.pi
     unstable.antigravity-fhs
     ungoogled-chromium
     hubstaff

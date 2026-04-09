@@ -2,7 +2,7 @@
 {
   programs.opencode = {
     enable = true;
-    package = pkgs.unstable.opencode;
+    package = pkgs.llm-agents.opencode;
     settings = {
       theme = "catppuccin";
       plugin = [ "opencode-antigravity-auth@latest" ];
