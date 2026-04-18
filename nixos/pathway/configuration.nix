@@ -71,8 +71,24 @@
   };
 
   services.printing.enable = true;
+  powerManagement.enable = true;
 
-  services.power-profiles-daemon.enable = true;
+  programs.auto-cpufreq = {
+    enable = true;
+    settings = {
+      battery = {
+        governor = "powersave";
+        turbo = "never";
+      };
+      charger = {
+        governor = "performance";
+        turbo = "auto";
+      };
+    };
+  };
+
+  # Disabled in favor of auto-cpufreq on this host.
+  services.power-profiles-daemon.enable = false;
   services.upower.enable = true;
 
   services.pulseaudio.enable = false;
