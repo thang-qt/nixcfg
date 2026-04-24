@@ -42,12 +42,8 @@
     qbittorrent
     cider
     obsidian
+    vscode
   ];
-
-  programs.vscode = {
-    enable = true;
-    package = pkgs.vscodium.fhs;
-  };
 
   programs.git = {
     lfs.enable = true;
