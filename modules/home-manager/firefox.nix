@@ -41,6 +41,7 @@
         "network.trr.mode" = 2;
         "network.trr.uri" = "https://mozilla.cloudflare-dns.com/dns-query";
         "reader.color_scheme" = "sepia";
+        "network.IDN_show_punycode" = true;
       };
     };
   };
