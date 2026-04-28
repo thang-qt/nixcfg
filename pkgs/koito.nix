@@ -1,12 +1,12 @@
 { lib, fetchFromGitHub, stdenv, buildGoModule, fetchYarnDeps, yarnConfigHook, yarnBuildHook, nodejs, pkg-config, vips }:
 
 let
-  version = "0.1.4";
+  version = "0.1.7";
   src = fetchFromGitHub {
     owner = "gabehf";
     repo = "Koito";
     rev = "v${version}";
-    hash = "sha256-PGxDtKIznvIdg9ACtksKA56oJPMp68Grzjvl98SEDL8=";
+    hash = "sha256-CIzeKyaujRmjjXvyiJ9gdJy9T3emowO8PeY3VY0p9Ho=";
   };
 
   frontend = stdenv.mkDerivation {
