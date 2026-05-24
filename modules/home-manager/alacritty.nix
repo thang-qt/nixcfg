@@ -2,11 +2,36 @@
 {
   programs.alacritty = {
     enable = true;
-    theme = "catppuccin_mocha";
     settings = {
+      colors = {
+        primary = {
+          background = "#2b3339";
+          foreground = "#d3c6aa";
+        };
+        normal = {
+          black = "#4b565c";
+          red = "#e67e80";
+          green = "#a7c080";
+          yellow = "#dbbc7f";
+          blue = "#7fbbb3";
+          magenta = "#d699b6";
+          cyan = "#83c092";
+          white = "#d3c6aa";
+        };
+        bright = {
+          black = "#5c6a72";
+          red = "#e67e80";
+          green = "#a7c080";
+          yellow = "#dbbc7f";
+          blue = "#7fbbb3";
+          magenta = "#d699b6";
+          cyan = "#83c092";
+          white = "#d3c6aa";
+        };
+      };
       window = {
         padding = {
-          x = 12;
+          x = 8;
           y = 8;
         };
         dimensions = {
@@ -16,19 +41,19 @@
       };
       font = {
         normal = {
-          family = "MesloLGM Nerd Font Mono";
+          family = "Iosevka Nerd Font Mono";
           style = "Regular";
         };
         bold = {
-          family = "MesloLGM Nerd Font Mono";
+          family = "Iosevka Nerd Font Mono";
           style = "Bold";
         };
         italic = {
-          family = "MesloLGM Nerd Font Mono";
+          family = "Iosevka Nerd Font Mono";
           style = "Italic";
         };
         bold_italic = {
-          family = "MesloLGM Nerd Font Mono";
+          family = "Iosevka Nerd Font Mono";
           style = "Bold Italic";
         };
         size = 14.0;

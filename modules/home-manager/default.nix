@@ -13,6 +13,6 @@
   pi = import ./pi.nix;
   rescrobbled = import ./rescrobbled.nix;
   niri = import ./niri;
-  noctalia = import ./noctalia.nix;
+  wm-stack = import ./wm-stack;
   zathura = import ./zathura.nix;
 }

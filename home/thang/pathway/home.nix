@@ -12,7 +12,6 @@
   imports = [
     inputs.spicetify-nix.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
-    inputs.noctalia.homeModules.default
     ../common.nix
     inputs.self.homeManagerModules.opencode
     inputs.self.homeManagerModules.pi
@@ -23,13 +22,12 @@
     inputs.self.homeManagerModules.mpv
     inputs.self.homeManagerModules.rescrobbled
     inputs.self.homeManagerModules.niri
-    inputs.self.homeManagerModules.noctalia
+    inputs.self.homeManagerModules.wm-stack
     inputs.self.homeManagerModules.zathura
   ];
 
   home.packages = with pkgs; [
     alacritty
-    quickshell
     thunderbird
     vacuum-tube
     gh
@@ -72,6 +70,7 @@
       echo "Wrote $out with $(${jq}/bin/jq '.providers.proxy.models | length' "$out") models."
     '')
   ];
+
 
   programs.pi-coding-agent = {
     enable = true;

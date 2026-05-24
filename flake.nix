@@ -22,10 +22,6 @@
       url = "github:thang-qt/Kairos";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    noctalia = {
-      url = "github:noctalia-dev/noctalia-shell";
-      inputs.nixpkgs.follows = "nixpkgs-unstable";
-    };
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
@@ -38,7 +34,6 @@
       spicetify-nix,
       auto-cpufreq,
       kairos,
-      noctalia,
       ...
     }@inputs:
     let
