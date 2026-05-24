@@ -24,6 +24,7 @@
     inputs.self.homeManagerModules.niri
     inputs.self.homeManagerModules.wm-stack
     inputs.self.homeManagerModules.zathura
+    inputs.self.homeManagerModules.yazi
   ];
 
   home.packages = with pkgs; [

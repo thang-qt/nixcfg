@@ -15,4 +15,5 @@
   niri = import ./niri;
   wm-stack = import ./wm-stack;
   zathura = import ./zathura.nix;
+  yazi = import ./yazi.nix;
 }
