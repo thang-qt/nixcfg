@@ -5,6 +5,7 @@
 {
   programs.helix = {
     enable = true;
+    defaultEditor = true;
     themes = {
       mocha_transparent = {
         inherits = "catppuccin_mocha";
