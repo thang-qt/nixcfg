@@ -8,7 +8,6 @@
   ];
 
   home.packages = with pkgs; [
-    nerd-fonts.iosevka
     libnotify
     playerctl
     (writeShellScriptBin "notify-volume" ''

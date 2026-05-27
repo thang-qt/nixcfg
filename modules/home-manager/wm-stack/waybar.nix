@@ -87,7 +87,7 @@
       * {
         border: none;
         border-radius: 0;
-        font-family: "Iosevka Nerd Font Mono";
+        font-family: "Iosevka Nerd Font";
         font-size: 12px;
         min-height: 0;
       }

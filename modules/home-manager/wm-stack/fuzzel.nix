@@ -5,7 +5,7 @@
     settings = {
       main = {
         terminal = "alacritty -e";
-        font = "Iosevka:size=12";
+        font = "Iosevka Nerd Font:size=12";
         width = 48;
         lines = 12;
         horizontal-pad = 8;
