@@ -15,7 +15,14 @@
 
   environment.systemPackages = with pkgs; [
     heroic
+    wineWowPackages.stagingFull
+    winetricks
   ];
+
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
   programs.gamemode.enable = true;
 }
