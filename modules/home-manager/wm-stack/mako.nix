@@ -1,7 +1,4 @@
-{ pkgs, ... }:
 {
-  home.packages = [ pkgs.mako ];
-
   xdg.configFile."mako/config".text = ''
     anchor=top-right
     font=Iosevka Nerd Font 11
@@ -15,9 +12,9 @@
     default-timeout=5000
   '';
 
-  # Do not use `services.mako.enable`: the upstream user unit is WantedBy
-  # graphical-session.target, which also starts in KDE. Niri starts mako
-  # explicitly instead.
+  # Keep mako out of home.packages too: the package installs a D-Bus
+  # notification service that KDE can activate from the user profile.
+  # Niri starts mako explicitly by absolute store path instead.
   services.mako = {
     enable = false;
     settings = {

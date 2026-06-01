@@ -1,6 +1,10 @@
-{ lib, pkgs, ... }:
+{ pkgs, ... }:
 {
-  xdg.configFile."niri/config.kdl".source = ./config.kdl;
+  xdg.configFile."niri/config.kdl".text =
+    builtins.replaceStrings
+      [ ''spawn-at-startup "mako"'' ]
+      [ ''spawn-at-startup "${pkgs.mako}/bin/mako"'' ]
+      (builtins.readFile ./config.kdl);
 
   systemd.user.services.polkit-kde-authentication-agent-1 = {
     Unit = {
