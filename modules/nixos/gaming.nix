@@ -15,7 +15,7 @@
 
   environment.systemPackages = with pkgs; [
     heroic
-    wineWowPackages.stagingFull
+    wineWow64Packages.stagingFull
     winetricks
   ];
 

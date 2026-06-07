@@ -6,6 +6,7 @@
 {
   programs.firefox = {
     enable = true;
+    configPath = "${config.xdg.configHome}/mozilla/firefox";
     profiles.thang = {
       settings = {
         "browser.newtabpage.enabled" = false;

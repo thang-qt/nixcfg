@@ -1,6 +1,6 @@
 { pkgs, ... }:
 {
-  services.swww.enable = true;
+  services.awww.enable = true;
 
   home.packages = with pkgs; [
     (writeShellScriptBin "cycle-wallpaper" ''
@@ -22,17 +22,17 @@
         exit 0
       fi
 
-      ${swww}/bin/swww img "$wallpaper" \
+      ${awww}/bin/awww img "$wallpaper" \
         --transition-type any \
         --transition-duration 1
     '')
   ];
 
-  systemd.user.services.swww-wallpaper-cycle = {
+  systemd.user.services.awww-wallpaper-cycle = {
     Unit = {
-      Description = "Random wallpaper rotation with swww";
-      After = [ "swww.service" ];
-      Requires = [ "swww.service" ];
+      Description = "Random wallpaper rotation with awww";
+      After = [ "awww.service" ];
+      Requires = [ "awww.service" ];
     };
     Service = {
       Type = "oneshot";
@@ -40,12 +40,12 @@
     };
   };
 
-  systemd.user.timers.swww-wallpaper-cycle = {
+  systemd.user.timers.awww-wallpaper-cycle = {
     Unit.Description = "Rotate wallpaper every 2 hours";
     Timer = {
       OnBootSec = "10s";
       OnUnitActiveSec = "2h";
-      Unit = "swww-wallpaper-cycle.service";
+      Unit = "awww-wallpaper-cycle.service";
     };
     Install.WantedBy = [ "timers.target" ];
   };

@@ -42,7 +42,7 @@ in
       type = lib.types.listOf lib.types.package;
       default = with pkgs; [
         nil
-        nixfmt-rfc-style
+        nixfmt
         nodejs_22
         typescript
         typescript-language-server

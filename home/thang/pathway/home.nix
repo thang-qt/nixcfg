@@ -13,7 +13,6 @@
     inputs.spicetify-nix.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
     ../common.nix
-    inputs.self.homeManagerModules.opencode
     inputs.self.homeManagerModules.pi
     inputs.self.homeManagerModules.firefox
     inputs.self.homeManagerModules.alacritty
@@ -105,7 +104,7 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks."*".extraOptions = {
+    settings."*" = {
       IdentityAgent = "~/.1password/agent.sock";
     };
   };
