@@ -114,7 +114,7 @@
 
   # services.cloudflare-warp.enable = true;
 
-  programs.firefox.enable = true;
+  # Firefox is installed and configured by Home Manager.
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
