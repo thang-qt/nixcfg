@@ -61,7 +61,7 @@
         "browser.toolbars.bookmarks.visibility" = "never";
         "browser.newtabpage.activity-stream.trendingSearch.defaultSearchEngine" = "DuckDuckGo";
         "sidebar.revamp" = true;
-        "sidebar.verticalTabs" = true;
+        "sidebar.verticalTabs" = false;
         "sidebar.revamp.round-content-area" = true;
         "sidebar.visibility" = "expand-on-hover";
         "sidebar.expandOnHover" = true;
