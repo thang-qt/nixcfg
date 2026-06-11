@@ -105,14 +105,14 @@ in
       enable = lib.mkOption {
         type = lib.types.bool;
         default = true;
-        description = "Enable pi-web-access for web search/fetch tools and its web skill.";
+        description = "Enable @juicesharp/rpiv-web-tools for web search/fetch tools.";
       };
 
       package = lib.mkOption {
         type = lib.types.package;
-        default = pkgs.pi-web-access;
-        defaultText = lib.literalExpression "pi-web-access fetched from GitHub at v0.10.7";
-        description = "Reproducibly fetched pi-web-access package.";
+        default = pkgs.rpiv-web-tools;
+        defaultText = lib.literalExpression "@juicesharp/rpiv-web-tools fetched from npm at 1.19.1";
+        description = "Reproducibly fetched rpiv-web-tools package.";
       };
     };
 
@@ -175,7 +175,7 @@ in
       - ~/.pi/agent/APPEND_SYSTEM.md (if programs.pi-coding-agent.appendSystem is set)
 
       pi-subagents source: ${cfg.subagents.package}
-      pi-web-access source: ${cfg.webAccess.package}
+      rpiv-web-tools source: ${cfg.webAccess.package}
       rpiv-btw source: ${cfg.btw.package}
     '';
 
