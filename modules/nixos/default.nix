@@ -10,5 +10,6 @@
   koito = import ./koito.nix;
   restic = import ./restic.nix;
   gaming = import ./gaming.nix;
+  llama-cpp = import ./llama-cpp.nix;
   docker = import ./docker.nix;
 }

@@ -24,7 +24,19 @@ in
       let
         dir = lib.last (lib.splitString "/" mountPoint);
       in
-      mkBindMount dir);
+      mkBindMount dir) // {
+    "/home/thang/.local/share/ai-models" = {
+      device = "/data/thang/Models";
+      fsType = "none";
+      options = [ "bind" ];
+      depends = [ "/data" ];
+    };
+  };
 
-  systemd.tmpfiles.rules = map (dir: "d /home/thang/${dir} 0755 thang users - -") bindDirs;
+  systemd.tmpfiles.rules = map (dir: "d /home/thang/${dir} 0755 thang users - -") bindDirs ++ [
+    "d /data/thang/Models 0755 thang users - -"
+    "d /home/thang/.local 0755 thang users - -"
+    "d /home/thang/.local/share 0755 thang users - -"
+    "d /home/thang/.local/share/ai-models 0755 thang users - -"
+  ];
 }

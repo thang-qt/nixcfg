@@ -14,6 +14,7 @@
     inputs.self.nixosModules.koito
     inputs.self.nixosModules.restic
     inputs.self.nixosModules.gaming
+    inputs.self.nixosModules.llama-cpp
     inputs.self.nixosModules.docker
   ];
 

@@ -56,6 +56,7 @@
         "/home/thang/.cache"
         "/home/thang/.local/share/Trash"
         "/home/thang/.local/share/docker"
+        "/home/thang/.local/share/ai-models"
         "/home/thang/.mozilla/firefox/*/cache2"
         "/home/thang/.config/google-chrome/*/Cache"
         "/home/thang/.config/chromium/*/Cache"
