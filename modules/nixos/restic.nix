@@ -62,6 +62,7 @@
         "/home/thang/.config/chromium/*/Cache"
         "/home/thang/Downloads"
         "/home/thang/Games"
+        "/home/thang/Music"
         "/home/thang/Videos"
         "/home/thang/Dev/SQL/pgdata"
         "/home/thang/.local/share/Steam"
