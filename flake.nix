@@ -18,6 +18,7 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    kairos.url = "github:thang-qt/Kairos/b6d1eb1b2e1d4f947341064a268c8644e089a7ea";
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
@@ -29,6 +30,7 @@
       sops-nix,
       spicetify-nix,
       auto-cpufreq,
+      kairos,
       ...
     }@inputs:
     let

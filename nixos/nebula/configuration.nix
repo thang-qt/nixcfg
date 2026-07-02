@@ -14,6 +14,7 @@
     inputs.self.nixosModules.readn
     inputs.self.nixosModules.koito
     inputs.self.nixosModules.docker
+    inputs.kairos.nixosModules.default
   ];
 
   boot.loader.systemd-boot.enable = true;
@@ -45,6 +46,23 @@
   custom_modules.koito = {
     enable = true;
     allowedHosts = "*";
+  };
+
+  services.kairos = {
+    enable = true;
+    port = 3457;
+    listenAddress = "127.0.0.1";
+    environment = {
+      ADMIN_PASSWORD = "thang123";
+    };
+    settings = {
+      appEnv = "production";
+      cookieSecure = true;
+      authEnabled = true;
+      allowSignup = false;
+      bootstrapAdmin = true;
+      adminEmail = "thang@thangqt.com";
+    };
   };
 
   system.stateVersion = "25.05";
