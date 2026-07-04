@@ -1,43 +1,129 @@
 {
   lib,
-  appimageTools,
-  requireFile,
+  stdenv,
+  fetchurl,
+  dpkg,
+  autoPatchelfHook,
+  makeWrapper,
+  alsa-lib,
+  at-spi2-atk,
+  at-spi2-core,
+  cairo,
+  cups,
+  dbus,
+  expat,
+  gdk-pixbuf,
+  glib,
+  gtk3,
+  libdrm,
+  libgbm,
+  libnotify,
+  libpulseaudio,
+  libuuid,
+  libxkbcommon,
+  libxcb,
+  libx11,
+  libxcomposite,
+  libxcursor,
+  libxdamage,
+  libxext,
+  libxfixes,
+  libxi,
+  libxrandr,
+  libxrender,
+  libxscrnsaver,
+  libxtst,
+  mesa,
+  nspr,
+  nss,
+  pango,
+  systemd,
+  xdg-utils,
 }:
 
-let
-  version = "3.1.8";
+stdenv.mkDerivation (finalAttrs: {
   pname = "cider";
+  version = "4.0.0";
 
-  src = requireFile {
-    name = "cider-v${version}-linux-x64.AppImage";
-    sha256 = "1b5qllzk1r7jpxw19a90p87kpc6rh05nc8zdr22bcl630xh8ql5k";
-    message = ''
-      This Nix expression requires the Cider AppImage.
-      Please add it to the Nix store with:
-        nix-store --add-fixed sha256 ~/Downloads/cider-v${version}-linux-x64.AppImage
-    '';
+  src = fetchurl {
+    url = "https://repo.cider.sh/apt/pool/main/cider-v${finalAttrs.version}-linux-x64.deb";
+    hash = "sha256-Z5B7VQatTEktt4e7aF5EGDTufgwfRHJzCZ1Lia/aIFk=";
   };
 
-  appimageContents = appimageTools.extractType2 { inherit pname version src; };
-in
-appimageTools.wrapType2 {
-  inherit pname version src;
+  nativeBuildInputs = [
+    autoPatchelfHook
+    dpkg
+    makeWrapper
+  ];
 
-  extraInstallCommands = ''
-    install -Dm644 ${appimageContents}/Cider.desktop $out/share/applications/${pname}.desktop
-    install -Dm644 ${appimageContents}/Cider.png $out/share/pixmaps/${pname}.png
-    substituteInPlace $out/share/applications/${pname}.desktop \
-      --replace-fail 'Exec=Cider' 'Exec=${pname}'
+  buildInputs = [
+    alsa-lib
+    at-spi2-atk
+    at-spi2-core
+    cairo
+    cups
+    dbus
+    expat
+    gdk-pixbuf
+    glib
+    gtk3
+    libdrm
+    libgbm
+    libnotify
+    libpulseaudio
+    libuuid
+    libxkbcommon
+    libxcb
+    libx11
+    libxcomposite
+    libxcursor
+    libxdamage
+    libxext
+    libxfixes
+    libxi
+    libxrandr
+    libxrender
+    libxscrnsaver
+    libxtst
+    mesa
+    nspr
+    nss
+    pango
+    stdenv.cc.cc.lib
+    systemd
+    xdg-utils
+  ];
+
+  unpackPhase = ''
+    runHook preUnpack
+
+    dpkg-deb --fsys-tarfile $src | tar --extract --no-same-owner --no-same-permissions
+
+    runHook postUnpack
+  '';
+
+  installPhase = ''
+    runHook preInstall
+
+    mkdir -p $out/lib $out/share
+    cp -r usr/lib/cider $out/lib/
+    cp -r usr/share/applications usr/share/pixmaps $out/share/
+
+    install -d $out/bin
+    makeWrapper $out/lib/cider/Cider $out/bin/cider \
+      --prefix PATH : ${lib.makeBinPath [ xdg-utils ]}
+
+    runHook postInstall
   '';
 
   meta = {
-    description = "A new look into listening and enjoying Apple Music in style and performance";
-    homepage = "https://github.com/ciderapp/Cider";
-    downloadPage = "https://github.com/ciderapp/Cider/releases";
-    license = lib.licenses.agpl3Only;
+    description = "A cross-platform Apple Music experience built on Vue.js";
+    homepage = "https://cider.sh";
+    downloadPage = "https://repo.cider.sh/apt";
+    license = lib.licenses.unfree;
     sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
     maintainers = [ ];
     platforms = [ "x86_64-linux" ];
     mainProgram = "cider";
   };
-}
+})
