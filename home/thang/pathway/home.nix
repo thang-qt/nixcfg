@@ -25,6 +25,7 @@
     inputs.self.homeManagerModules.zathura
     inputs.self.homeManagerModules.yazi
     inputs.self.homeManagerModules.zed
+    ./pi.nix
   ];
 
   home.packages = with pkgs; [
@@ -42,30 +43,6 @@
     obsidian
     vscode
   ];
-
-
-  programs.pi-coding-agent = {
-    enable = true;
-    settings = {
-      theme = "dark";
-      defaultProvider = "proxy";
-      defaultModel = "cx/gpt-5.5-medium";
-      defaultThinkingLevel = "medium";
-      warnings.anthropicExtraUsage = false;
-    };
-    models = null;
-    subagents.settings = {
-      agentOverrides = {
-        reviewer = {
-          thinking = "high";
-          inheritProjectContext = false;
-        };
-        oracle = {
-          thinking = "high";
-        };
-      };
-    };
-  };
 
   programs.git = {
     lfs.enable = true;
