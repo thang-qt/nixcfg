@@ -131,6 +131,55 @@ in
       };
     };
 
+    multiAccount = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable pi-multi-account for automatic provider/account failover and rotation.";
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.pi-multi-account;
+        defaultText = lib.literalExpression "pi-multi-account fetched from npm at 1.13.5";
+        description = "Reproducibly fetched pi-multi-account package.";
+      };
+
+      settings = lib.mkOption {
+        type = jsonFormat.type;
+        default = {
+          includeCursor = false;
+          showUsage = false;
+        };
+        example = {
+          includeCursor = false;
+          showUsage = false;
+          providerOrder = [
+            "anthropic"
+            "openai-codex"
+            "qwen"
+            "ollama"
+          ];
+        };
+        description = "Settings written to ~/.pi/agent/provider-failover.json for pi-multi-account.";
+      };
+    };
+
+    commandCode = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable pi-commandcode-provider for the Command Code API.";
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.pi-commandcode-provider;
+        defaultText = lib.literalExpression "pi-commandcode-provider fetched from npm at 0.4.1";
+        description = "Reproducibly fetched pi-commandcode-provider package.";
+      };
+    };
+
     subagents = {
       enable = lib.mkOption {
         type = lib.types.bool;
@@ -177,6 +226,8 @@ in
       pi-subagents source: ${cfg.subagents.package}
       rpiv-web-tools source: ${cfg.webAccess.package}
       rpiv-btw source: ${cfg.btw.package}
+      pi-multi-account source: ${cfg.multiAccount.package}
+      pi-commandcode-provider source: ${cfg.commandCode.package}
     '';
 
     home.file.".pi/agent/APPEND_SYSTEM.md" = lib.mkIf (cfg.appendSystem != null) {
@@ -187,12 +238,18 @@ in
       text = cfg.agentsMd;
     };
 
+    home.file.".pi/agent/provider-failover.json" = lib.mkIf cfg.multiAccount.enable {
+      source = jsonFormat.generate "pi-provider-failover.json" cfg.multiAccount.settings;
+    };
+
     home.file.".pi/agent/settings.json".source = jsonFormat.generate "pi-settings.json" (
       lib.recursiveUpdate defaultSettings (
         lib.recursiveUpdate cfg.settings {
           packages = (cfg.settings.packages or [ ])
             ++ lib.optionals cfg.webAccess.enable [ (toString cfg.webAccess.package) ]
             ++ lib.optionals cfg.btw.enable [ (toString cfg.btw.package) ]
+            ++ lib.optionals cfg.multiAccount.enable [ (toString cfg.multiAccount.package) ]
+            ++ lib.optionals cfg.commandCode.enable [ (toString cfg.commandCode.package) ]
             ++ lib.optionals cfg.subagents.enable [ (toString cfg.subagents.package) ];
           subagents = lib.recursiveUpdate (cfg.settings.subagents or { }) cfg.subagents.settings;
         }
