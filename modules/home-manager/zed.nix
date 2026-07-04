@@ -1,12 +1,15 @@
-{ lib, pkgs, ... }:
 {
+  lib,
+  pkgs,
+  ...
+}: {
   programs.zed-editor = {
     enable = true;
     package = pkgs.unstable.zed-editor;
     installRemoteServer = true;
 
     extensions = [
-      "everforest"
+      "catppuccin"
       "nix"
       "toml"
       "make"
@@ -54,9 +57,9 @@
       confirm_quit = false;
 
       theme = {
-        mode = "light";
-        light = "Everforest Light Medium (regular)";
-        dark = "Everforest Dark Medium (regular)";
+        mode = "dark";
+        light = "Catppuccin Mocha";
+        dark = "Catppuccin Mocha";
       };
 
       ui_font_family = "Iosevka Nerd Font";
@@ -100,7 +103,7 @@
         copy_on_select = false;
         detect_venv = {
           on = {
-            directories = [ ".env" "env" ".venv" "venv" ];
+            directories = [".env" "env" ".venv" "venv"];
             activate_script = "default";
           };
         };
@@ -118,7 +121,7 @@
 
       languages = {
         Nix = {
-          language_servers = [ "nixd" "!nil" ];
+          language_servers = ["nixd" "!nil"];
           formatter = {
             external = {
               command = lib.getExe pkgs.alejandra;
@@ -126,7 +129,7 @@
           };
         };
         Go = {
-          language_servers = [ "gopls" ];
+          language_servers = ["gopls"];
           formatter = {
             external = {
               command = lib.getExe pkgs.gofumpt;
@@ -134,16 +137,16 @@
           };
         };
         JavaScript = {
-          language_servers = [ "typescript-language-server" "eslint" ];
+          language_servers = ["typescript-language-server" "eslint"];
         };
         TypeScript = {
-          language_servers = [ "typescript-language-server" "eslint" ];
+          language_servers = ["typescript-language-server" "eslint"];
         };
         HTML = {
-          language_servers = [ "vscode-html-language-server" "tailwindcss-language-server" ];
+          language_servers = ["vscode-html-language-server" "tailwindcss-language-server"];
         };
         CSS = {
-          language_servers = [ "vscode-css-language-server" "tailwindcss-language-server" ];
+          language_servers = ["vscode-css-language-server" "tailwindcss-language-server"];
         };
         Markdown = {
           format_on_save = "off";

@@ -6,9 +6,9 @@
     padding=8
     border-size=1
     border-radius=0
-    background-color=#2b3339ee
-    text-color=#d3c6aaff
-    border-color=#a7c080ff
+    background-color=#1e1e2eee
+    text-color=#cdd6f4ff
+    border-color=#a6e3a1ff
     default-timeout=5000
   '';
 
@@ -24,9 +24,9 @@
       padding = "8";
       border-size = 1;
       border-radius = 0;
-      background-color = "#2b3339ee";
-      text-color = "#d3c6aaff";
-      border-color = "#a7c080ff";
+      background-color = "#1e1e2eee";
+      text-color = "#cdd6f4ff";
+      border-color = "#a6e3a1ff";
       default-timeout = 5000;
     };
   };

@@ -1,32 +1,31 @@
-{ ... }:
-{
+{...}: {
   programs.alacritty = {
     enable = true;
     settings = {
       colors = {
         primary = {
-          background = "#2b3339";
-          foreground = "#d3c6aa";
+          background = "#1e1e2e";
+          foreground = "#cdd6f4";
         };
         normal = {
-          black = "#4b565c";
-          red = "#e67e80";
-          green = "#a7c080";
-          yellow = "#dbbc7f";
-          blue = "#7fbbb3";
-          magenta = "#d699b6";
-          cyan = "#83c092";
-          white = "#d3c6aa";
+          black = "#45475a";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan = "#94e2d5";
+          white = "#bac2de";
         };
         bright = {
-          black = "#5c6a72";
-          red = "#e67e80";
-          green = "#a7c080";
-          yellow = "#dbbc7f";
-          blue = "#7fbbb3";
-          magenta = "#d699b6";
-          cyan = "#83c092";
-          white = "#d3c6aa";
+          black = "#585b70";
+          red = "#f38ba8";
+          green = "#a6e3a1";
+          yellow = "#f9e2af";
+          blue = "#89b4fa";
+          magenta = "#f5c2e7";
+          cyan = "#94e2d5";
+          white = "#a6adc8";
         };
       };
       window = {

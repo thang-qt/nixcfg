@@ -1,5 +1,4 @@
-{ ... }:
-{
+{...}: {
   programs.fuzzel = {
     enable = true;
     settings = {
@@ -13,16 +12,16 @@
         inner-pad = 6;
       };
       colors = {
-        background = "2b3339ff";
-        text = "d3c6aaff";
-        prompt = "a7c080ff";
-        placeholder = "859289ff";
-        input = "d3c6aaff";
-        match = "dbbc7fff";
-        selection = "3a4248ff";
-        selection-text = "d3c6aaff";
-        selection-match = "dbbc7fff";
-        border = "a7c080ff";
+        background = "1e1e2eff";
+        text = "cdd6f4ff";
+        prompt = "a6e3a1ff";
+        placeholder = "6c7086ff";
+        input = "cdd6f4ff";
+        match = "f9e2afff";
+        selection = "313244ff";
+        selection-text = "cdd6f4ff";
+        selection-match = "f9e2afff";
+        border = "a6e3a1ff";
       };
       border = {
         width = 1;

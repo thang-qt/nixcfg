@@ -1,10 +1,9 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   programs.waybar = {
     enable = true;
     systemd = {
       enable = true;
-      targets = [ "niri.service" ];
+      targets = ["niri.service"];
     };
     settings.mainBar = {
       layer = "top";
@@ -17,7 +16,7 @@
         "niri/workspaces"
         "niri/window"
       ];
-      modules-center = [ "clock" ];
+      modules-center = ["clock"];
       modules-right = [
         "mpris"
         "tray"
@@ -98,19 +97,19 @@
       }
 
       window#waybar {
-        background: #2b3339;
-        color: #d3c6aa;
+        background: #1e1e2e;
+        color: #cdd6f4;
       }
 
       #workspaces button {
         padding: 0 4px;
-        color: #859289;
+        color: #6c7086;
       }
 
       #workspaces button.active,
       #workspaces button.focused {
-        color: #2b3339;
-        background: #a7c080;
+        color: #1e1e2e;
+        background: #a6e3a1;
       }
 
       #window,
@@ -131,11 +130,11 @@
       }
 
       #mpris.playing {
-        color: #a7c080;
+        color: #a6e3a1;
       }
 
       #mpris.paused {
-        color: #dbbc7f;
+        color: #f9e2af;
       }
 
       #mpris,

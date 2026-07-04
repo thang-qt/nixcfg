@@ -170,8 +170,8 @@ layout {
         // How many logical pixels the ring extends out from the windows.
         width 2
 
-        active-color "#a7c080"
-        inactive-color "#859289"
+        active-color "#a6e3a1"
+        inactive-color "#6c7086"
 
         // Colors can be set in a variety of ways:
         // - CSS named colors: "red"
