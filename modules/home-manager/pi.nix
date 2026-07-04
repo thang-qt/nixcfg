@@ -180,6 +180,21 @@ in
       };
     };
 
+    spark = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable the pi-spark package.";
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.pi-spark;
+        defaultText = lib.literalExpression "pi-spark fetched from GitHub at v0.15.0";
+        description = "Reproducibly fetched pi-spark package.";
+      };
+    };
+
     subagents = {
       enable = lib.mkOption {
         type = lib.types.bool;
@@ -224,6 +239,7 @@ in
       - ~/.pi/agent/APPEND_SYSTEM.md (if programs.pi-coding-agent.appendSystem is set)
 
       pi-subagents source: ${cfg.subagents.package}
+      pi-spark source: ${cfg.spark.package}
       rpiv-web-tools source: ${cfg.webAccess.package}
       rpiv-btw source: ${cfg.btw.package}
       pi-multi-account source: ${cfg.multiAccount.package}
@@ -250,6 +266,7 @@ in
             ++ lib.optionals cfg.btw.enable [ (toString cfg.btw.package) ]
             ++ lib.optionals cfg.multiAccount.enable [ (toString cfg.multiAccount.package) ]
             ++ lib.optionals cfg.commandCode.enable [ (toString cfg.commandCode.package) ]
+            ++ lib.optionals cfg.spark.enable [ (toString cfg.spark.package) ]
             ++ lib.optionals cfg.subagents.enable [ (toString cfg.subagents.package) ];
           subagents = lib.recursiveUpdate (cfg.settings.subagents or { }) cfg.subagents.settings;
         }
