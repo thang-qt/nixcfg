@@ -1,12 +1,13 @@
-{ config, lib, pkgs, ... }:
-let
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}: let
   cfg = config.custom_modules.koito;
   stateDir = "/var/lib/koito";
   configDir = "${stateDir}/config";
-  dbName = "koito";
-  dbUser = "koito";
-in
-{
+in {
   options.custom_modules.koito = {
     enable = lib.mkEnableOption "Koito scrobbler service";
 
@@ -62,7 +63,7 @@ in
       description = "Koito scrobbler service user";
     };
 
-    users.groups.koito = { };
+    users.groups.koito = {};
 
     systemd.tmpfiles.rules = [
       "d ${stateDir} 0750 koito koito -"
@@ -71,27 +72,13 @@ in
       "d ${configDir}/images 0750 koito koito -"
     ];
 
-    services.postgresql.enable = true;
-    services.postgresql.ensureDatabases = [ dbName ];
-    services.postgresql.ensureUsers = [
-      {
-        name = dbUser;
-        ensureDBOwnership = true;
-      }
-    ];
-    services.postgresql.authentication = lib.mkAfter ''
-      local ${dbName} ${dbUser} peer
-    '';
-
     systemd.services.koito = {
       description = "Koito ListenBrainz Scrobbler";
-      wantedBy = [ "multi-user.target" ];
-      after = [ "network.target" "postgresql.service" ];
-      requires = [ "postgresql.service" ];
+      wantedBy = ["multi-user.target"];
+      after = ["network.target"];
 
       environment =
         {
-          KOITO_DATABASE_URL = "postgres:///${dbName}?host=/run/postgresql";
           KOITO_ALLOWED_HOSTS = cfg.allowedHosts;
           KOITO_LISTEN_PORT = toString cfg.port;
           KOITO_CONFIG_DIR = configDir;
@@ -100,6 +87,9 @@ in
           KOITO_DEFAULT_USERNAME = cfg.defaultUsername;
           KOITO_DEFAULT_THEME = "urim";
           KOITO_LOGIN_GATE = "true";
+        }
+        // lib.optionalAttrs (cfg.defaultPasswordFile != null) {
+          KOITO_DEFAULT_PASSWORD_FILE = "%d/password";
         }
         // lib.optionalAttrs (cfg.subsonicUrl != null) {
           KOITO_SUBSONIC_URL = cfg.subsonicUrl;
@@ -118,7 +108,7 @@ in
         PrivateTmp = true;
         ProtectSystem = "strict";
         ProtectHome = true;
-        ReadWritePaths = [ stateDir ];
+        ReadWritePaths = [stateDir];
 
         EnvironmentFile = lib.mkIf (cfg.subsonicParamsFile != null) [
           cfg.subsonicParamsFile
@@ -128,21 +118,16 @@ in
           "password:${cfg.defaultPasswordFile}"
         ];
       };
-
-      preStart = lib.mkIf (cfg.defaultPasswordFile != null) ''
-        if [ -f "$CREDENTIALS_DIRECTORY/password" ]; then
-          export KOITO_DEFAULT_PASSWORD=$(cat "$CREDENTIALS_DIRECTORY/password")
-        fi
-      '';
     };
 
-    services.navidrome.settings = lib.mkIf (
-      cfg.configureNavidrome
-      && config.services.navidrome.enable
-      && !config.custom_modules.multi-scrobbler.enable
-    ) {
-      "ListenBrainz.Enabled" = true;
-      "ListenBrainz.BaseURL" = "http://127.0.0.1:${toString cfg.port}/apis/listenbrainz/1";
-    };
+    services.navidrome.settings =
+      lib.mkIf (
+        cfg.configureNavidrome
+        && config.services.navidrome.enable
+        && !config.custom_modules.multi-scrobbler.enable
+      ) {
+        "ListenBrainz.Enabled" = true;
+        "ListenBrainz.BaseURL" = "http://127.0.0.1:${toString cfg.port}/apis/listenbrainz/1";
+      };
   };
 }

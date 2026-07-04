@@ -4,8 +4,7 @@
   config,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosModules.common
@@ -19,7 +18,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelParams = [ "net.ifnames=0" ];
+  boot.kernelParams = ["net.ifnames=0"];
 
   networking.hostName = "nebula";
 
@@ -32,7 +31,7 @@
     };
   };
 
-  environment.shells = [ pkgs.fish ];
+  environment.shells = [pkgs.fish];
   programs.fish.enable = true;
 
   services.openssh = {
@@ -46,6 +45,7 @@
   custom_modules.koito = {
     enable = true;
     allowedHosts = "*";
+    defaultUsername = "thang";
   };
 
   services.kairos = {
