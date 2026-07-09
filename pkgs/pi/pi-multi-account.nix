@@ -7,11 +7,11 @@
 
 stdenvNoCC.mkDerivation rec {
   pname = "pi-multi-account";
-  version = "1.13.5";
+  version = "1.13.14";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/pi-multi-account/-/pi-multi-account-${version}.tgz";
-    hash = "sha256-WeciDpNehPzwQiq0ry3DDv72HUGdbejDWLnEtRbBM8g=";
+    hash = "sha256-GB+j7TJHlGrEAKWju049ygfLpYr2CAtBHJ3d8qebae4=";
   };
 
   sourceRoot = "package";
