@@ -1,4 +1,4 @@
-{...}: {
+{ ... }: {
   programs.pi-coding-agent = {
     enable = true;
     settings = {
@@ -7,8 +7,17 @@
       defaultModel = "gpt-5.5";
       defaultThinkingLevel = "medium";
       warnings.anthropicExtraUsage = false;
+      retry.provider.maxRetries = 0;
     };
     models = null;
+    multiAccount.settings = {
+      includeCursor = false;
+      includeQwen = false;
+      includeOllama = false;
+      showUsage = false;
+      providerOrder = [ "openai-codex" ];
+      rescueUnmanagedProviders = false;
+    };
     subagents.settings = {
       agentOverrides = {
         reviewer = {
@@ -25,7 +34,7 @@
         oracle = {
           model = "gpt-5.5";
           thinking = "high";
-          fallbackModels = ["deepseek/deepseek-v4-pro"];
+          fallbackModels = [ "deepseek/deepseek-v4-pro" ];
         };
       };
     };

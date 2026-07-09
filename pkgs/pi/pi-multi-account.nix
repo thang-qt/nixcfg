@@ -2,6 +2,7 @@
   lib,
   stdenvNoCC,
   fetchurl,
+  python3,
 }:
 
 stdenvNoCC.mkDerivation rec {
@@ -14,6 +15,41 @@ stdenvNoCC.mkDerivation rec {
   };
 
   sourceRoot = "package";
+
+  nativeBuildInputs = [ python3 ];
+
+  postPatch = ''
+    # Keep pi-multi-account scoped to providers it manages when configured.
+    # Without this, an error from an active external provider like commandcode
+    # is "rescued" into Codex, which mixes Command Code runs with Codex account
+    # rotation.
+    python3 - <<'PY'
+    from pathlib import Path
+    path = Path("index.ts")
+    text = path.read_text()
+    replacements = [
+        ("includeCursor?: boolean;", "includeCursor?: boolean;\n\trescueUnmanagedProviders?: boolean;"),
+        ('| "includeCursor"', '| "includeCursor"\n\t\t| "rescueUnmanagedProviders"'),
+        (
+            "includeCursor: true,\n\tproviderOrder: DEFAULT_PROVIDER_ORDER,",
+            "includeCursor: true,\n\trescueUnmanagedProviders: true,\n\tproviderOrder: DEFAULT_PROVIDER_ORDER,",
+        ),
+        (
+            "includeCursor: raw.includeCursor ?? true,\n\t\tproviderOrder: order.filter(",
+            "includeCursor: raw.includeCursor ?? true,\n\t\trescueUnmanagedProviders: raw.rescueUnmanagedProviders ?? true,\n\t\tproviderOrder: order.filter(",
+        ),
+        (
+            "if (!managed) {\n\t\t\tif (",
+            "if (!managed) {\n\t\t\tif (!config.rescueUnmanagedProviders) return;\n\t\t\tif (",
+        ),
+    ]
+    for old, new in replacements:
+        if old not in text:
+            raise SystemExit(f"missing pi-multi-account patch target: {old!r}")
+        text = text.replace(old, new, 1)
+    path.write_text(text)
+    PY
+  '';
 
   installPhase = ''
     runHook preInstall
