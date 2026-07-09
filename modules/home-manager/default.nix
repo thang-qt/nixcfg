@@ -12,6 +12,7 @@
   opencode = import ./opencode.nix;
   pi = import ./pi.nix;
   rescrobbled = import ./rescrobbled.nix;
+  trakt-scrobbler = import ./trakt-scrobbler.nix;
   niri = import ./niri;
   wm-stack = import ./wm-stack;
   zathura = import ./zathura.nix;

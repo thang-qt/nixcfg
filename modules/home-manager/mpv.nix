@@ -28,6 +28,10 @@
       keep-open = "yes";
       keep-open-pause = "yes";
       save-position-on-quit = "yes";
+      # When opening one local file, create a playlist from sibling media files so playback advances.
+      autocreate-playlist = "same";
+      # Required by Trakt Scrobbler for mpv progress/file tracking.
+      input-ipc-server = "/run/user/1000/.umpv";
       sub-auto = "fuzzy";
     };
   };

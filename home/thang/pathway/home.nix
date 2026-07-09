@@ -20,6 +20,7 @@
     inputs.self.homeManagerModules.spicetify
     inputs.self.homeManagerModules.mpv
     inputs.self.homeManagerModules.rescrobbled
+    inputs.self.homeManagerModules.trakt-scrobbler
     inputs.self.homeManagerModules.niri
     inputs.self.homeManagerModules.wm-stack
     inputs.self.homeManagerModules.zathura
