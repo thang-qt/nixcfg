@@ -11,7 +11,6 @@
     };
     models = null;
     multiAccount.settings = {
-      autoContinue = false;
       includeCursor = false;
       includeQwen = false;
       includeOllama = false;
