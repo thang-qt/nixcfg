@@ -4,7 +4,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   nixpkgs.overlays = [
     inputs.self.overlays.llm-agents
   ];
@@ -35,7 +36,6 @@
     vacuum-tube
     gh
     llm-agents.codex
-    llm-agents.crush
     unstable.antigravity-fhs
     ungoogled-chromium
     hubstaff
