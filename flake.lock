@@ -144,17 +144,17 @@
         "nixpkgs": "nixpkgs"
       },
       "locked": {
-        "lastModified": 1783005020,
-        "narHash": "sha256-AxtZ++FasMZ4aqTN6KefIcGq6Y1TMQVldMLRqAakW38=",
+        "lastModified": 1783949661,
+        "narHash": "sha256-PtFd3rECOibG7P4mo+2hYMvvGOVrTWJ3pkP/S3ERfSs=",
         "owner": "thang-qt",
         "repo": "Kairos",
-        "rev": "b6d1eb1b2e1d4f947341064a268c8644e089a7ea",
+        "rev": "98f80c2d305bc0b4b4a931e6d36b7f4122a94345",
         "type": "github"
       },
       "original": {
         "owner": "thang-qt",
         "repo": "Kairos",
-        "rev": "b6d1eb1b2e1d4f947341064a268c8644e089a7ea",
+        "rev": "98f80c2d305bc0b4b4a931e6d36b7f4122a94345",
         "type": "github"
       }
     },

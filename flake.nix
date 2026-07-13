@@ -18,7 +18,7 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kairos.url = "github:thang-qt/Kairos/b6d1eb1b2e1d4f947341064a268c8644e089a7ea";
+    kairos.url = "github:thang-qt/Kairos/98f80c2d305bc0b4b4a931e6d36b7f4122a94345";
     llm-agents.url = "github:numtide/llm-agents.nix";
   };
 
