@@ -4,7 +4,7 @@
     settings = {
       theme = "dark";
       defaultProvider = "proxy";
-      defaultModel = "gpt-5.5";
+      defaultModel = "gpt-5.6-luna";
       defaultThinkingLevel = "medium";
       warnings.anthropicExtraUsage = false;
       retry.provider.maxRetries = 0;
@@ -32,7 +32,7 @@
           model = "deepseek/deepseek-v4-flash";
         };
         oracle = {
-          model = "gpt-5.5";
+          model = "gpt-5.6-luna";
           thinking = "high";
           fallbackModels = [ "deepseek/deepseek-v4-pro" ];
         };
