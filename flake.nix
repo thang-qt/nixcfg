@@ -20,6 +20,7 @@
     };
     kairos.url = "github:thang-qt/Kairos/619464a8c4c53fbf5668ea2894115ec3dbf34b3d";
     llm-agents.url = "github:numtide/llm-agents.nix";
+    hermes-agent.url = "github:NousResearch/hermes-agent";
   };
 
   outputs =
@@ -67,6 +68,14 @@
             sops-nix.nixosModules.sops
           ];
         };
+        petri = nixpkgs.lib.nixosSystem {
+          specialArgs = { inherit inputs; };
+          modules = [
+            ./nixos/petri/configuration.nix
+            inputs.hermes-agent.nixosModules.default
+            sops-nix.nixosModules.sops
+          ];
+        };
       };
 
       homeConfigurations = {
@@ -82,6 +91,13 @@
           extraSpecialArgs = { inherit inputs; };
           modules = [
             ./home/thang/pathway/home.nix
+          ];
+        };
+        "thang@petri" = home-manager.lib.homeManagerConfiguration {
+          pkgs = nixpkgs.legacyPackages.aarch64-linux;
+          extraSpecialArgs = { inherit inputs; };
+          modules = [
+            ./home/thang/petri/home.nix
           ];
         };
       };
