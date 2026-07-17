@@ -16,6 +16,7 @@
     ../common.nix
     inputs.self.homeManagerModules.pi
     inputs.self.homeManagerModules.firefox
+    inputs.self.homeManagerModules.zen
     inputs.self.homeManagerModules.alacritty
     inputs.self.homeManagerModules.zellij
     inputs.self.homeManagerModules.spicetify
@@ -37,7 +38,7 @@
     gh
     llm-agents.codex
     unstable.antigravity-fhs
-    ungoogled-chromium
+    inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium
     hubstaff
     qbittorrent
     cider

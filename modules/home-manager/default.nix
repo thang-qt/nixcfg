@@ -4,6 +4,7 @@
   git = import ./git.nix;
   helix = import ./helix.nix;
   firefox = import ./firefox.nix;
+  zen = import ./zen.nix;
   alacritty = import ./alacritty.nix;
   zellij = import ./zellij;
   fish = import ./fish.nix;

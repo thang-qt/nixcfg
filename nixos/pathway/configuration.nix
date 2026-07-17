@@ -115,11 +115,18 @@
 
   # services.cloudflare-warp.enable = true;
 
-  # Firefox is installed and configured by Home Manager.
+  # Browsers are installed and configured by Home Manager.
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
     polkitPolicyOwners = [ "thang" ];
+  };
+  environment.etc."1password/custom_allowed_browsers" = {
+    text = ''
+      zen
+      helium
+    '';
+    mode = "0755";
   };
   programs.kdeconnect.enable = true;
 
