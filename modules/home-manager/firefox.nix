@@ -56,6 +56,7 @@
         "browser.urlbar.trimHttps" = true;
         "browser.urlbar.trimURLs" = true;
         "widget.gtk.rounded-bottom-corners.enabled" = true;
+        "widget.gtk.native-emoji-dialog" = false;
         "browser.compactmode.show" = true;
         "browser.formfill.enable" = false;
         "browser.toolbars.bookmarks.visibility" = "never";
