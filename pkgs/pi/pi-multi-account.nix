@@ -20,8 +20,7 @@ stdenvNoCC.mkDerivation rec {
 
   postPatch = ''
     # Keep pi-multi-account scoped to providers it manages when configured.
-    # Without this, an error from an active external provider like commandcode
-    # is "rescued" into Codex, which mixes Command Code runs with Codex account
+    # Keep errors from unmanaged external providers outside Codex account
     # rotation.
     python3 - <<'PY'
     from pathlib import Path
