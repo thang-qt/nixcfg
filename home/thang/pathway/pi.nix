@@ -24,17 +24,10 @@
           thinking = "high";
           inheritProjectContext = false;
         };
-        scout = {
-          model = "deepseek/deepseek-v4-flash";
-          thinking = "medium";
-        };
-        worker = {
-          model = "deepseek/deepseek-v4-flash";
-        };
+        scout.thinking = "medium";
         oracle = {
           model = "gpt-5.6-sol";
           thinking = "high";
-          fallbackModels = [ "deepseek/deepseek-v4-pro" ];
         };
       };
     };
