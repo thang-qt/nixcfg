@@ -52,10 +52,6 @@
 
   services.kairos = {
     enable = true;
-    # Kairos e81d7e1's flake has a stale Go vendoring hash.
-    package = inputs.kairos.packages.${pkgs.system}.default.overrideAttrs (_: {
-      vendorHash = "sha256-zeLW8wiSPLkBHjuzTLr7GnH2bfOw5gmYMTK2pcIEK4c=";
-    });
     port = 3457;
     listenAddress = "127.0.0.1";
     environment = {
