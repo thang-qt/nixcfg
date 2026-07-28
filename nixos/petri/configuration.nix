@@ -1,7 +1,5 @@
 {
   inputs,
-  lib,
-  config,
   pkgs,
   ...
 }: {
@@ -46,59 +44,8 @@
 
   security.sudo.wheelNeedsPassword = false;
 
-  systemd.tmpfiles.rules = [
-    "f /var/lib/hermes/env 0600 hermes hermes - -"
-    "f /var/lib/hermes/.hermes/.hermes_history 0660 hermes hermes - -"
-  ];
-
-  services.hermes-agent = {
-    enable = true;
-    package = inputs.hermes-agent.packages.${pkgs.system}.minimal;
-    addToSystemPackages = true;
-    environmentFiles = ["/var/lib/hermes/env"];
-    environment = {
-      API_SERVER_ENABLED = "true";
-      API_SERVER_HOST = "0.0.0.0";
-      API_SERVER_PORT = "8642";
-    };
-    workingDirectory = "/var/lib/hermes/workspace";
-
-    settings = {
-      # Provider/model are configured by `hermes setup`; preserve them here.
-      toolsets = ["all"];
-      max_turns = 100;
-      terminal = {
-        backend = "local";
-        cwd = "/data/workspace";
-        timeout = 180;
-      };
-      memory = {
-        memory_enabled = true;
-        user_profile_enabled = true;
-      };
-    };
-
-    container = {
-      enable = true;
-      hostUsers = ["thang"];
-      extraVolumes = [
-        "/home/thang/Dev:/Dev:rw"
-      ];
-    };
-
-    extraPackages = with pkgs; [
-      curl
-      fd
-      git
-      jq
-      nodejs_22
-      python3
-      ripgrep
-      uv
-    ];
-  };
-
   environment.systemPackages = with pkgs; [
+    inputs.hermes-agent.packages.${pkgs.system}.minimal
     htop
     sops
     age

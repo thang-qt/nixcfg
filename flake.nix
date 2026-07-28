@@ -80,7 +80,6 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./nixos/petri/configuration.nix
-            inputs.hermes-agent.nixosModules.default
             sops-nix.nixosModules.sops
           ];
         };
