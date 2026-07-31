@@ -2,7 +2,8 @@
   inputs,
   pkgs,
   ...
-}: {
+}:
+{
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosModules.common
@@ -21,11 +22,11 @@
   networking.hostName = "petri";
   networking.useDHCP = false;
   networking.interfaces.enp0s6.useDHCP = true;
-  networking.firewall.trustedInterfaces = ["tailscale0"];
+  networking.firewall.trustedInterfaces = [ "tailscale0" ];
 
   services.openssh = {
     enable = true;
-    ports = [2211];
+    ports = [ 2211 ];
     openFirewall = true;
     settings = {
       PermitRootLogin = "no";
@@ -46,6 +47,7 @@
 
   environment.systemPackages = with pkgs; [
     inputs.hermes-agent.packages.${pkgs.system}.minimal
+    himalaya
     htop
     sops
     age
