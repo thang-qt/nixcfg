@@ -74,6 +74,7 @@
   ];
 
   programs.fish.enable = true;
+  programs.mosh.enable = true;
 
   programs.direnv = {
     enable = true;
