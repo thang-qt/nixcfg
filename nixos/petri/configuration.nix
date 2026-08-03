@@ -46,7 +46,7 @@
   security.sudo.wheelNeedsPassword = false;
 
   environment.systemPackages = with pkgs; [
-    inputs.hermes-agent.packages.${pkgs.system}.minimal
+    inputs.hermes-agent.packages.${pkgs.system}.default
     himalaya
     htop
     sops
