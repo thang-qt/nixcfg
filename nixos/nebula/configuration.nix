@@ -36,6 +36,7 @@
   environment.systemPackages = [
     inputs.hermes-agent.packages.${pkgs.system}.default
     pkgs.himalaya
+    pkgs.oci-cli
   ];
 
   security.sudo.extraRules = [
