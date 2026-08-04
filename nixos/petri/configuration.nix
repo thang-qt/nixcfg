@@ -103,7 +103,6 @@
   };
 
   environment.systemPackages = with pkgs; [
-    inputs.hermes-agent.packages.${pkgs.system}.default
     himalaya
     htop
     sops

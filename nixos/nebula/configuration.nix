@@ -33,6 +33,23 @@
   environment.shells = [pkgs.fish];
   programs.fish.enable = true;
 
+  environment.systemPackages = [
+    inputs.hermes-agent.packages.${pkgs.system}.default
+    pkgs.himalaya
+  ];
+
+  security.sudo.extraRules = [
+    {
+      users = [ "thang" ];
+      commands = [
+        {
+          command = "ALL";
+          options = [ "NOPASSWD" ];
+        }
+      ];
+    }
+  ];
+
   services.openssh = {
     enable = true;
     ports = [2211];
