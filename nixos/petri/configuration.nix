@@ -1,9 +1,9 @@
 {
+  config,
   inputs,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     inputs.self.nixosModules.common
@@ -22,11 +22,12 @@
   networking.hostName = "petri";
   networking.useDHCP = false;
   networking.interfaces.enp0s6.useDHCP = true;
-  networking.firewall.trustedInterfaces = [ "tailscale0" ];
+  networking.firewall.trustedInterfaces = ["tailscale0"];
+  networking.firewall.allowedTCPPorts = [2211];
 
   services.openssh = {
     enable = true;
-    ports = [ 2211 ];
+    ports = [2211];
     openFirewall = true;
     settings = {
       PermitRootLogin = "no";
@@ -44,6 +45,62 @@
   };
 
   security.sudo.wheelNeedsPassword = false;
+
+  systemd.tmpfiles.rules = [
+    "z /home/thang/.config/code-server/config.yaml 0600 thang users -"
+  ];
+
+  sops.secrets.code-server-password-hash = {
+    sopsFile = ../../secrets/code-server.yaml;
+    format = "yaml";
+    key = "code_server_password_hash";
+    mode = "0400";
+    owner = "root";
+    restartUnits = ["code-server.service"];
+  };
+
+  sops.templates."code-server-env" = {
+    content = ''
+      HASHED_PASSWORD=${config.sops.placeholder.code-server-password-hash}
+    '';
+    mode = "0400";
+    owner = "root";
+  };
+
+  services.code-server = {
+    enable = true;
+    user = "thang";
+    group = "users";
+    host = "127.0.0.1";
+    port = 4444;
+    auth = "password";
+    disableTelemetry = true;
+    disableUpdateCheck = true;
+  };
+
+  systemd.services.code-server.serviceConfig.EnvironmentFile =
+    config.sops.templates."code-server-env".path;
+
+  sops.secrets.cloudflare-tunnel-credentials = {
+    sopsFile = ../../secrets/cloudflared-credentials.json;
+    format = "json";
+    key = "";
+    mode = "0400";
+    owner = "root";
+    restartUnits = ["cloudflared-tunnel-7b92ff59-1e66-4103-8ade-ca6d2117c1b5.service"];
+  };
+
+  services.cloudflared = {
+    enable = true;
+
+    tunnels."7b92ff59-1e66-4103-8ade-ca6d2117c1b5" = {
+      credentialsFile = config.sops.secrets.cloudflare-tunnel-credentials.path;
+      ingress."petri-code.thangqt.com" = {
+        service = "http://127.0.0.1:4444";
+      };
+      default = "http_status:404";
+    };
+  };
 
   environment.systemPackages = with pkgs; [
     inputs.hermes-agent.packages.${pkgs.system}.default
