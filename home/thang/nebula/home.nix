@@ -9,5 +9,6 @@
   imports = [
     inputs.sops-nix.homeManagerModules.sops
     ../common.nix
+    inputs.self.homeManagerModules.zellij
   ];
 }
