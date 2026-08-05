@@ -26,6 +26,7 @@
     thang = {
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAEEmpz4BTIDrPitcRgoE/rKdJXh/w4dH8n/gYBvZFUA"
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIONhUAE47UJ/nMcuIZLgefDjGqNeX0ywcJQgJoMB80S6"
       ];
     };
   };
@@ -60,6 +61,10 @@
       PasswordAuthentication = false;
     };
   };
+
+  networking.firewall.extraCommands = ''
+    iptables -A nixos-fw -s 222.252.22.135/32 -j nixos-fw-accept
+  '';
 
   custom_modules.koito = {
     enable = true;

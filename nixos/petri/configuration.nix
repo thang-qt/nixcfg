@@ -24,6 +24,9 @@
   networking.interfaces.enp0s6.useDHCP = true;
   networking.firewall.trustedInterfaces = ["tailscale0"];
   networking.firewall.allowedTCPPorts = [2211];
+  networking.firewall.extraCommands = ''
+    iptables -A nixos-fw -s 222.252.22.135/32 -j nixos-fw-accept
+  '';
 
   services.openssh = {
     enable = true;
@@ -41,6 +44,7 @@
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAEEmpz4BTIDrPitcRgoE/rKdJXh/w4dH8n/gYBvZFUA"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHZ7KokkDS4XU9M15R3htHbt4ZJ9NQeYxVbKWinbE3n5"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAkyDdWAGpKeCyQmuu/s+n2Di4zbH2hsBo0m8SKhD3z7 quangthang@ctrl-c.club"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIDtX6hahETY97j5Qm27XwrgQ5+dncMJ76dAPJzLeby2C"
     ];
   };
 
