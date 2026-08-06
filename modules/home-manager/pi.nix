@@ -131,6 +131,21 @@ in
       };
     };
 
+    commandCode = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = true;
+        description = "Enable pi-commandcode-provider for the Command Code API.";
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.pi-commandcode-provider;
+        defaultText = lib.literalExpression "pi-commandcode-provider fetched from npm at 0.4.3";
+        description = "Reproducibly fetched pi-commandcode-provider package.";
+      };
+    };
+
     spark = {
       enable = lib.mkOption {
         type = lib.types.bool;
@@ -193,6 +208,7 @@ in
       pi-spark source: ${cfg.spark.package}
       rpiv-web-tools source: ${cfg.webAccess.package}
       rpiv-btw source: ${cfg.btw.package}
+      pi-commandcode-provider source: ${cfg.commandCode.package}
     '';
 
     home.file.".pi/agent/APPEND_SYSTEM.md" = lib.mkIf (cfg.appendSystem != null) {
@@ -209,6 +225,7 @@ in
           packages = (cfg.settings.packages or [ ])
             ++ lib.optionals cfg.webAccess.enable [ (toString cfg.webAccess.package) ]
             ++ lib.optionals cfg.btw.enable [ (toString cfg.btw.package) ]
+            ++ lib.optionals cfg.commandCode.enable [ (toString cfg.commandCode.package) ]
             ++ lib.optionals cfg.spark.enable [ (toString cfg.spark.package) ]
             ++ lib.optionals cfg.subagents.enable [ (toString cfg.subagents.package) ];
           subagents = lib.recursiveUpdate (cfg.settings.subagents or { }) cfg.subagents.settings;
