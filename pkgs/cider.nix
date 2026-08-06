@@ -17,6 +17,7 @@
   gtk3,
   libdrm,
   libgbm,
+  libglvnd,
   libnotify,
   libpulseaudio,
   libuuid,
@@ -40,14 +41,13 @@
   systemd,
   xdg-utils,
 }:
-
 stdenv.mkDerivation (finalAttrs: {
   pname = "cider";
-  version = "4.0.0";
+  version = "4.0.9.1";
 
   src = fetchurl {
     url = "https://repo.cider.sh/apt/pool/main/cider-v${finalAttrs.version}-linux-x64.deb";
-    hash = "sha256-Z5B7VQatTEktt4e7aF5EGDTufgwfRHJzCZ1Lia/aIFk=";
+    hash = "sha256-MsA6lK3PsyOEx938FgJFx8l9oqwoM3FzIK5goF73lTs=";
   };
 
   nativeBuildInputs = [
@@ -55,6 +55,8 @@ stdenv.mkDerivation (finalAttrs: {
     dpkg
     makeWrapper
   ];
+
+  runtimeDependencies = [libglvnd];
 
   buildInputs = [
     alsa-lib
@@ -69,6 +71,7 @@ stdenv.mkDerivation (finalAttrs: {
     gtk3
     libdrm
     libgbm
+    libglvnd
     libnotify
     libpulseaudio
     libuuid
@@ -111,7 +114,8 @@ stdenv.mkDerivation (finalAttrs: {
 
     install -d $out/bin
     makeWrapper $out/lib/cider/Cider $out/bin/cider \
-      --prefix PATH : ${lib.makeBinPath [ xdg-utils ]}
+      --prefix LD_LIBRARY_PATH : ${lib.makeLibraryPath [libglvnd]} \
+      --prefix PATH : ${lib.makeBinPath [xdg-utils]}
 
     runHook postInstall
   '';
@@ -121,9 +125,9 @@ stdenv.mkDerivation (finalAttrs: {
     homepage = "https://cider.sh";
     downloadPage = "https://repo.cider.sh/apt";
     license = lib.licenses.unfree;
-    sourceProvenance = with lib.sourceTypes; [ binaryNativeCode ];
-    maintainers = [ ];
-    platforms = [ "x86_64-linux" ];
+    sourceProvenance = with lib.sourceTypes; [binaryNativeCode];
+    maintainers = [];
+    platforms = ["x86_64-linux"];
     mainProgram = "cider";
   };
 })
