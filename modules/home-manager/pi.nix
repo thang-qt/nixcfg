@@ -134,7 +134,7 @@ in
     multiAccount = {
       enable = lib.mkOption {
         type = lib.types.bool;
-        default = true;
+        default = false;
         description = "Enable pi-multi-account for automatic provider/account failover and rotation.";
       };
 
@@ -227,7 +227,6 @@ in
       pi-spark source: ${cfg.spark.package}
       rpiv-web-tools source: ${cfg.webAccess.package}
       rpiv-btw source: ${cfg.btw.package}
-      pi-multi-account source: ${cfg.multiAccount.package}
     '';
 
     home.file.".pi/agent/APPEND_SYSTEM.md" = lib.mkIf (cfg.appendSystem != null) {

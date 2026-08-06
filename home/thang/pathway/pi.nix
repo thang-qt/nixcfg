@@ -10,14 +10,6 @@
       retry.provider.maxRetries = 0;
     };
     models = null;
-    multiAccount.settings = {
-      includeCursor = false;
-      includeQwen = false;
-      includeOllama = false;
-      showUsage = false;
-      providerOrder = [ "openai-codex" ];
-      rescueUnmanagedProviders = false;
-    };
     subagents.settings = {
       agentOverrides = {
         reviewer = {
