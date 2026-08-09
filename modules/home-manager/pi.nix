@@ -146,6 +146,21 @@ in
       };
     };
 
+    mcpAdapter = {
+      enable = lib.mkOption {
+        type = lib.types.bool;
+        default = false;
+        description = "Enable the pi-mcp-adapter package.";
+      };
+
+      package = lib.mkOption {
+        type = lib.types.package;
+        default = pkgs.pi-mcp-adapter;
+        defaultText = lib.literalExpression "pi-mcp-adapter fetched from GitHub at v2.21.0";
+        description = "MCP adapter package to enable.";
+      };
+    };
+
     spark = {
       enable = lib.mkOption {
         type = lib.types.bool;
@@ -209,6 +224,7 @@ in
       rpiv-web-tools source: ${cfg.webAccess.package}
       rpiv-btw source: ${cfg.btw.package}
       pi-commandcode-provider source: ${cfg.commandCode.package}
+      pi-mcp-adapter source: ${cfg.mcpAdapter.package}
     '';
 
     home.file.".pi/agent/APPEND_SYSTEM.md" = lib.mkIf (cfg.appendSystem != null) {
@@ -226,6 +242,7 @@ in
             ++ lib.optionals cfg.webAccess.enable [ (toString cfg.webAccess.package) ]
             ++ lib.optionals cfg.btw.enable [ (toString cfg.btw.package) ]
             ++ lib.optionals cfg.commandCode.enable [ (toString cfg.commandCode.package) ]
+            ++ lib.optionals cfg.mcpAdapter.enable [ (toString cfg.mcpAdapter.package) ]
             ++ lib.optionals cfg.spark.enable [ (toString cfg.spark.package) ]
             ++ lib.optionals cfg.subagents.enable [ (toString cfg.subagents.package) ];
           subagents = lib.recursiveUpdate (cfg.settings.subagents or { }) cfg.subagents.settings;
