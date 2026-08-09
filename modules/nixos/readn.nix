@@ -7,7 +7,7 @@
 
 {
   sops.secrets.readn-auth = {
-    sopsFile = ../../secrets/readn.yaml;
+    sopsFile = ../../secrets/nebula/readn.yaml;
     format = "yaml";
     key = "readn_auth";
     mode = "0400";

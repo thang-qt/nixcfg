@@ -55,7 +55,7 @@
   ];
 
   sops.secrets.code-server-password-hash = {
-    sopsFile = ../../secrets/code-server.yaml;
+    sopsFile = ../../secrets/petri/code-server.yaml;
     format = "yaml";
     key = "code_server_password_hash";
     mode = "0400";
@@ -86,7 +86,7 @@
     config.sops.templates."code-server-env".path;
 
   sops.secrets.cloudflare-tunnel-credentials = {
-    sopsFile = ../../secrets/cloudflared-credentials.json;
+    sopsFile = ../../secrets/petri/cloudflared-credentials.json;
     format = "json";
     key = "";
     mode = "0400";

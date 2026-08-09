@@ -1,10 +1,26 @@
 keys:
-  - &thang age12gt0669qhhsptwsjeqgnx5dctfyhr0mzqcgrl8u3c83gfv00ucksw5yy39
-  - &nebula age1gv6vmrm2pdujce08wj62vlxlfnf0jes72ma0whegn967rjn9m3yqhr0f6a
+  - &thang age1fcfzxhj4lxq4x5men38nfrmpgy42mrnxhs64zn9ynr63cde3zegqj56n7m
+
+  # Dedicated native age identities, one per NixOS host.
+  - &pathway age1k36we9d4jnxmrx2nurv0349rdht5gtcp24zffl3yvw06gns2a96s9tx3fx
+  - &nebula age1v8ewnvuy9dyugqnm22lv956506rz2uw0sfjjn4sg82w3zwucqdjqsw4ckx
+  - &petri age1ktcr9jjrf24w7s2ups6fy5wx0mg08v660qdkfvyu6f9w00vyyv6spycprf
 
 creation_rules:
-  - path_regex: secrets/[^/]+\.yaml$
+  - path_regex: ^secrets/pathway/[^/]+\.(yaml|json)$
+    key_groups:
+      - age:
+          - *thang
+          - *pathway
+
+  - path_regex: ^secrets/nebula/[^/]+\.(yaml|json)$
     key_groups:
       - age:
           - *thang
           - *nebula
+
+  - path_regex: ^secrets/petri/[^/]+\.(yaml|json)$
+    key_groups:
+      - age:
+          - *thang
+          - *petri

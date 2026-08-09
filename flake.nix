@@ -65,7 +65,6 @@
           specialArgs = { inherit inputs; };
           modules = [
             ./nixos/nebula/configuration.nix
-            sops-nix.nixosModules.sops
           ];
         };
         pathway = nixpkgs.lib.nixosSystem {
@@ -73,14 +72,12 @@
           modules = [
             ./nixos/pathway/configuration.nix
             auto-cpufreq.nixosModules.default
-            sops-nix.nixosModules.sops
           ];
         };
         petri = nixpkgs.lib.nixosSystem {
           specialArgs = { inherit inputs; };
           modules = [
             ./nixos/petri/configuration.nix
-            sops-nix.nixosModules.sops
           ];
         };
       };

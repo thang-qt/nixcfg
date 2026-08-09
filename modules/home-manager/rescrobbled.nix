@@ -24,7 +24,7 @@ let
 in
 {
   sops.secrets.rescrobbled-listenbrainz-token = {
-    sopsFile = ../../secrets/rescrobbled.yaml;
+    sopsFile = ../../secrets/pathway/rescrobbled.yaml;
     format = "yaml";
     key = "listenbrainz_token";
   };

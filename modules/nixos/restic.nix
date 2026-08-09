@@ -6,11 +6,9 @@
 }:
 
 {
-  sops.age.keyFile = "/etc/sops/age/keys.txt";
-
   sops.secrets = {
     restic-password = {
-      sopsFile = ../../secrets/restic.yaml;
+      sopsFile = ../../secrets/pathway/restic.yaml;
       format = "yaml";
       key = "restic_password";
       mode = "0400";
@@ -18,7 +16,7 @@
     };
 
     restic-s3-access-key = {
-      sopsFile = ../../secrets/restic.yaml;
+      sopsFile = ../../secrets/pathway/restic.yaml;
       format = "yaml";
       key = "aws_access_key_id";
       mode = "0400";
@@ -26,7 +24,7 @@
     };
 
     restic-s3-secret-key = {
-      sopsFile = ../../secrets/restic.yaml;
+      sopsFile = ../../secrets/pathway/restic.yaml;
       format = "yaml";
       key = "aws_secret_access_key";
       mode = "0400";

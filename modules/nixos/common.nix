@@ -6,6 +6,10 @@
   ...
 }:
 {
+  imports = [
+    ./sops.nix
+  ];
+
   boot.tmp.cleanOnBoot = true;
 
   time.timeZone = "Asia/Ho_Chi_Minh";

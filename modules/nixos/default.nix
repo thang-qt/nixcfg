@@ -2,6 +2,7 @@
 # These should be stuff you would like to share with others, not your personal configurations.
 {
   common = import ./common.nix;
+  sops = import ./sops.nix;
   nginx = import ./nginx.nix;
   open-webui = import ./open-webui.nix;
   readn = import ./readn.nix;

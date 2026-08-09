@@ -31,6 +31,11 @@
     ../pi.nix
   ];
 
+  sops.age = {
+    keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
+    sshKeyPaths = [ ];
+  };
+
   home.packages = with pkgs; [
     alacritty
     thunderbird
