@@ -1,18 +1,15 @@
 {
   config,
-  lib,
   pkgs,
   ...
-}:
-
-{
+}: {
   sops.secrets.readn-auth = {
     sopsFile = ../../secrets/nebula/readn.yaml;
     format = "yaml";
     key = "readn_auth";
     mode = "0400";
     owner = config.systemd.services.yarr.serviceConfig.User or "root";
-    restartUnits = [ "yarr.service" ];
+    restartUnits = ["yarr.service"];
   };
 
   services.yarr = {

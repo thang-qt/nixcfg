@@ -10,6 +10,10 @@
 
     sops-nix.url = "github:Mic92/sops-nix";
     sops-nix.inputs.nixpkgs.follows = "nixpkgs";
+    git-hooks = {
+      url = "github:cachix/git-hooks.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     spicetify-nix = {
       url = "github:Gerg-L/spicetify-nix";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -31,79 +35,148 @@
     };
   };
 
-  outputs =
-    {
-      self,
-      nixpkgs,
-      home-manager,
-      sops-nix,
-      spicetify-nix,
-      auto-cpufreq,
-      kairos,
-      ...
-    }@inputs:
-    let
-      systems = [
-        "aarch64-linux"
-        "i686-linux"
-        "x86_64-linux"
-        "aarch64-darwin"
-        "x86_64-darwin"
-      ];
-      forAllSystems = nixpkgs.lib.genAttrs systems;
-    in
-    {
-      packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
-      formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
+  outputs = {
+    self,
+    nixpkgs,
+    home-manager,
+    auto-cpufreq,
+    ...
+  } @ inputs: let
+    systems = [
+      "aarch64-linux"
+      "i686-linux"
+      "x86_64-linux"
+      "aarch64-darwin"
+      "x86_64-darwin"
+    ];
+    forAllSystems = nixpkgs.lib.genAttrs systems;
+    preCommitCheckFor = system:
+      if builtins.hasAttr system inputs.git-hooks.lib
+      then
+        inputs.git-hooks.lib.${system}.run {
+          src = ./.;
+          hooks = {
+            alejandra.enable = true;
+            deadnix.enable = true;
+            statix.enable = true;
+          };
+        }
+      else null;
+  in {
+    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
-      overlays = import ./overlays { inherit inputs; };
-      nixosModules = import ./modules/nixos;
-      homeManagerModules = import ./modules/home-manager;
+    checks = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+        preCommitCheck = preCommitCheckFor system;
+      in
+        {
+          formatting =
+            pkgs.runCommand "check-nix-formatting" {
+              nativeBuildInputs = [pkgs.alejandra];
+              src = self;
+            } ''
+              cp -r "$src" source
+              chmod -R u+w source
+              alejandra --check source
+              touch "$out"
+            '';
 
-      nixosConfigurations = {
-        nebula = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./nixos/nebula/configuration.nix
-          ];
+          lint =
+            pkgs.runCommand "lint-nix" {
+              nativeBuildInputs = [
+                pkgs.deadnix
+                pkgs.statix
+              ];
+              src = self;
+            } ''
+              cp -r "$src" source
+              chmod -R u+w source
+              cd source
+              statix check .
+              deadnix --fail .
+              touch "$out"
+            '';
+        }
+        // nixpkgs.lib.optionalAttrs (preCommitCheck != null) {
+          pre-commit = preCommitCheck;
+        }
+    );
+
+    devShells = forAllSystems (
+      system: let
+        pkgs = nixpkgs.legacyPackages.${system};
+        preCommitCheck = preCommitCheckFor system;
+      in {
+        default = pkgs.mkShell {
+          packages =
+            (with pkgs; [
+              age
+              alejandra
+              deadnix
+              git
+              jq
+              nixd
+              nh
+              sops
+              ssh-to-age
+              statix
+            ])
+            ++ pkgs.lib.optionals (preCommitCheck != null) preCommitCheck.enabledPackages;
+          shellHook = pkgs.lib.optionalString (preCommitCheck != null) preCommitCheck.shellHook;
         };
-        pathway = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./nixos/pathway/configuration.nix
-            auto-cpufreq.nixosModules.default
-          ];
-        };
-        petri = nixpkgs.lib.nixosSystem {
-          specialArgs = { inherit inputs; };
-          modules = [
-            ./nixos/petri/configuration.nix
-          ];
-        };
+      }
+    );
+
+    overlays = import ./overlays {inherit inputs;};
+    nixosModules = import ./modules/nixos;
+    homeManagerModules = import ./modules/home-manager;
+
+    nixosConfigurations = {
+      nebula = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./nixos/nebula/configuration.nix
+        ];
       };
-
-      homeConfigurations = {
-        "thang@nebula" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./home/thang/nebula/home.nix
-          ];
-        };
-        "thang@pathway" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.x86_64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./home/thang/pathway/home.nix
-          ];
-        };
-        "thang@petri" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages.aarch64-linux;
-          extraSpecialArgs = { inherit inputs; };
-          modules = [
-            ./home/thang/petri/home.nix
-          ];
-        };
+      pathway = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./nixos/pathway/configuration.nix
+          auto-cpufreq.nixosModules.default
+        ];
+      };
+      petri = nixpkgs.lib.nixosSystem {
+        specialArgs = {inherit inputs;};
+        modules = [
+          ./nixos/petri/configuration.nix
+        ];
       };
     };
+
+    homeConfigurations = {
+      "thang@nebula" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home/thang/nebula/home.nix
+        ];
+      };
+      "thang@pathway" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.x86_64-linux;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home/thang/pathway/home.nix
+        ];
+      };
+      "thang@petri" = home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.aarch64-linux;
+        extraSpecialArgs = {inherit inputs;};
+        modules = [
+          ./home/thang/petri/home.nix
+        ];
+      };
+    };
+  };
 }

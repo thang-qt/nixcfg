@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   imports = [
     ./fuzzel.nix
     ./waybar.nix
@@ -39,13 +38,13 @@
   systemd.user.services.playerctld = {
     Unit = {
       Description = "MPRIS playerctld daemon";
-      PartOf = [ "graphical-session.target" ];
-      After = [ "graphical-session.target" ];
+      PartOf = ["graphical-session.target"];
+      After = ["graphical-session.target"];
     };
     Service = {
       ExecStart = "${pkgs.playerctl}/bin/playerctld daemon";
       Restart = "on-failure";
     };
-    Install.WantedBy = [ "graphical-session.target" ];
+    Install.WantedBy = ["graphical-session.target"];
   };
 }

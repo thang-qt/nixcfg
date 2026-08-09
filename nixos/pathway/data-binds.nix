@@ -1,6 +1,4 @@
-{ lib, ... }:
-
-let
+{lib, ...}: let
   bindDirs = [
     "Documents"
     "Dev"
@@ -13,30 +11,32 @@ let
   mkBindMount = dir: {
     device = "/data/thang/${dir}";
     fsType = "none";
-    options = [ "bind" ];
-    depends = [ "/data" ];
+    options = ["bind"];
+    depends = ["/data"];
   };
-in
-{
-  fileSystems = lib.genAttrs
+in {
+  fileSystems =
+    lib.genAttrs
     (map (dir: "/home/thang/${dir}") bindDirs)
-    (mountPoint:
-      let
-        dir = lib.last (lib.splitString "/" mountPoint);
-      in
-      mkBindMount dir) // {
-    "/home/thang/.local/share/ai-models" = {
-      device = "/data/thang/Models";
-      fsType = "none";
-      options = [ "bind" ];
-      depends = [ "/data" ];
+    (mountPoint: let
+      dir = lib.last (lib.splitString "/" mountPoint);
+    in
+      mkBindMount dir)
+    // {
+      "/home/thang/.local/share/ai-models" = {
+        device = "/data/thang/Models";
+        fsType = "none";
+        options = ["bind"];
+        depends = ["/data"];
+      };
     };
-  };
 
-  systemd.tmpfiles.rules = map (dir: "d /home/thang/${dir} 0755 thang users - -") bindDirs ++ [
-    "d /data/thang/Models 0755 thang users - -"
-    "d /home/thang/.local 0755 thang users - -"
-    "d /home/thang/.local/share 0755 thang users - -"
-    "d /home/thang/.local/share/ai-models 0755 thang users - -"
-  ];
+  systemd.tmpfiles.rules =
+    map (dir: "d /home/thang/${dir} 0755 thang users - -") bindDirs
+    ++ [
+      "d /data/thang/Models 0755 thang users - -"
+      "d /home/thang/.local 0755 thang users - -"
+      "d /home/thang/.local/share 0755 thang users - -"
+      "d /home/thang/.local/share/ai-models 0755 thang users - -"
+    ];
 }

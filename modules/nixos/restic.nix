@@ -1,11 +1,4 @@
-{
-  config,
-  lib,
-  pkgs,
-  ...
-}:
-
-{
+{config, ...}: {
   sops.secrets = {
     restic-password = {
       sopsFile = ../../secrets/pathway/restic.yaml;
@@ -48,7 +41,7 @@
       passwordFile = config.sops.secrets.restic-password.path;
       environmentFile = config.sops.templates."restic-env".path;
 
-      paths = [ "/home/thang" ];
+      paths = ["/home/thang"];
 
       exclude = [
         "/home/thang/.cache"

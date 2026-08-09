@@ -4,8 +4,7 @@
   inputs,
   lib,
   ...
-}:
-{
+}: {
   imports = [
     ./sops.nix
   ];
@@ -39,27 +38,25 @@
     };
   };
 
-  nix =
-    let
-      flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
-    in
-    {
-      settings = {
-        experimental-features = "nix-command flakes";
-        flake-registry = "";
-        nix-path = config.nix.nixPath;
-      };
-      channel.enable = false;
-
-      registry = lib.mapAttrs (_: flake: { inherit flake; }) flakeInputs;
-      nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
-      gc = {
-        automatic = true;
-        dates = "monthly";
-        options = "--delete-older-than 30d";
-      };
-      optimise.automatic = true;
+  nix = let
+    flakeInputs = lib.filterAttrs (_: lib.isType "flake") inputs;
+  in {
+    settings = {
+      experimental-features = "nix-command flakes";
+      flake-registry = "";
+      nix-path = config.nix.nixPath;
     };
+    channel.enable = false;
+
+    registry = lib.mapAttrs (_: flake: {inherit flake;}) flakeInputs;
+    nixPath = lib.mapAttrsToList (n: _: "${n}=flake:${n}") flakeInputs;
+    gc = {
+      automatic = true;
+      dates = "monthly";
+      options = "--delete-older-than 30d";
+    };
+    optimise.automatic = true;
+  };
 
   environment.systemPackages = with pkgs; [
     wget

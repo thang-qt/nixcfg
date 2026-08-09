@@ -1,20 +1,19 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   xdg.configFile."niri/config.kdl".text =
     builtins.replaceStrings
-      [ ''spawn-at-startup "mako"'' ]
-      [ ''spawn-at-startup "${pkgs.mako}/bin/mako"'' ]
-      (builtins.readFile ./config.kdl);
+    [''spawn-at-startup "mako"'']
+    [''spawn-at-startup "${pkgs.mako}/bin/mako"'']
+    (builtins.readFile ./config.kdl);
 
   systemd.user.services.polkit-kde-authentication-agent-1 = {
     Unit = {
       Description = "KDE polkit authentication agent";
-      Wants = [ "graphical-session.target" ];
-      After = [ "graphical-session.target" ];
+      Wants = ["graphical-session.target"];
+      After = ["graphical-session.target"];
       ConditionEnvironment = "XDG_CURRENT_DESKTOP=niri";
     };
     Install = {
-      WantedBy = [ "graphical-session.target" ];
+      WantedBy = ["graphical-session.target"];
     };
     Service = {
       Type = "simple";

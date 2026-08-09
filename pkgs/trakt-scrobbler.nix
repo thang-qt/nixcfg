@@ -2,7 +2,6 @@
   lib,
   python3Packages,
 }:
-
 python3Packages.buildPythonApplication rec {
   pname = "trakt-scrobbler";
   version = "1.9.0b1";
@@ -14,7 +13,7 @@ python3Packages.buildPythonApplication rec {
     hash = "sha256-Guk4TZK834sPt7WZJRV1OM6dKE2zZYsfr8adMztfAuw=";
   };
 
-  build-system = [ python3Packages.hatchling ];
+  build-system = [python3Packages.hatchling];
 
   propagatedBuildInputs = with python3Packages; [
     requests

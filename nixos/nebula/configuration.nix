@@ -1,7 +1,5 @@
 {
   inputs,
-  lib,
-  config,
   pkgs,
   ...
 }: {
@@ -42,11 +40,11 @@
 
   security.sudo.extraRules = [
     {
-      users = [ "thang" ];
+      users = ["thang"];
       commands = [
         {
           command = "ALL";
-          options = [ "NOPASSWD" ];
+          options = ["NOPASSWD"];
         }
       ];
     }

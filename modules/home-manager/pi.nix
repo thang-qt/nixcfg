@@ -3,10 +3,9 @@
   lib,
   pkgs,
   ...
-}:
-let
+}: let
   cfg = config.programs.pi-coding-agent;
-  jsonFormat = pkgs.formats.json { };
+  jsonFormat = pkgs.formats.json {};
 
   defaultSettings = {
     quietStartup = true;
@@ -25,42 +24,45 @@ let
       provider.maxRetryDelayMs = 60000;
     };
   };
-
-in
-{
+in {
   options.programs.pi-coding-agent = {
     enable = lib.mkEnableOption "Pi coding agent";
 
     package = lib.mkOption {
       type = lib.types.package;
-      default = if pkgs ? llm-agents && pkgs.llm-agents ? pi then pkgs.llm-agents.pi else pkgs.pi;
+      default =
+        if pkgs ? llm-agents && pkgs.llm-agents ? pi
+        then pkgs.llm-agents.pi
+        else pkgs.pi;
       defaultText = lib.literalExpression "pkgs.llm-agents.pi or pkgs.pi";
       description = "Pi coding agent package to install.";
     };
 
     extraPackages = lib.mkOption {
       type = lib.types.listOf lib.types.package;
-      default = with pkgs; [
-        nil
-        nixfmt
-        nodejs_22
-        typescript
-        typescript-language-server
-        ripgrep
-        fd
-        gh
-      ] ++ lib.optionals stdenv.hostPlatform.isLinux [ wl-clipboard ];
+      default = with pkgs;
+        [
+          nil
+          nixfmt
+          nodejs_22
+          typescript
+          typescript-language-server
+          ripgrep
+          fd
+          gh
+        ]
+        ++ lib.optionals stdenv.hostPlatform.isLinux [wl-clipboard];
       description = "Extra tools available to Pi and subagent child processes.";
     };
 
     settings = lib.mkOption {
-      type = jsonFormat.type;
-      default = { };
+      inherit (jsonFormat) type;
+      default = {};
       example = {
         defaultProvider = "anthropic";
         defaultModel = "claude-sonnet-4-5";
         defaultThinkingLevel = "medium";
-        enabledModels = [ "claude-*" "gpt-*" ];
+        enabledModels = ["claude-*" "gpt-*"];
       };
       description = "Settings written to ~/.pi/agent/settings.json.";
     };
@@ -73,7 +75,7 @@ in
           baseUrl = "http://127.0.0.1:11434/v1";
           apiKey = "ollama";
           api = "openai-completions";
-          models = [{ id = "qwen2.5-coder:32b"; }];
+          models = [{id = "qwen2.5-coder:32b";}];
         };
       };
       description = "Optional models.json content for custom providers and model overrides.";
@@ -191,8 +193,8 @@ in
       };
 
       settings = lib.mkOption {
-        type = jsonFormat.type;
-        default = { };
+        inherit (jsonFormat) type;
+        default = {};
         example = {
           agentOverrides.reviewer = {
             thinking = "high";
@@ -205,7 +207,7 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = [ cfg.package ] ++ cfg.extraPackages;
+    home.packages = [cfg.package] ++ cfg.extraPackages;
 
     home.sessionVariables = {
       PI_TELEMETRY = "0";
@@ -238,14 +240,15 @@ in
     home.file.".pi/agent/settings.json".source = jsonFormat.generate "pi-settings.json" (
       lib.recursiveUpdate defaultSettings (
         lib.recursiveUpdate cfg.settings {
-          packages = (cfg.settings.packages or [ ])
-            ++ lib.optionals cfg.webAccess.enable [ (toString cfg.webAccess.package) ]
-            ++ lib.optionals cfg.btw.enable [ (toString cfg.btw.package) ]
-            ++ lib.optionals cfg.commandCode.enable [ (toString cfg.commandCode.package) ]
-            ++ lib.optionals cfg.mcpAdapter.enable [ (toString cfg.mcpAdapter.package) ]
-            ++ lib.optionals cfg.spark.enable [ (toString cfg.spark.package) ]
-            ++ lib.optionals cfg.subagents.enable [ (toString cfg.subagents.package) ];
-          subagents = lib.recursiveUpdate (cfg.settings.subagents or { }) cfg.subagents.settings;
+          packages =
+            (cfg.settings.packages or [])
+            ++ lib.optionals cfg.webAccess.enable [(toString cfg.webAccess.package)]
+            ++ lib.optionals cfg.btw.enable [(toString cfg.btw.package)]
+            ++ lib.optionals cfg.commandCode.enable [(toString cfg.commandCode.package)]
+            ++ lib.optionals cfg.mcpAdapter.enable [(toString cfg.mcpAdapter.package)]
+            ++ lib.optionals cfg.spark.enable [(toString cfg.spark.package)]
+            ++ lib.optionals cfg.subagents.enable [(toString cfg.subagents.package)];
+          subagents = lib.recursiveUpdate (cfg.settings.subagents or {}) cfg.subagents.settings;
         }
       )
     );

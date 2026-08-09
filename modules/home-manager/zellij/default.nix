@@ -1,11 +1,7 @@
-{
-  config,
-  ...
-}:
-{
+_: {
   programs.zellij = {
     enable = true;
-    
+
     # Main configuration settings
     extraConfig = ''
       simplified_ui true
@@ -15,7 +11,7 @@
       theme "catppuccin-mocha"
       default_shell "fish"
       show_startup_tips false
-      
+
       keybinds clear-defaults=true {
           normal {
               // uncomment this and adjust key if using copy_on_select=false
@@ -218,7 +214,7 @@
           }
       }
     '';
-    
+
     # Custom layout with compact-bar plugin
     layouts = {
       custom = ''

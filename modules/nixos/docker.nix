@@ -1,10 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-{
+_: {
   virtualisation.docker = {
     enable = false;
     rootless = {

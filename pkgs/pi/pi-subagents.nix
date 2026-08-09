@@ -4,7 +4,6 @@
   fetchFromGitHub,
   fetchurl,
 }:
-
 stdenvNoCC.mkDerivation rec {
   pname = "pi-subagents";
   version = "0.24.0";

@@ -1,6 +1,14 @@
-{ lib, stdenv, fetchurl, autoPatchelfHook, makeWrapper, alsa-lib, libXtst, webkitgtk_4_1 }:
-
-stdenv.mkDerivation (finalAttrs: {
+{
+  lib,
+  stdenv,
+  fetchurl,
+  autoPatchelfHook,
+  makeWrapper,
+  alsa-lib,
+  libXtst,
+  webkitgtk_4_1,
+}:
+stdenv.mkDerivation (_finalAttrs: {
   sourceRoot = ".";
   pname = "pano-scrobbler";
   version = "4.20";
@@ -10,8 +18,8 @@ stdenv.mkDerivation (finalAttrs: {
     hash = "sha256-fCJ/5QwYy9T6ep2VEuT4QqBGFx5y47wxHCSh+VDWkQs=";
   };
 
-  nativeBuildInputs = [ autoPatchelfHook makeWrapper ];
-  buildInputs = [ alsa-lib libXtst webkitgtk_4_1 stdenv.cc.cc.lib ];
+  nativeBuildInputs = [autoPatchelfHook makeWrapper];
+  buildInputs = [alsa-lib libXtst webkitgtk_4_1 stdenv.cc.cc.lib];
 
   installPhase = ''
     runHook preInstall
@@ -44,7 +52,7 @@ stdenv.mkDerivation (finalAttrs: {
     description = "Feature packed cross-platform music tracker";
     homepage = "https://github.com/kawaiiDango/pano-scrobbler";
     license = licenses.gpl3Plus;
-    platforms = [ "x86_64-linux" ];
+    platforms = ["x86_64-linux"];
     mainProgram = "pano-scrobbler";
   };
 })

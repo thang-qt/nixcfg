@@ -1,15 +1,11 @@
-{
-  pkgs,
-  ...
-}:
-{
+{pkgs, ...}: {
   programs.helix = {
     enable = true;
     defaultEditor = true;
     themes = {
       mocha_transparent = {
         inherits = "catppuccin_mocha";
-        "ui.background" = { };
+        "ui.background" = {};
       };
     };
     settings = {
@@ -33,7 +29,7 @@
             "file-name"
             "spinner"
           ];
-          center = [ "diagnostics" ];
+          center = ["diagnostics"];
           right = [
             "version-control"
             "position"
@@ -59,13 +55,13 @@
           name = "nix";
           auto-format = true;
           formatter.command = "${pkgs.nixfmt}/bin/nixfmt";
-          language-servers = [ "nix-lsp" ];
+          language-servers = ["nix-lsp"];
         }
         {
           name = "cpp";
           auto-format = true;
           formatter.command = "${pkgs.clang-tools}/bin/clang-format";
-          language-servers = [ "cpp-lsp" ];
+          language-servers = ["cpp-lsp"];
         }
       ];
     };

@@ -1,4 +1,4 @@
-{ ... }: {
+_: {
   programs.pi-coding-agent = {
     enable = true;
     settings = {

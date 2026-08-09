@@ -1,11 +1,4 @@
-{
-  config,
-  pkgs,
-  lib,
-  ...
-}:
-
-{
+_: {
   networking.firewall.allowedTCPPorts = [
     80
     443
@@ -81,5 +74,5 @@
     defaults.email = "thang@thangqt.com";
   };
 
-  users.users.nginx.extraGroups = [ "acme" ];
+  users.users.nginx.extraGroups = ["acme"];
 }

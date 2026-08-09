@@ -1,11 +1,9 @@
 {
   inputs,
   lib,
-  config,
   pkgs,
   ...
-}:
-{
+}: {
   imports = [
     ./hardware-configuration.nix
     ./data-binds.nix
@@ -20,8 +18,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.initrd.luks.devices."luks-f37aceda-6d5d-4c90-9baa-eb64220a6042".device =
-    "/dev/disk/by-uuid/f37aceda-6d5d-4c90-9baa-eb64220a6042";
+  boot.initrd.luks.devices."luks-f37aceda-6d5d-4c90-9baa-eb64220a6042".device = "/dev/disk/by-uuid/f37aceda-6d5d-4c90-9baa-eb64220a6042";
   boot.resumeDevice = "/dev/mapper/luks-f37aceda-6d5d-4c90-9baa-eb64220a6042";
 
   boot.initrd.secrets = {
@@ -105,7 +102,7 @@
   programs.nh.enable = true;
 
   nix.settings = {
-    extra-substituters = [ "https://cache.numtide.com" ];
+    extra-substituters = ["https://cache.numtide.com"];
     extra-trusted-public-keys = [
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     ];
@@ -119,7 +116,7 @@
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
-    polkitPolicyOwners = [ "thang" ];
+    polkitPolicyOwners = ["thang"];
   };
   environment.etc."1password/custom_allowed_browsers" = {
     text = ''

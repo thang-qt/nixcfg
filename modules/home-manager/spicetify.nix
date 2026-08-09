@@ -2,11 +2,9 @@
   inputs,
   pkgs,
   ...
-}:
-let
+}: let
   spicePkgs = inputs.spicetify-nix.legacyPackages.${pkgs.stdenv.hostPlatform.system};
-in
-{
+in {
   programs.spicetify = {
     enable = true;
     spotifyPackage = pkgs.unstable.spotify;

@@ -4,12 +4,9 @@
 {
   config,
   lib,
-  pkgs,
   modulesPath,
   ...
-}:
-
-{
+}: {
   imports = [
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -23,17 +20,16 @@
     "sd_mod"
     "sdhci_pci"
   ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
 
   fileSystems."/" = {
     device = "/dev/mapper/luks-423a3a9b-a99c-4d07-b7c5-e604f8ef6fd1";
     fsType = "ext4";
   };
 
-  boot.initrd.luks.devices."luks-423a3a9b-a99c-4d07-b7c5-e604f8ef6fd1".device =
-    "/dev/disk/by-uuid/423a3a9b-a99c-4d07-b7c5-e604f8ef6fd1";
+  boot.initrd.luks.devices."luks-423a3a9b-a99c-4d07-b7c5-e604f8ef6fd1".device = "/dev/disk/by-uuid/423a3a9b-a99c-4d07-b7c5-e604f8ef6fd1";
 
   fileSystems."/boot" = {
     device = "/dev/disk/by-uuid/1008-BEBC";
@@ -45,7 +41,7 @@
   };
 
   swapDevices = [
-    { device = "/dev/mapper/luks-f37aceda-6d5d-4c90-9baa-eb64220a6042"; }
+    {device = "/dev/mapper/luks-f37aceda-6d5d-4c90-9baa-eb64220a6042";}
   ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";

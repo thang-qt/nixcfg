@@ -1,5 +1,4 @@
-{ pkgs, ... }:
-{
+{pkgs, ...}: {
   services.awww.enable = true;
 
   home.packages = with pkgs; [
@@ -31,8 +30,8 @@
   systemd.user.services.awww-wallpaper-cycle = {
     Unit = {
       Description = "Random wallpaper rotation with awww";
-      After = [ "awww.service" ];
-      Requires = [ "awww.service" ];
+      After = ["awww.service"];
+      Requires = ["awww.service"];
     };
     Service = {
       Type = "oneshot";
@@ -47,6 +46,6 @@
       OnUnitActiveSec = "2h";
       Unit = "awww-wallpaper-cycle.service";
     };
-    Install.WantedBy = [ "timers.target" ];
+    Install.WantedBy = ["timers.target"];
   };
 }

@@ -1,11 +1,4 @@
-{
-  inputs,
-  lib,
-  config,
-  pkgs,
-  ...
-}:
-{
+{inputs, ...}: {
   nixpkgs.overlays = [
     inputs.self.overlays.llm-agents
   ];

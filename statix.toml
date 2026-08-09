@@ -1,0 +1,4 @@
+# Repeated dotted option assignments are idiomatic in NixOS and Home Manager
+# modules; forcing them into giant attrsets makes host configuration less clear.
+disabled = ["repeated_keys"]
+ignore = [".direnv"]

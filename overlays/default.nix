@@ -1,9 +1,7 @@
-{ inputs, ... }:
-{
+{inputs, ...}: {
   additions = final: _prev: import ../pkgs final.pkgs;
 
-  modifications =
-    final: prev:
+  modifications = final: prev:
     {
     }
     // (import ./readn.nix final prev);

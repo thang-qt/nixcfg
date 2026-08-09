@@ -1,11 +1,8 @@
 {
   inputs,
-  lib,
-  config,
   pkgs,
   ...
-}:
-{
+}: {
   nixpkgs.overlays = [
     inputs.self.overlays.llm-agents
   ];
@@ -21,5 +18,4 @@
     gh
     uv
   ];
-
 }

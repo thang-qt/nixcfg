@@ -2,9 +2,8 @@
   config,
   pkgs,
   ...
-}:
-let
-  rescrobbled = pkgs.rescrobbled.overrideAttrs (old: let
+}: let
+  rescrobbled = pkgs.rescrobbled.overrideAttrs (_old: let
     version = "auto-reconnect";
     src = pkgs.fetchFromGitHub {
       owner = "marius851000";
@@ -21,8 +20,7 @@ let
       hash = cargoHash;
     };
   });
-in
-{
+in {
   sops.secrets.rescrobbled-listenbrainz-token = {
     sopsFile = ../../secrets/pathway/rescrobbled.yaml;
     format = "yaml";
@@ -52,8 +50,8 @@ in
         "network-online.target"
         "sops-nix.service"
       ];
-      Wants = [ "network-online.target" ];
-      Requires = [ "sops-nix.service" ];
+      Wants = ["network-online.target"];
+      Requires = ["sops-nix.service"];
     };
   };
 }

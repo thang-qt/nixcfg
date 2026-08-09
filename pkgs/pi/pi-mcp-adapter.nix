@@ -33,7 +33,7 @@ buildNpmPackage rec {
 
   npmDepsHash = "sha256-REDh6vcUwODUPlZbTeLzSweIsi3pa5Go46JgU7HyPP0=";
   npmDepsFetcherVersion = 2;
-  npmFlags = [ "--legacy-peer-deps" ];
+  npmFlags = ["--legacy-peer-deps"];
   dontNpmBuild = true;
 
   installPhase = ''

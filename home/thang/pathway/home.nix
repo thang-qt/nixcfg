@@ -1,11 +1,9 @@
 {
   inputs,
-  lib,
   config,
   pkgs,
   ...
-}:
-{
+}: {
   nixpkgs.overlays = [
     inputs.self.overlays.llm-agents
   ];
@@ -33,7 +31,7 @@
 
   sops.age = {
     keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
-    sshKeyPaths = [ ];
+    sshKeyPaths = [];
   };
 
   home.packages = with pkgs; [

@@ -1,5 +1,4 @@
-{ lib, ... }:
-{
+{lib, ...}: {
   programs.auto-cpufreq = {
     enable = lib.mkDefault true;
     settings = {

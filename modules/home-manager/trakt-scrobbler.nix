@@ -1,6 +1,9 @@
-{ config, pkgs, ... }:
 {
-  home.packages = [ pkgs.trakt-scrobbler ];
+  config,
+  pkgs,
+  ...
+}: {
+  home.packages = [pkgs.trakt-scrobbler];
 
   xdg.configFile."trakt-scrobbler/config.yaml".text = ''
     version: '1.0'
@@ -25,8 +28,8 @@
     Unit = {
       Description = "Trakt Scrobbler Service";
       Documentation = "https://github.com/iamkroot/trakt-scrobbler";
-      After = [ "graphical-session.target" ];
-      PartOf = [ "graphical-session.target" ];
+      After = ["graphical-session.target"];
+      PartOf = ["graphical-session.target"];
     };
 
     Service = {
@@ -38,6 +41,6 @@
       ];
     };
 
-    Install.WantedBy = [ "graphical-session.target" ];
+    Install.WantedBy = ["graphical-session.target"];
   };
 }

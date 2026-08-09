@@ -2,14 +2,12 @@
   pkgs,
   lib,
   ...
-}:
-let
+}: let
   user = "thang";
   modelsHome = "/home/${user}/.local/share/ai-models";
   modelCache = "${modelsHome}/llama-cache";
   hfHome = "${modelsHome}/huggingface";
-in
-{
+in {
   environment.systemPackages = with pkgs; [
     llama-cpp-vulkan
     vulkan-tools
