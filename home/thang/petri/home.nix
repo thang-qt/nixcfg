@@ -4,7 +4,8 @@
   config,
   pkgs,
   ...
-}: {
+}:
+{
   nixpkgs.overlays = [
     inputs.self.overlays.llm-agents
   ];
@@ -14,6 +15,7 @@
     ../common.nix
     inputs.self.homeManagerModules.pi
     inputs.self.homeManagerModules.zellij
+    ../pi.nix
   ];
 
   home.packages = with pkgs; [
@@ -21,8 +23,4 @@
     uv
   ];
 
-  programs.pi-coding-agent = {
-    enable = true;
-    extraPackages = [];
-  };
 }

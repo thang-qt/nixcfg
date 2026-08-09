@@ -15,7 +15,6 @@
     ../common.nix
     inputs.self.homeManagerModules.pi
     inputs.self.homeManagerModules.zellij
+    ../pi.nix
   ];
-
-  programs.pi-coding-agent.enable = true;
 }
