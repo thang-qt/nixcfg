@@ -47,6 +47,7 @@
     cider
     obsidian
     vscode
+    koreader
   ];
 
   programs.git = {
