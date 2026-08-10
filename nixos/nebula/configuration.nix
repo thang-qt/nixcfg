@@ -5,6 +5,7 @@
 }: {
   imports = [
     ./hardware-configuration.nix
+    ./grimmory.nix
     inputs.self.nixosModules.common
     inputs.self.nixosModules.nginx
     # inputs.self.nixosModules.open-webui
@@ -33,7 +34,7 @@
   programs.fish.enable = true;
 
   environment.systemPackages = [
-    inputs.hermes-agent.packages.${pkgs.system}.default
+    inputs.hermes-agent.packages.${pkgs.stdenv.hostPlatform.system}.default
     pkgs.himalaya
     pkgs.oci-cli
   ];
@@ -72,6 +73,7 @@
 
   services.kairos = {
     enable = true;
+    package = inputs.kairos.packages.${pkgs.stdenv.hostPlatform.system}.default;
     port = 3457;
     listenAddress = "127.0.0.1";
     environment = {
