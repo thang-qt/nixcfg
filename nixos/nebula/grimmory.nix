@@ -116,12 +116,17 @@ in {
     };
   };
 
+  # Grimmory and MariaDB run as UID/GID 1000 inside their containers.
   systemd.tmpfiles.rules = [
     "d ${dataDir} 0755 root root -"
-    "d ${dataDir}/data 0750 root root -"
-    "d ${dataDir}/books 0750 root root -"
-    "d ${dataDir}/bookdrop 0750 root root -"
-    "d ${dataDir}/mariadb 0750 root root -"
+    "d ${dataDir}/data 0750 thang users -"
+    "z ${dataDir}/data 0750 thang users -"
+    "d ${dataDir}/books 0750 thang users -"
+    "z ${dataDir}/books 0750 thang users -"
+    "d ${dataDir}/bookdrop 0750 thang users -"
+    "z ${dataDir}/bookdrop 0750 thang users -"
+    "d ${dataDir}/mariadb 0750 thang users -"
+    "z ${dataDir}/mariadb 0750 thang users -"
     "d ${backupDir} 0750 root root -"
   ];
 
@@ -254,10 +259,11 @@ in {
         ${pkgs.podman}/bin/podman exec \
           --env-file "$env_file" \
           mariadb \
+          # The persisted MariaDB 11.4 mysql.proc table is read-only; dumping
+          # routines makes the otherwise valid application dump fail.
           mariadb-dump \
           --single-transaction \
           --quick \
-          --routines \
           --events \
           --triggers \
           --user=grimmory \
