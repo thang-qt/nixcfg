@@ -6,6 +6,7 @@
   imports = [
     ./hardware-configuration.nix
     ./grimmory.nix
+    ./backup.nix
     inputs.self.nixosModules.common
     inputs.self.nixosModules.nginx
     # inputs.self.nixosModules.open-webui

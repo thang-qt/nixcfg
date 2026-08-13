@@ -8,6 +8,7 @@
     ./hardware-configuration.nix
     inputs.self.nixosModules.common
     inputs.self.nixosModules.docker
+    inputs.self.nixosModules.restic
   ];
 
   boot.loader.systemd-boot.enable = true;

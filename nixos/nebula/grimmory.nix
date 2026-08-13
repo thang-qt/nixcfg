@@ -45,7 +45,12 @@ in {
       key = "restic_password";
       mode = "0400";
       owner = "root";
-      restartUnits = ["restic-backups-grimmory.service"];
+      restartUnits = [
+        "restic-backups-grimmory.service"
+        "restic-backups-koito.service"
+        "restic-backups-kairos.service"
+        "restic-backups-readn.service"
+      ];
     };
 
     grimmory-s3-access-key = {
@@ -54,7 +59,12 @@ in {
       key = "aws_access_key_id";
       mode = "0400";
       owner = "root";
-      restartUnits = ["restic-backups-grimmory.service"];
+      restartUnits = [
+        "restic-backups-grimmory.service"
+        "restic-backups-koito.service"
+        "restic-backups-kairos.service"
+        "restic-backups-readn.service"
+      ];
     };
 
     grimmory-s3-secret-key = {
@@ -63,7 +73,12 @@ in {
       key = "aws_secret_access_key";
       mode = "0400";
       owner = "root";
-      restartUnits = ["restic-backups-grimmory.service"];
+      restartUnits = [
+        "restic-backups-grimmory.service"
+        "restic-backups-koito.service"
+        "restic-backups-kairos.service"
+        "restic-backups-readn.service"
+      ];
     };
   };
 

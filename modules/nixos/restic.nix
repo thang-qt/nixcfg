@@ -1,7 +1,62 @@
-{config, ...}: {
+{
+  config,
+  lib,
+  ...
+}: let
+  host = config.networking.hostName;
+  resticSecretsFile = ../../secrets/${host}/restic.yaml;
+
+  commonExcludes = [
+    "/home/thang/.cache"
+    "/home/thang/.local/share/Trash"
+    "node_modules"
+    ".pnpm-store"
+    ".pnpm-home/store"
+    ".next"
+    ".nuxt"
+    ".venv"
+    ".tox"
+    "__pycache__"
+    "target/debug"
+    "target/release"
+    "dist"
+    "build"
+    ".gradle"
+    ".android"
+    ".cxx"
+    ".cache"
+    ".npm"
+    "Library/PackageCache"
+    "Library/ArtifactDB"
+    "Library/Bee"
+    "Library/Il2cppBuildCache"
+    ".pytest_cache"
+    ".mypy_cache"
+    ".ruff_cache"
+    "*.tmp"
+    "*.temp"
+    ".DS_Store"
+  ];
+
+  pathwayExcludes = [
+    "/home/thang/.local/share/docker"
+    "/home/thang/.local/share/ai-models"
+    "/home/thang/.zen/*/cache2"
+    "/home/thang/.config/helium/*/Cache"
+    "/home/thang/Downloads"
+    "/home/thang/Games"
+    "/home/thang/Music"
+    "/home/thang/Videos"
+    "/home/thang/Dev/SQL/pgdata"
+    "/home/thang/.local/share/Steam"
+    "/home/thang/.local/share/umu"
+    "/home/thang/.local/share/pnpm"
+    "/home/thang/Dev/.pnpm-store"
+  ];
+in {
   sops.secrets = {
     restic-password = {
-      sopsFile = ../../secrets/pathway/restic.yaml;
+      sopsFile = resticSecretsFile;
       format = "yaml";
       key = "restic_password";
       mode = "0400";
@@ -9,7 +64,7 @@
     };
 
     restic-s3-access-key = {
-      sopsFile = ../../secrets/pathway/restic.yaml;
+      sopsFile = resticSecretsFile;
       format = "yaml";
       key = "aws_access_key_id";
       mode = "0400";
@@ -17,7 +72,7 @@
     };
 
     restic-s3-secret-key = {
-      sopsFile = ../../secrets/pathway/restic.yaml;
+      sopsFile = resticSecretsFile;
       format = "yaml";
       key = "aws_secret_access_key";
       mode = "0400";
@@ -31,83 +86,38 @@
   '';
 
   sops.templates."restic-repo".content = ''
-    s3:https://s3-hcm5-r1.longvan.net/backupqt/hostname/pathway
+    s3:https://s3-hcm5-r1.longvan.net/backupqt/hostname/${host}
   '';
 
-  services.restic.backups = {
-    pathway-home = {
-      initialize = true;
-      repositoryFile = config.sops.templates."restic-repo".path;
-      passwordFile = config.sops.secrets.restic-password.path;
-      environmentFile = config.sops.templates."restic-env".path;
+  services.restic.backups."${host}-home" = {
+    initialize = true;
+    repositoryFile = config.sops.templates."restic-repo".path;
+    passwordFile = config.sops.secrets.restic-password.path;
+    environmentFile = config.sops.templates."restic-env".path;
 
-      paths = ["/home/thang"];
+    paths = ["/home/thang"];
 
-      exclude = [
-        "/home/thang/.cache"
-        "/home/thang/.local/share/Trash"
-        "/home/thang/.local/share/docker"
-        "/home/thang/.local/share/ai-models"
-        "/home/thang/.zen/*/cache2"
-        "/home/thang/.config/helium/*/Cache"
-        "/home/thang/Downloads"
-        "/home/thang/Games"
-        "/home/thang/Music"
-        "/home/thang/Videos"
-        "/home/thang/Dev/SQL/pgdata"
-        "/home/thang/.local/share/Steam"
-        "/home/thang/.local/share/umu"
-        "/home/thang/.local/share/pnpm"
-        "/home/thang/Dev/.pnpm-store"
-        "node_modules"
-        ".pnpm-store"
-        ".pnpm-home/store"
-        ".next"
-        ".nuxt"
-        ".venv"
-        ".tox"
-        "__pycache__"
-        "target/debug"
-        "target/release"
-        "dist"
-        "build"
-        ".gradle"
-        ".android"
-        ".cxx"
-        ".cache"
-        ".npm"
-        "Library/PackageCache"
-        "Library/ArtifactDB"
-        "Library/Bee"
-        "Library/Il2cppBuildCache"
-        ".pytest_cache"
-        ".mypy_cache"
-        ".ruff_cache"
-        "*.tmp"
-        "*.temp"
-        ".DS_Store"
-      ];
+    exclude = commonExcludes ++ lib.optionals (host == "pathway") pathwayExcludes;
 
-      timerConfig = {
-        OnCalendar = "daily";
-        Persistent = true;
-        RandomizedDelaySec = "5m";
-      };
-
-      pruneOpts = [
-        "--keep-daily 7"
-        "--keep-weekly 4"
-        "--keep-monthly 6"
-        "--keep-yearly 2"
-      ];
-
-      runCheck = false;
-
-      extraBackupArgs = [
-        "--exclude-caches"
-        "--exclude-if-present .nobackup"
-        "--compression auto"
-      ];
+    timerConfig = {
+      OnCalendar = "daily";
+      Persistent = true;
+      RandomizedDelaySec = "5m";
     };
+
+    pruneOpts = [
+      "--keep-daily 7"
+      "--keep-weekly 4"
+      "--keep-monthly 6"
+      "--keep-yearly 2"
+    ];
+
+    runCheck = false;
+
+    extraBackupArgs = [
+      "--exclude-caches"
+      "--exclude-if-present .nobackup"
+      "--compression auto"
+    ];
   };
 }
