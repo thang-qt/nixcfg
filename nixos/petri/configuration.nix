@@ -23,6 +23,17 @@
   networking.useDHCP = false;
   networking.interfaces.enp0s6.useDHCP = true;
   networking.firewall.trustedInterfaces = ["tailscale0"];
+
+  services.dnsmasq = {
+    enable = true;
+    settings.server = [
+      "/taila3219b.ts.net/100.100.100.100"
+      "/ts.net/100.100.100.100"
+    ];
+  };
+
+  networking.search = ["taila3219b.ts.net"];
+  services.tailscale.extraSetFlags = ["--accept-dns=false"];
   networking.firewall.allowedTCPPorts = [2211];
   networking.firewall.extraCommands = ''
     iptables -A nixos-fw -s 222.252.22.135/32 -j nixos-fw-accept
