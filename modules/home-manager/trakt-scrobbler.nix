@@ -1,8 +1,4 @@
-{
-  config,
-  pkgs,
-  ...
-}: {
+{pkgs, ...}: {
   home.packages = [pkgs.trakt-scrobbler];
 
   xdg.configFile."trakt-scrobbler/config.yaml".text = ''
@@ -16,8 +12,8 @@
         # mpv/umpv uses this per-user IPC socket for the desktop-launched singleton instance.
         ipc_path: /run/user/1000/.umpv
     fileinfo:
-      whitelist:
-        - ${config.home.homeDirectory}/Videos
+      # An empty whitelist allows all media opened in mpv.
+      whitelist: []
       include_regexes:
         episode:
           # Fixes pack folders like "Modern Family (2009) Season 1-11 S01-S11 .../Season 3/... S03E24 ..."
