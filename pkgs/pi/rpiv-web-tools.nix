@@ -5,16 +5,16 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "rpiv-web-tools";
-  version = "1.19.1";
+  version = "2.5.2";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@juicesharp/rpiv-web-tools/-/rpiv-web-tools-${version}.tgz";
-    hash = "sha256-5P0T8JTusyj3L4cv2co1roD6DqJXLrhut8zq01cwCLc=";
+    hash = "sha256-DlDN+DylF3JhUM7vMm6xD3kzdkejw386PgKBe4w/zZk=";
   };
 
   rpivConfigSrc = fetchurl {
     url = "https://registry.npmjs.org/@juicesharp/rpiv-config/-/rpiv-config-${version}.tgz";
-    hash = "sha256-2MbWTYISyyUY4Xtk93dbPp0TBSCVcud02asUDMHZOEc=";
+    hash = "sha256-Fti/shSrLz92mXlHmRZwY+41d5BMxhfS+BJIrLoGzFY=";
   };
 
   sourceRoot = "package";

@@ -32,9 +32,9 @@ in {
       type = lib.types.package;
       default =
         if pkgs ? llm-agents && pkgs.llm-agents ? pi
-        then pkgs.llm-agents.pi
+        then pkgs.llm-agents.pi.override {useBun = false;}
         else pkgs.pi;
-      defaultText = lib.literalExpression "pkgs.llm-agents.pi or pkgs.pi";
+      defaultText = lib.literalExpression "pkgs.llm-agents.pi.override {useBun = false;} or pkgs.pi";
       description = "Pi coding agent package to install.";
     };
 
@@ -113,7 +113,7 @@ in {
       package = lib.mkOption {
         type = lib.types.package;
         default = pkgs.rpiv-web-tools;
-        defaultText = lib.literalExpression "@juicesharp/rpiv-web-tools fetched from npm at 1.19.1";
+        defaultText = lib.literalExpression "@juicesharp/rpiv-web-tools fetched from npm at 2.5.2";
         description = "Reproducibly fetched rpiv-web-tools package.";
       };
     };
@@ -128,7 +128,7 @@ in {
       package = lib.mkOption {
         type = lib.types.package;
         default = pkgs.rpiv-btw;
-        defaultText = lib.literalExpression "@juicesharp/rpiv-btw fetched from npm at 1.1.5";
+        defaultText = lib.literalExpression "@juicesharp/rpiv-btw fetched from npm at 2.5.2";
         description = "Reproducibly fetched rpiv-btw package.";
       };
     };
@@ -143,7 +143,7 @@ in {
       package = lib.mkOption {
         type = lib.types.package;
         default = pkgs.pi-commandcode-provider;
-        defaultText = lib.literalExpression "pi-commandcode-provider fetched from npm at 0.4.3";
+        defaultText = lib.literalExpression "pi-commandcode-provider fetched from npm at 0.5.1";
         description = "Reproducibly fetched pi-commandcode-provider package.";
       };
     };
@@ -158,7 +158,7 @@ in {
       package = lib.mkOption {
         type = lib.types.package;
         default = pkgs.pi-mcp-adapter;
-        defaultText = lib.literalExpression "pi-mcp-adapter fetched from GitHub at v2.21.0";
+        defaultText = lib.literalExpression "pi-mcp-adapter fetched from GitHub at v2.26.0";
         description = "MCP adapter package to enable.";
       };
     };
@@ -173,7 +173,7 @@ in {
       package = lib.mkOption {
         type = lib.types.package;
         default = pkgs.pi-spark;
-        defaultText = lib.literalExpression "pi-spark fetched from GitHub at v0.15.0";
+        defaultText = lib.literalExpression "pi-spark fetched from GitHub at v0.22.0";
         description = "Reproducibly fetched pi-spark package.";
       };
     };
@@ -188,7 +188,7 @@ in {
       package = lib.mkOption {
         type = lib.types.package;
         default = pkgs.pi-subagents;
-        defaultText = lib.literalExpression "pi-subagents fetched from GitHub at v0.24.0";
+        defaultText = lib.literalExpression "pi-subagents fetched from GitHub at v0.50.0";
         description = "Reproducibly fetched pi-subagents package.";
       };
 

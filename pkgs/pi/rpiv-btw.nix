@@ -5,11 +5,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "rpiv-btw";
-  version = "1.1.5";
+  version = "2.5.2";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/@juicesharp/rpiv-btw/-/rpiv-btw-${version}.tgz";
-    hash = "sha256-S4/tzfg9E7vLJqdWZHF7PqzNnDMMJH+cIsd0sLQYpGM=";
+    hash = "sha256-j1JT6tsCj5KWg7DpfSNoTOaN4ogzlmVjqWooaG7To+s=";
   };
 
   sourceRoot = "package";

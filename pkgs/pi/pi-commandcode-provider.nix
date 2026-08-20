@@ -5,11 +5,11 @@
 }:
 stdenvNoCC.mkDerivation rec {
   pname = "pi-commandcode-provider";
-  version = "0.4.3";
+  version = "0.5.1";
 
   src = fetchurl {
     url = "https://registry.npmjs.org/pi-commandcode-provider/-/pi-commandcode-provider-${version}.tgz";
-    hash = "sha256-wZ2OrFoBCtinmu1sv45acvJ3HDqX2jKP0ALW5lb4cuk=";
+    hash = "sha256-KjEOIFPJSY+vSrxWzlM2J/jkIvhok8vnFlSXrdqABgQ=";
   };
 
   sourceRoot = "package";

@@ -2,44 +2,59 @@
   lib,
   buildNpmPackage,
   fetchFromGitHub,
+  fetchurl,
 }:
 buildNpmPackage rec {
   pname = "pi-mcp-adapter";
-  version = "2.21.0";
+  version = "2.26.0";
 
   src = fetchFromGitHub {
     owner = "nicobailon";
     repo = "pi-mcp-adapter";
     rev = "v${version}";
-    hash = "sha256-9B+Q+SIutyXMuNvWZrVvCfGSpMaVrBwvFHvE995zFMA=";
+    hash = "sha256-l8PDjwNk6SC4mzanp7gxOCsVm2NQcigNBl+7zs+CbWM=";
   };
 
-  # The upstream lockfile omits integrity fields for these duplicate peer dependencies.
+  typeboxSrc = fetchurl {
+    url = "https://registry.npmjs.org/typebox/-/typebox-1.3.3.tgz";
+    hash = "sha256-MqzN8lNFA7nG0KcOsTgYgwfSML9kX5OCpub3qtFhtNw=";
+  };
+
   postPatch = ''
-    substituteInPlace package-lock.json \
-      --replace-fail \
-        '"resolved": "https://registry.npmjs.org/@earendil-works/pi-agent-core/-/pi-agent-core-0.79.10.tgz",' \
-        '"resolved": "https://registry.npmjs.org/@earendil-works/pi-agent-core/-/pi-agent-core-0.79.10.tgz",
-        "integrity": "sha512-XKxgdjhcPuyjrthCOFSgfzT3xZ1uBrJ1IMVDxci1to6hIN6BIg9J5iY8q0pGXK1DLgATLP23da+1UyZLwA360Q==",' \
-      --replace-fail \
-        '"resolved": "https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-0.79.10.tgz",' \
-        '"resolved": "https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-0.79.10.tgz",
-        "integrity": "sha512-9jR23tOl0BIUdQMn70Gr72xYBpM7Xgl9Lyv7gAnU1USfkNRuYG/f/edLl+n/Dp/RafDW3JI4DF7y/GhgkORuew==",' \
-      --replace-fail \
-        '"resolved": "https://registry.npmjs.org/@earendil-works/pi-tui/-/pi-tui-0.79.10.tgz",' \
-        '"resolved": "https://registry.npmjs.org/@earendil-works/pi-tui/-/pi-tui-0.79.10.tgz",
-        "integrity": "sha512-FUVOjDn1DVwM1uHD5MNYboXQrXjIDbSt+BQ3py7nQWCY62tKfxgiM1OBMxTcwRWLfSdZHUPpV0hm1loIdUJnPw==",'
+    awk '
+      index($0, "node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-agent-core") { integrity = "sha512-evyzXYWCLQGmcaBYHlmSku02r8qoN4SGI60GZABo6iV+H+nqX+P9ud8fEZ4GmRq9mUSREvvfX+w9dA9ThF9C6w==" }
+      index($0, "node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-ai") { integrity = "sha512-wMsAdJMxuNri08vLqTyYVI201DQQezGhPSTkzYsHdw5dYX3rCNwEmSvpaAwhi7ELKI/2tE/CEgSWg/6iRxSgdQ==" }
+      index($0, "node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-client") { integrity = "sha512-/V5hGHE4Zq+jG0GtwIB9PyBUOGd6gBLZ7lkQYFKchKnxYHeH3rmWC5xw4kpnZKKBuBuFTdLVbU9vEjlAGMMb2A==" }
+      index($0, "node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-protocol") { integrity = "sha512-Ox1pciyeSPGEEUcxvR0/dJcrY7C6hrEGA8y71rOsvSIUlXN1Cbp/be/eoL71OGDBk5O97TeQPfWN6Ju/2Ehjww==" }
+      index($0, "node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-telemetry") { integrity = "sha512-180/xGJtsq7IoR3p9EKWjRd0e9M4DkxInhlo9xyD7prDC7Qrhqq+nhvwrW0lFjPfXcEI2FSHmGCSyvSJE9GsaQ==" }
+      index($0, "node_modules/@earendil-works/pi-coding-agent/node_modules/@earendil-works/pi-tui") { integrity = "sha512-udeXFbgEhJ6JiB0uguwNVNkDy2FENfmtQwPcY+/iJ8GWeq18wkal1tKqa5YyeH0IqtX1vG0cGh8zfSYzyzVuLA==" }
+      integrity != "" && index($0, "resolved") {
+        print
+        print sprintf("      %cintegrity%c: %c%s%c,", 34, 34, 34, integrity, 34)
+        integrity = ""
+        next
+      }
+      { print }
+    ' package-lock.json > package-lock.json.tmp
+    mv package-lock.json.tmp package-lock.json
   '';
 
-  npmDepsHash = "sha256-REDh6vcUwODUPlZbTeLzSweIsi3pa5Go46JgU7HyPP0=";
+  npmDepsHash = "sha256-QfssD73hzWrKbbJmmzWIYkT1OxaRdu9Ju+sMLIbiJtQ=";
   npmDepsFetcherVersion = 2;
   npmFlags = ["--legacy-peer-deps"];
+  npmInstallFlags = ["--omit=dev"];
   dontNpmBuild = true;
 
   installPhase = ''
     runHook preInstall
     mkdir -p $out
     cp -R . $out/
+
+    # typebox is an optional peer in the upstream package but is imported at runtime.
+    mkdir -p $out/node_modules
+    tar -xzf ${typeboxSrc} -C $out/node_modules
+    mv $out/node_modules/package $out/node_modules/typebox
+
     runHook postInstall
   '';
 

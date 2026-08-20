@@ -40,7 +40,7 @@
     vacuum-tube
     gh
     llm-agents.codex
-    unstable.antigravity-fhs
+    llm-agents.antigravity-cli
     inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium
     hubstaff
     qbittorrent

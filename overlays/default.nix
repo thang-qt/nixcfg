@@ -13,5 +13,5 @@
     };
   };
 
-  llm-agents = inputs.llm-agents.overlays.default;
+  llm-agents = inputs.llm-agents.overlays.shared-nixpkgs;
 }
