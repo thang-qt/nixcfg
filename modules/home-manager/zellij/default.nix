@@ -8,7 +8,7 @@ _: {
       pane_frames false
       mouse_mode true
       default_layout "custom"
-      theme "catppuccin-mocha"
+      theme "noctalia"
       default_shell "fish"
       show_startup_tips false
 

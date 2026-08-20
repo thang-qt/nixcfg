@@ -33,6 +33,8 @@
       url = "github:AlvaroParker/helium-nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    # Keep Noctalia's own nixpkgs input so its binary cache remains usable.
+    noctalia.url = "github:noctalia-dev/noctalia/cachix";
   };
 
   outputs = {
