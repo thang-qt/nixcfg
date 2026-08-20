@@ -15,6 +15,7 @@
   rescrobbled = import ./rescrobbled.nix;
   trakt-scrobbler = import ./trakt-scrobbler.nix;
   niri = import ./niri;
+  noctalia = import ./noctalia;
   zathura = import ./zathura.nix;
   yazi = import ./yazi.nix;
   zed = import ./zed.nix;
