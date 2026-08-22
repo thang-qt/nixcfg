@@ -3,7 +3,20 @@
   config,
   pkgs,
   ...
-}: {
+}: let
+  # KOReader's SDL Wayland backend currently crashes in Mesa's thread cleanup
+  # during normal exit. Keep this application on XWayland until that is fixed.
+  koreaderX11 = pkgs.symlinkJoin {
+    name = "koreader-x11-${pkgs.koreader.version}";
+    paths = [pkgs.koreader];
+    nativeBuildInputs = [pkgs.makeWrapper];
+    postBuild = ''
+      rm "$out/bin/koreader"
+      makeWrapper ${pkgs.koreader}/bin/koreader "$out/bin/koreader" \
+        --set SDL_VIDEODRIVER x11
+    '';
+  };
+in {
   nixpkgs.overlays = [
     inputs.self.overlays.llm-agents
   ];
@@ -48,7 +61,7 @@
     cider
     obsidian
     vscode
-    koreader
+    koreaderX11
   ];
 
   programs.git = {

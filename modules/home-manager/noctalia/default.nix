@@ -9,17 +9,17 @@
 
   programs.noctalia = {
     enable = true;
-    # Niri starts Noctalia directly, as recommended by the upstream docs.
-    systemd.enable = false;
+    # A Niri-bound service keeps plugin helper processes in one cgroup and
+    # stops them before the compositor removes its Wayland socket.
+    systemd.enable = true;
     settings = {
       audio.enable_overdrive = true;
       backdrop.enabled = true;
       bar.default = {
         background_opacity = 0.88;
-        start = ["control-center" "launcher" "workspaces"];
+        start = ["control-center" "launcher" "workspaces" "lyrics"];
         center = ["clock"];
         end = [
-          "lyrics"
           "tray"
           "icefish/phone-connect:bar"
           "notifications"
@@ -79,8 +79,48 @@
     adw-gtk3
     ddcutil
     glib
+    playerctl
     qt6Packages.qt6ct
   ];
+
+  systemd.user.services = {
+    noctalia = {
+      Unit = {
+        BindsTo = lib.mkForce ["niri.service"];
+        PartOf = lib.mkForce ["niri.service"];
+        After = lib.mkForce ["niri.service"];
+      };
+      Service.TimeoutStopSec = 5;
+      Install.WantedBy = lib.mkForce ["niri.service"];
+    };
+
+    kdeconnect = {
+      Unit = {
+        Description = "KDE Connect for the Niri session";
+        BindsTo = ["niri.service"];
+        PartOf = ["niri.service"];
+        After = ["niri.service"];
+      };
+      Service = {
+        ExecStart = "/run/current-system/sw/bin/kdeconnectd";
+        Restart = "on-failure";
+        RestartPreventExitStatus = 255;
+        RestartSec = 2;
+      };
+      Install.WantedBy = ["niri.service"];
+    };
+  };
+
+  # Plasma retains its normal autostart; Niri uses the ordered service above.
+  xdg.configFile."autostart/org.kde.kdeconnect.daemon.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=KDE Connect
+    Exec=/run/current-system/sw/bin/kdeconnectd
+    StartupNotify=false
+    NoDisplay=true
+    OnlyShowIn=KDE;
+  '';
 
   # Let Noctalia's generated theme files drive these declarative configs.
   home.sessionVariables.QT_QPA_PLATFORMTHEME = "qt6ct";

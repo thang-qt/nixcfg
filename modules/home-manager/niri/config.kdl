@@ -287,10 +287,6 @@ include optional=true "~/.config/niri/noctalia.kdl"
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
-// Start the Noctalia desktop shell.
-spawn-at-startup "noctalia"
-spawn-at-startup "thunderbird"
-
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 spawn-sh-at-startup "niri msg --json outputs | jq -e 'to_entries | any(.key != \"eDP-1\" and .value.current_mode != null)' >/dev/null && niri msg output eDP-1 off || niri msg output eDP-1 on"
@@ -347,7 +343,7 @@ window-rule {
 }
 
 window-rule {
-    match app-id="Cider"
+    match app-id=r#"^(cider|Cider)$"#
     open-on-workspace "entertainment"
     open-floating true
     default-column-width { proportion 0.75; }
