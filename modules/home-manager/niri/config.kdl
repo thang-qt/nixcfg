@@ -287,6 +287,8 @@ include optional=true "~/.config/niri/noctalia.kdl"
 // which may be more convenient to use.
 // See the binds section below for more spawn examples.
 
+spawn-at-startup "thunderbird"
+
 // To run a shell command (with variables, pipes, etc.), use spawn-sh-at-startup:
 // spawn-sh-at-startup "qs -c ~/source/qs/MyAwesomeShell"
 spawn-sh-at-startup "niri msg --json outputs | jq -e 'to_entries | any(.key != \"eDP-1\" and .value.current_mode != null)' >/dev/null && niri msg output eDP-1 off || niri msg output eDP-1 on"
@@ -359,6 +361,14 @@ window-rule {
     open-floating true
 }
 
+// Open the Kairos app-mode window as a floating window sized relative to the output.
+window-rule {
+    match app-id=r#"^chrome-llm\.thangqt\.com__-Default$"#
+    open-floating true
+    default-column-width { proportion 0.225; }
+    default-window-height { proportion 0.58; }
+}
+
 // Rounded window corners, including Noctalia panels.
 window-rule {
     geometry-corner-radius 6
@@ -425,6 +435,9 @@ binds {
     Super+W { spawn "noctalia" "msg" "wallpaper-random"; }
     Super+Ctrl+P { spawn-sh "niri msg --json outputs | jq -e '.\"eDP-1\".current_mode == null' >/dev/null && niri msg output eDP-1 on || niri msg output eDP-1 off"; }
     Super+B { spawn "zen"; }
+    Ctrl+Backslash hotkey-overlay-title="Open Kairos" {
+        spawn "helium" "--app=https://llm.thangqt.com"
+    }
     Super+E { spawn "alacritty" "-e" "yazi"; }
 
     // Noctalia desktop shell controls.
