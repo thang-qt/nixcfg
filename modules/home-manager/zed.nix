@@ -57,9 +57,9 @@
       confirm_quit = false;
 
       theme = {
-        mode = "system";
-        light = "Noctalia Light";
-        dark = "Noctalia Dark";
+        mode = "dark";
+        light = "Catppuccin Mocha";
+        dark = "Catppuccin Mocha";
       };
 
       ui_font_family = "Iosevka Nerd Font";

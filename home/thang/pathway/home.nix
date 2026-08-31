@@ -34,8 +34,8 @@ in {
     inputs.self.homeManagerModules.mpv
     inputs.self.homeManagerModules.rescrobbled
     inputs.self.homeManagerModules.trakt-scrobbler
-    inputs.self.homeManagerModules.niri
-    inputs.self.homeManagerModules.noctalia
+    # inputs.self.homeManagerModules.niri
+    # inputs.self.homeManagerModules.noctalia
     inputs.self.homeManagerModules.zathura
     inputs.self.homeManagerModules.yazi
     inputs.self.homeManagerModules.zed
