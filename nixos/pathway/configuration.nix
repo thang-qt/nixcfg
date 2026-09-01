@@ -3,28 +3,7 @@
   lib,
   pkgs,
   ...
-}: let
-  kdeconnect = pkgs.symlinkJoin {
-    name = "kdeconnect-niri";
-    paths = [pkgs.kdePackages.kdeconnect-kde];
-    nativeBuildInputs = [pkgs.makeWrapper];
-    postBuild = ''
-      rm "$out/bin/kdeconnectd"
-      makeWrapper ${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnectd "$out/bin/kdeconnectd" \
-        --run 'if [ "''${XDG_CURRENT_DESKTOP-}" = niri ] && ! ${pkgs.systemd}/bin/systemctl --user --quiet is-active niri.service; then exit 0; fi' \
-        --set QT_QPA_PLATFORM "wayland;offscreen"
-
-      dbusService="$out/share/dbus-1/services/org.kde.kdeconnect.service"
-      cp --remove-destination \
-        ${pkgs.kdePackages.kdeconnect-kde}/share/dbus-1/services/org.kde.kdeconnect.service \
-        "$dbusService"
-      substituteInPlace "$dbusService" \
-        --replace-fail \
-        "Exec=${pkgs.kdePackages.kdeconnect-kde}/bin/kdeconnectd" \
-        "Exec=$out/bin/kdeconnectd"
-    '';
-  };
-in {
+}: {
   imports = [
     ./hardware-configuration.nix
     ./data-binds.nix
@@ -129,7 +108,7 @@ in {
     ];
   };
 
-  programs.niri.enable = true;
+  # programs.niri.enable = true;
 
   # services.cloudflare-warp.enable = true;
 
@@ -146,12 +125,7 @@ in {
     '';
     mode = "0755";
   };
-  # Permit D-Bus reactivation during session teardown to fall back to Qt's
-  # headless backend instead of aborting when Niri's Wayland socket is gone.
-  programs.kdeconnect = {
-    enable = true;
-    package = lib.mkForce kdeconnect;
-  };
+  programs.kdeconnect.enable = true;
 
   programs.nix-ld = {
     enable = true;
