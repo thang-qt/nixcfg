@@ -26,6 +26,7 @@
     inputs.self.homeManagerModules.zathura
     inputs.self.homeManagerModules.yazi
     inputs.self.homeManagerModules.zed
+    inputs.self.homeManagerModules.wezterm
     ../pi.nix
   ];
 

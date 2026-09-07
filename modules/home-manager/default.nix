@@ -19,4 +19,5 @@
   zathura = import ./zathura.nix;
   yazi = import ./yazi.nix;
   zed = import ./zed.nix;
+  wezterm = import ./wezterm.nix;
 }
