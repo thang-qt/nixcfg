@@ -10,7 +10,6 @@
   fish = import ./fish.nix;
   spicetify = import ./spicetify.nix;
   mpv = import ./mpv.nix;
-  opencode = import ./opencode.nix;
   pi = import ./pi.nix;
   rescrobbled = import ./rescrobbled.nix;
   trakt-scrobbler = import ./trakt-scrobbler.nix;

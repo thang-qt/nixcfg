@@ -43,6 +43,8 @@
     gh
     llm-agents.codex
     llm-agents.antigravity-cli
+    llm-agents.opencode2
+    llm-agents.opencode2-desktop
     inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium
     hubstaff
     qbittorrent
