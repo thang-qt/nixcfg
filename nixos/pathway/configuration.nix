@@ -44,14 +44,14 @@
   networking.networkmanager.enable = true;
 
   services.xserver.enable = true;
-  services.displayManager.sddm = {
+
+  services.desktopManager.pantheon.enable = true;
+  services.gnome.gnome-online-accounts.enable = true;
+  services.xserver.displayManager.lightdm = {
     enable = true;
-    wayland = {
-      enable = true;
-      compositor = "kwin";
-    };
+    greeters.pantheon.enable = true;
   };
-  services.desktopManager.plasma6.enable = true;
+  services.displayManager.defaultSession = "pantheon-wayland";
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -125,8 +125,6 @@
     '';
     mode = "0755";
   };
-  programs.kdeconnect.enable = true;
-
   programs.nix-ld = {
     enable = true;
   };
@@ -139,7 +137,6 @@
 
   environment.systemPackages = with pkgs; [
     unrar
-    kdePackages.sddm-kcm
     rclone
     qalculate-qt
     sops

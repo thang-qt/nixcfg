@@ -46,12 +46,14 @@
     llm-agents.opencode2
     llm-agents.opencode2-desktop
     inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium
-    hubstaff
     qbittorrent
     cider
     obsidian
     vscode
     koreader
+    drawy
+    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.jorts
+    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.mixer
   ];
 
   programs.git = {
