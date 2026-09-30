@@ -1,5 +1,6 @@
 {lib, ...}: {
   hardware.bluetooth.enable = lib.mkDefault true;
+  hardware.bluetooth.powerOnBoot = false;
   hardware.bluetooth.settings = {
     General = {
       Experimental = true;
