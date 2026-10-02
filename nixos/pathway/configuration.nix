@@ -44,14 +44,8 @@
   networking.networkmanager.enable = true;
 
   services.xserver.enable = true;
-
-  services.desktopManager.pantheon.enable = true;
-  services.gnome.gnome-online-accounts.enable = true;
-  services.xserver.displayManager.lightdm = {
-    enable = true;
-    greeters.pantheon.enable = true;
-  };
-  services.displayManager.defaultSession = "pantheon-wayland";
+  services.displayManager.plasma-login-manager.enable = true;
+  services.desktopManager.plasma6.enable = true;
   services.xserver.xkb = {
     layout = "us";
     variant = "";
@@ -125,6 +119,7 @@
     '';
     mode = "0755";
   };
+  programs.kdeconnect.enable = true;
   programs.nix-ld = {
     enable = true;
   };

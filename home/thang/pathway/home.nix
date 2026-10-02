@@ -52,8 +52,6 @@
     vscode
     koreader
     drawy
-    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.jorts
-    inputs.self.packages.${pkgs.stdenv.hostPlatform.system}.mixer
   ];
 
   programs.git = {
