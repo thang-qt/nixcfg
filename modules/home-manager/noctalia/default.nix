@@ -50,7 +50,7 @@
         templates = {
           enable_builtin_templates = true;
           enable_community_templates = true;
-          community_ids = ["zen-browser" "zed" "zellij"];
+          community_ids = ["zed" "zellij"];
           builtin_ids = [
             "alacritty"
             "helix"

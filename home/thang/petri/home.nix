@@ -3,10 +3,6 @@
   pkgs,
   ...
 }: {
-  nixpkgs.overlays = [
-    inputs.self.overlays.llm-agents
-  ];
-
   imports = [
     ../common.nix
     inputs.self.homeManagerModules.pi

@@ -4,10 +4,6 @@
   pkgs,
   ...
 }: {
-  nixpkgs.overlays = [
-    inputs.self.overlays.llm-agents
-  ];
-
   imports = [
     inputs.spicetify-nix.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
@@ -41,10 +37,8 @@
     thunderbird
     vacuum-tube
     gh
-    llm-agents.codex
-    llm-agents.antigravity-cli
-    llm-agents.opencode2
-    llm-agents.opencode2-desktop
+    unstable.codex
+    unstable.antigravity-cli
     inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium
     qbittorrent
     cider

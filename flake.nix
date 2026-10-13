@@ -23,7 +23,6 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     kairos.url = "github:thang-qt/Kairos/01adc27e043b458c0d4b469e2cfb634611d86891";
-    llm-agents.url = "github:numtide/llm-agents.nix";
     hermes-agent.url = "github:NousResearch/hermes-agent";
     zen-browser = {
       url = "github:youwen5/zen-browser-flake";

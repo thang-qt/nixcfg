@@ -12,6 +12,4 @@
       config.allowUnfree = true;
     };
   };
-
-  llm-agents = inputs.llm-agents.overlays.shared-nixpkgs;
 }

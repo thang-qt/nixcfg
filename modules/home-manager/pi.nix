@@ -30,11 +30,8 @@ in {
 
     package = lib.mkOption {
       type = lib.types.package;
-      default =
-        if pkgs ? llm-agents && pkgs.llm-agents ? pi
-        then pkgs.llm-agents.pi.override {useBun = false;}
-        else pkgs.pi;
-      defaultText = lib.literalExpression "pkgs.llm-agents.pi.override {useBun = false;} or pkgs.pi";
+      default = pkgs.unstable.pi-coding-agent;
+      defaultText = lib.literalExpression "pkgs.unstable.pi-coding-agent";
       description = "Pi coding agent package to install.";
     };
 
