@@ -224,17 +224,17 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1785234566,
-        "narHash": "sha256-Z+gXURTFWHL6lHTvs1rmX39K2tM//I6QDoUxfBEoG1w=",
+        "lastModified": 1791896383,
+        "narHash": "sha256-vnpyBnm/xiedr8dbH/GALHLcd1zLnSJ1lRw6mu7f2dk=",
         "owner": "thang-qt",
         "repo": "Kairos",
-        "rev": "01adc27e043b458c0d4b469e2cfb634611d86891",
+        "rev": "f13f950991050fd9a4f0aae357b936de329b82c4",
         "type": "github"
       },
       "original": {
         "owner": "thang-qt",
         "repo": "Kairos",
-        "rev": "01adc27e043b458c0d4b469e2cfb634611d86891",
+        "rev": "f13f950991050fd9a4f0aae357b936de329b82c4",
         "type": "github"
       }
     },
@@ -418,6 +418,7 @@
         "noctalia": "noctalia",
         "sops-nix": "sops-nix",
         "spicetify-nix": "spicetify-nix",
+        "threadline": "threadline",
         "zen-browser": "zen-browser"
       }
     },
@@ -504,6 +505,27 @@
       "original": {
         "owner": "nix-systems",
         "repo": "default",
+        "type": "github"
+      }
+    },
+    "threadline": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1791896836,
+        "narHash": "sha256-P8Mrc5fkxiE+YS9P7lwdCrvRpD29CjqjEcPXFUPFeUE=",
+        "owner": "thang-qt",
+        "repo": "ThreadLine",
+        "rev": "7046f806bda2f89667ed68e35c65267f86077f4d",
+        "type": "github"
+      },
+      "original": {
+        "owner": "thang-qt",
+        "repo": "ThreadLine",
+        "rev": "7046f806bda2f89667ed68e35c65267f86077f4d",
         "type": "github"
       }
     },
