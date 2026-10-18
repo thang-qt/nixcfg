@@ -1,5 +1,10 @@
 {inputs, ...}: {
-  additions = final: _prev: import ../pkgs final.pkgs;
+  additions = final: prev:
+    import ../pkgs {
+      pkgs = final;
+      inherit (prev.stdenv.hostPlatform) system;
+      inherit inputs;
+    };
 
   modifications = final: prev:
     {

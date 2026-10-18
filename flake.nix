@@ -66,7 +66,11 @@
         }
       else null;
   in {
-    packages = forAllSystems (system: import ./pkgs nixpkgs.legacyPackages.${system});
+    packages = forAllSystems (system:
+      import ./pkgs {
+        pkgs = nixpkgs.legacyPackages.${system};
+        inherit inputs system;
+      });
     formatter = forAllSystems (system: nixpkgs.legacyPackages.${system}.alejandra);
 
     checks = forAllSystems (
