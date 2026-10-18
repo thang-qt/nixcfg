@@ -131,6 +131,7 @@
   };
 
   environment.systemPackages = with pkgs; [
+    tmux
     unrar
     rclone
     qalculate-qt
