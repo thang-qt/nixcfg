@@ -22,7 +22,7 @@
       url = "github:AdnanHodzic/auto-cpufreq";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    kairos.url = "github:thang-qt/Kairos/f8bf33e960843e408f6f2c6ccb4cb048c3c77c48";
+    kairos.url = "github:thang-qt/Kairos/06343c8f4ff72a59f8cf1869e55bc46fcad396b0";
     threadline.url = "github:thang-qt/ThreadLine/7046f806bda2f89667ed68e35c65267f86077f4d";
     threadline.inputs.nixpkgs.follows = "nixpkgs";
     hermes-agent.url = "github:NousResearch/hermes-agent";
