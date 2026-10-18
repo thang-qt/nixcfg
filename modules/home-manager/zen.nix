@@ -45,7 +45,21 @@
     "network.IDN_show_punycode" = true;
   };
 
-  zen = pkgs.wrapFirefox inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped {
+  upstreamZen = inputs.zen-browser.packages.${pkgs.stdenv.hostPlatform.system}.zen-browser-unwrapped;
+  # The flake's 1.23.3b x86-64 hash differs from the published release digest.
+  # Remove this override once upstream supplies the corrected hash.
+  zenUnwrapped =
+    if pkgs.stdenv.hostPlatform.isx86_64 && upstreamZen.version == "1.23.3b"
+    then
+      upstreamZen.overrideAttrs (old: {
+        src = pkgs.fetchurl {
+          inherit (old.src) url;
+          hash = "sha256-uyBF0+IWVNQP6EElAJLurf0sH8gx7vtQkiJ3PIvcoUk=";
+        };
+      })
+    else upstreamZen;
+
+  zen = pkgs.wrapFirefox zenUnwrapped {
     pname = "zen-browser";
     extraPrefs = lib.concatStringsSep "\n" (
       lib.mapAttrsToList (name: value: "pref(${builtins.toJSON name}, ${builtins.toJSON value});") settings
