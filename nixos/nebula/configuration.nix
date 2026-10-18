@@ -8,6 +8,7 @@
     ./grimmory.nix
     ./backup.nix
     ./threadline.nix
+    ./kairos.nix
     inputs.self.nixosModules.common
     inputs.self.nixosModules.nginx
     # inputs.self.nixosModules.open-webui
@@ -78,9 +79,6 @@
     package = inputs.kairos.packages.${pkgs.stdenv.hostPlatform.system}.default;
     port = 3457;
     listenAddress = "127.0.0.1";
-    environment = {
-      ADMIN_PASSWORD = "thang123";
-    };
     settings = {
       appEnv = "production";
       cookieSecure = true;
