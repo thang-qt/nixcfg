@@ -50,6 +50,7 @@
     vscode
     koreader
     drawy
+    wl-clipboard
   ];
 
   xdg.dataFile."applications/org.kairos.Kairos.desktop".source = "${pkgs.kairos-desktop}/share/applications/org.kairos.Kairos.desktop";
