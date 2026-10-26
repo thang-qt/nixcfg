@@ -515,17 +515,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1791896836,
-        "narHash": "sha256-P8Mrc5fkxiE+YS9P7lwdCrvRpD29CjqjEcPXFUPFeUE=",
+        "lastModified": 1792987801,
+        "narHash": "sha256-MVElJlg8N8Hi9EnxBiTc7uSDvFxrg+baOHQMUaJJwGQ=",
         "owner": "thang-qt",
         "repo": "ThreadLine",
-        "rev": "7046f806bda2f89667ed68e35c65267f86077f4d",
+        "rev": "823ec12f84eafc9538710974a032660f0be9a818",
         "type": "github"
       },
       "original": {
         "owner": "thang-qt",
         "repo": "ThreadLine",
-        "rev": "7046f806bda2f89667ed68e35c65267f86077f4d",
+        "rev": "823ec12f84eafc9538710974a032660f0be9a818",
         "type": "github"
       }
     },
@@ -561,11 +561,11 @@
         ]
       },
       "locked": {
-        "lastModified": 1792140224,
-        "narHash": "sha256-TEDD0EgSDKOl9hGNlEaINfd2Y4PFhyh4czw4lb1AGak=",
+        "lastModified": 1792660108,
+        "narHash": "sha256-qnUcCAYCcDlrxbw8jUIR9d2IgF1LvY36XipEnktfXcg=",
         "owner": "youwen5",
         "repo": "zen-browser-flake",
-        "rev": "5a0d21f99706b231df9ff35ab95dbccda88414d8",
+        "rev": "7f6ce45b162444c324df8874ca1d4c04bfdeb274",
         "type": "github"
       },
       "original": {

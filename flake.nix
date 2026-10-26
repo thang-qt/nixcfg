@@ -23,7 +23,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     kairos.url = "github:thang-qt/Kairos/06343c8f4ff72a59f8cf1869e55bc46fcad396b0";
-    threadline.url = "github:thang-qt/ThreadLine/7046f806bda2f89667ed68e35c65267f86077f4d";
+    threadline.url = "github:thang-qt/ThreadLine/823ec12f84eafc9538710974a032660f0be9a818";
     threadline.inputs.nixpkgs.follows = "nixpkgs";
     hermes-agent.url = "github:NousResearch/hermes-agent";
     zen-browser = {
