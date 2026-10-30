@@ -39,6 +39,7 @@
     thunderbird
     vacuum-tube
     gh
+    unstable.awscli2
     unstable.codex
     unstable.chatgpt
     unstable.pi-coding-agent
