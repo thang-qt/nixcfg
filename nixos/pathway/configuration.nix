@@ -141,6 +141,7 @@
     xwayland-satellite
     steam-run
     uv
+    nodejs
   ];
 
   fonts = {
