@@ -18,6 +18,16 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
+  # Graphical boot splash and LUKS unlock prompt; Esc reveals boot messages.
+  boot.plymouth = {
+    enable = true;
+    theme = "bgrt";
+  };
+  boot.consoleLogLevel = 3;
+  boot.initrd.verbose = false;
+  boot.kernelParams = ["quiet"];
+
   boot.initrd.luks.devices."luks-f37aceda-6d5d-4c90-9baa-eb64220a6042".device = "/dev/disk/by-uuid/f37aceda-6d5d-4c90-9baa-eb64220a6042";
   boot.resumeDevice = "/dev/mapper/luks-f37aceda-6d5d-4c90-9baa-eb64220a6042";
 
