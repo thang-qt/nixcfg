@@ -41,7 +41,6 @@
     gh
     unstable.awscli2
     unstable.codex
-    unstable.chatgpt
     unstable.pi-coding-agent
     unstable.antigravity-cli
     inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium
