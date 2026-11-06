@@ -41,6 +41,7 @@
     gh
     unstable.awscli2
     unstable.codex
+    unstable.docker-sbx
     unstable.pi-coding-agent
     unstable.antigravity-cli
     inputs.helium.packages.${pkgs.stdenv.hostPlatform.system}.helium
@@ -63,8 +64,22 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    settings."*" = {
-      IdentityAgent = "~/.1password/agent.sock";
+    settings = {
+      "sbx_cloud" = {
+        HostName = "sbx_gateway";
+        HostKeyAlias = "sbx_gateway";
+        IdentityAgent = "~/.ssh/sandboxes/%r/agent.sock";
+        IdentityFile = "~/.ssh/sandboxes/%r/%r";
+        CertificateFile = "~/.ssh/sandboxes/%r/%r-cert.pub";
+        UserKnownHostsFile = "~/.ssh/sandboxes/known_hosts";
+        ProxyCommand = "${pkgs.unstable.docker-sbx}/bin/sbx --cloud ssh-connect '%r' %h %p";
+        IdentitiesOnly = false;
+        ControlMaster = "no";
+        ControlPath = "none";
+      };
+      "*" = {
+        IdentityAgent = "~/.1password/agent.sock";
+      };
     };
   };
 }
