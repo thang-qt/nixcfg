@@ -15,6 +15,7 @@
     unstable = import inputs.nixpkgs-unstable {
       system = final.stdenv.hostPlatform.system;
       config.allowUnfree = true;
+      overlays = [(import ./t3code.nix)];
     };
   };
 }

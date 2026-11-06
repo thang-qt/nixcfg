@@ -35,6 +35,7 @@
     alacritty
     kairos-desktop
     sesame-link
+    unstable.t3code
     python3
     thunderbird
     vacuum-tube
