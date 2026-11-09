@@ -114,7 +114,8 @@
 
   # programs.niri.enable = true;
 
-  # services.cloudflare-warp.enable = true;
+  services.cloudflare-warp.enable = true;
+  systemd.services.cloudflare-warp.wantedBy = lib.mkForce [];
 
   # Browsers are installed and configured by Home Manager.
   programs._1password.enable = true;
