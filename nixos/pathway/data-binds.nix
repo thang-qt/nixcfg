@@ -2,6 +2,7 @@
   bindDirs = [
     "Documents"
     "Dev"
+    "Downloads"
     "Games"
     "Music"
     "Pictures"
