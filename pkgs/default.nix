@@ -7,6 +7,7 @@
   pano-scrobbler = pkgs.callPackage ./pano-scrobbler-bin.nix {};
   koito = pkgs.callPackage ./koito.nix {};
   cider = pkgs.callPackage ./cider.nix {};
+  prismlauncher-offline = pkgs.callPackage ./prismlauncher-offline.nix {};
   sesame-link = pkgs.callPackage ./sesame-link.nix {};
   trakt-scrobbler = pkgs.callPackage ./trakt-scrobbler.nix {};
 }

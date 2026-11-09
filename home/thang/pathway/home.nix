@@ -37,6 +37,7 @@
     sesame-link
     unstable.t3code
     python3
+    prismlauncher-offline
     thunderbird
     vacuum-tube
     gh
