@@ -7,7 +7,10 @@
   };
 
   environment.systemPackages = with pkgs; [
-    heroic
+    bubblewrap
+    fuse-overlayfs
+    gamescope
+    psmisc
     wineWow64Packages.stagingFull
     winetricks
   ];

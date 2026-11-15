@@ -38,6 +38,7 @@
     unstable.t3code
     python3
     prismlauncher-offline
+    unstable.sgdboop
     thunderbird
     vacuum-tube
     gh
@@ -57,6 +58,14 @@
   ];
 
   xdg.dataFile."applications/org.kairos.Kairos.desktop".source = "${pkgs.kairos-desktop}/share/applications/org.kairos.Kairos.desktop";
+
+  # WARP's tray app has its own login autostart, separate from the system daemon.
+  xdg.configFile."autostart/com.cloudflare.WarpTaskbar.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Cloudflare Zero Trust
+    Hidden=true
+  '';
 
   programs.git = {
     lfs.enable = true;
