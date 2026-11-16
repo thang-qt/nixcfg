@@ -8,6 +8,7 @@
     inputs.spicetify-nix.homeManagerModules.default
     inputs.sops-nix.homeManagerModules.sops
     ../common.nix
+    inputs.self.homeManagerModules.aria2
     # inputs.self.homeManagerModules.pi
     inputs.self.homeManagerModules.firefox
     inputs.self.homeManagerModules.zen

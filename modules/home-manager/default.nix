@@ -1,6 +1,7 @@
 # Add your reusable home-manager modules to this directory, on their own file (https://nixos.wiki/wiki/Module).
 # These should be stuff you would like to share with others, not your personal configurations.
 {
+  aria2 = import ./aria2.nix;
   git = import ./git.nix;
   helix = import ./helix.nix;
   firefox = import ./firefox.nix;
