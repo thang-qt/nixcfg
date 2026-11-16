@@ -89,5 +89,28 @@
     };
   };
 
+  services.nginx.virtualHosts."myfluey.thangqt.com" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:8080";
+      proxyWebsockets = true;
+    };
+  };
+
+  services.nginx.virtualHosts."askt.thangqt.com" = {
+    enableACME = true;
+    forceSSL = true;
+    locations."/" = {
+      proxyPass = "http://127.0.0.1:9924";
+      proxyWebsockets = true;
+      extraConfig = ''
+        proxy_buffering off;
+        proxy_read_timeout 600s;
+        client_max_body_size 25m;
+      '';
+    };
+  };
+
   system.stateVersion = "25.05";
 }

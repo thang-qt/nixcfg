@@ -224,17 +224,17 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1793419339,
-        "narHash": "sha256-g2Q6e/LV5qJWXSD1g6RV8aeP6nrjADaNTjQSBcTEtgI=",
+        "lastModified": 1794823426,
+        "narHash": "sha256-YYMSv9sxW/wMJSmmTIMliiwvvKU7t44zGW808+qwf4o=",
         "owner": "thang-qt",
         "repo": "Kairos",
-        "rev": "61dd3c84697d65c7c3903333e93dcef5a623b7f6",
+        "rev": "109be4fe8f4d8a3b7eb83e87f13bb01f2671ce17",
         "type": "github"
       },
       "original": {
         "owner": "thang-qt",
         "repo": "Kairos",
-        "rev": "61dd3c84697d65c7c3903333e93dcef5a623b7f6",
+        "rev": "109be4fe8f4d8a3b7eb83e87f13bb01f2671ce17",
         "type": "github"
       }
     },
@@ -515,17 +515,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1792987801,
-        "narHash": "sha256-MVElJlg8N8Hi9EnxBiTc7uSDvFxrg+baOHQMUaJJwGQ=",
+        "lastModified": 1794822521,
+        "narHash": "sha256-RkNXptF9yqJblYp85FM7F6bUp90F4BeT3Z1XtCDKuE4=",
         "owner": "thang-qt",
         "repo": "ThreadLine",
-        "rev": "823ec12f84eafc9538710974a032660f0be9a818",
+        "rev": "cf353217d9220976d3f48e23e9fa0ad3ba5e0bc0",
         "type": "github"
       },
       "original": {
         "owner": "thang-qt",
         "repo": "ThreadLine",
-        "rev": "823ec12f84eafc9538710974a032660f0be9a818",
+        "rev": "cf353217d9220976d3f48e23e9fa0ad3ba5e0bc0",
         "type": "github"
       }
     },
