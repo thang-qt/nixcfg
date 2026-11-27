@@ -240,27 +240,22 @@ in {
         set -euo pipefail
         umask 0077
 
-        env_file="$(mktemp)"
         tmp_file=""
 
         cleanup() {
-          rm -f "$env_file"
           if [ -n "$tmp_file" ]; then
             rm -f "$tmp_file"
           fi
         }
         trap cleanup EXIT
 
-        db_password="$(<"$CREDENTIALS_DIRECTORY/db-password")"
-        printf 'MYSQL_PWD=%s\n' "$db_password" > "$env_file"
-        chmod 0600 "$env_file"
-
         tmp_file="$(mktemp ${backupDir}/grimmory.sql.zst.XXXXXX)"
-        ${pkgs.podman}/bin/podman exec \
-          --env-file "$env_file" \
+        # The persisted MariaDB 11.4 mysql.proc table is read-only; dumping
+        # routines makes the otherwise valid application dump fail.
+        MYSQL_PWD="$(<"$CREDENTIALS_DIRECTORY/db-password")" \
+          ${pkgs.podman}/bin/podman exec \
+          --env MYSQL_PWD \
           mariadb \
-          # The persisted MariaDB 11.4 mysql.proc table is read-only; dumping
-          # routines makes the otherwise valid application dump fail.
           mariadb-dump \
           --single-transaction \
           --quick \
@@ -279,6 +274,9 @@ in {
 
   services.restic.backups.grimmory = {
     initialize = true;
+    # Interrupted pruning can leave an exclusive lock that blocks the next run.
+    # Normal unlock removes stale locks only, preserving active operations.
+    backupPrepareCommand = "${pkgs.restic}/bin/restic unlock";
     repositoryFile = config.sops.templates."grimmory-restic-repository".path;
     passwordFile = config.sops.secrets.grimmory-restic-password.path;
     environmentFile = config.sops.templates."grimmory-restic-env".path;
@@ -303,7 +301,7 @@ in {
       "--keep-yearly 3"
     ];
 
-    runCheck = false;
+    runCheck = true;
     extraBackupArgs = [
       "--exclude-caches"
       "--exclude-if-present .nobackup"

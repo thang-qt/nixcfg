@@ -71,6 +71,8 @@
     exclude,
   }: {
     initialize = true;
+    # Recover stale locks before the repository initialization probe runs.
+    backupPrepareCommand = "${pkgs.restic}/bin/restic unlock";
     repositoryFile = config.sops.templates."${repository}-restic-repository".path;
     passwordFile = resticPassword;
     environmentFile = resticEnvironment;
@@ -83,7 +85,7 @@
       RandomizedDelaySec = "15m";
     };
 
-    runCheck = false;
+    runCheck = true;
   };
 in {
   systemd.tmpfiles.rules = [
